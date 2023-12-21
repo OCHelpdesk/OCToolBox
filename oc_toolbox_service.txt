@@ -1,0 +1,35 @@
+https://learn.microsoft.com/en-ca/azure/app-service/quickstart-dotnetcore?pivots=development-environment-vscode&tabs=net70
+
+cd C:\Utilities\OCToolBox
+
+dotnet new webapp -n oc_toolbox_service --framework net7.0
+
+cd C:\Utilities\OCToolBox\oc_toolbox_service
+
+From Terminal
+dotnet run --urls=https://localhost:5001/
+From Chrome
+https://localhost:5001
+
+To debug, click 'Run and Debug' on left side.
+
+To add services, open Program.cs and add 
+builder.Services.AddTransient<oc_toolbox_service.Services.JsonProductSetService>();
+
+To add controllers, open Program.cs and add
+builder.Services.AddControllers();
+app.MapControllers();
+
+To add options to JSON return open Program.cs and add
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = null; //Keep property names the same as defined without changing to Javascript convension
+    options.JsonSerializerOptions.WriteIndented = true;        //Write indented.
+});
+
+To deploy to ocpricingdev.azurewebsites.net, open View -> Command Palette...
+VS Code will ask you to sign into Windows Azure if you have not yet. 
+Select Azure App Service: Deploy to Web App...
+Select ocpricingdev, the App Service instance which was created from Windows Azure portal. 
+To change destination of the deployement, 
+

@@ -1,0 +1,83 @@
+echo Setup Xcode
+
+echo Follow https://www.youtube.com/watch?v=0-S5a0eXPoc to setup VSCode
+echo 	Installed React Native Tools, ES7+ React/Redux/React-Native/JS snippets (or React-Native/React/Redux snippets for es6/es7), 
+echo		Prettier - Code formatter and Material Icon Theme
+echo 	Enabled Settings - Editor: Format On Save
+
+echo make sure node installed
+node -v
+
+echo make sure watchman installed
+watchman -v
+
+echo make sure ruby installed
+ruby -v
+rbenv install 2.7.5
+
+echo make sure cocoapods installed so to have pod
+pod --version
+echo sudo gem install cocoapods
+
+echo create project oc_toolbox_app
+npm uninstall -g react-native-cli @react-native-community/cli
+npx react-native init oc_toolbox_app
+
+cd oc_toolbox_app
+
+echo Navigating Between Screens with React Navigation
+echo 	https://reactnative.dev/docs/navigation
+echo Install React Navigation. 
+cd oc_toolbox_app
+npm install @react-navigation/native @react-navigation/native-stack @react-navigation/bottom-tabs @react-navigation/drawer
+echo Install the required peer dependencies
+npm install react-native-screens react-native-safe-area-context
+echo async-storage is not a dependency. Install it so to run pod for both of the packages.
+npm install @react-native-async-storage/async-storage
+echo For iOS with bare React Native project, make sure you have Cocoapods installed. Then install the pods to complete the installation:
+cd ios
+pod install
+cd ..
+
+echo Refer to https://www.npmjs.com/package/react-native-vector-icons, install Vector Icons
+npm install --save react-native-vector-icons
+echo Follow https://www.npmjs.com/package/react-native-vector-icons#ios to add the fonts to the Xcode project.
+echo For how to add fonds, refer to https://codewithchris.com/common-mistakes-with-adding-custom-fonts-to-your-ios-app/#includefonts
+echo Note if run pod install after adding the fonts, the fonts must be removed from Copy Bundle Resources of Build Phases. Otherwise, the project cannot be built.  
+
+echo Refer to https://reactnativeelements.com/, install React Native Elements, one of the most popular package (another is react native paper)
+npm install @rneui/base @rneui/themed
+
+npm i react-native-image-pan-zoom
+
+echo Refer to https://www.npmjs.com/package/react-native-background-actions
+npm i react-native-background-actions
+cd ios
+pod install
+cd ..
+echo Refer to https://www.interviewcrak.in/2022/12/how-to-run-react-native-app-in.html, some XCode work needed
+
+
+echo start the app
+npx react-native run-ios
+
+/*
+To add an app icon, open the ios Xcode workspace (must be the workspace instead of the project, would have building errors otherwise) with Xcode, select Images->AppIcon and drag&drop icon images to the image boxes.
+To add an image to the splash screen, add an image set to Images, open LaunchScreen story board, and an Image view control, and select the newly added image for the control.
+*/
+
+/*
+Open app Xcode workspace
+From OCPrice -> OCPrice -> Info, change Bundle Display Name to OCPricing
+From OCPrice -> Signing & Capabilties Tab, check Automatically Manage Signin, change Team to Orkin Canada Corporation and change Bundle Identifier to com.orkincanada.pricing.test
+Clean Build Folder
+Build
+*/
+
+/*
+To change version and build #s
+XCode -> OCPrice -> General -> Version #: 2.0, Build #: 3
+VSCode -> iOS -> OCPrice -> info.plist -> CFBundleShortVersionString: 2.0, CFBundleVersion: 3
+*/
+
+
