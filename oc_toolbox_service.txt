@@ -14,7 +14,8 @@ https://localhost:5001
 To debug, click 'Run and Debug' on left side.
 
 To add services, open Program.cs and add 
-builder.Services.AddTransient<oc_toolbox_service.Services.JsonProductSetService>();
+builder.Services.AddTransient<oc_toolbox_service.Services.ProductSetService>();
+builder.Services.AddTransient<oc_toolbox_service.Services.DocListService>();
 
 To add controllers, open Program.cs and add
 builder.Services.AddControllers();
@@ -27,9 +28,10 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.WriteIndented = true;        //Write indented.
 });
 
-To deploy to ocpricingdev.azurewebsites.net, open View -> Command Palette...
+To deploy to octoolbox.azurewebsites.net, open View -> Command Palette...
 VS Code will ask you to sign into Windows Azure if you have not yet. 
 Select Azure App Service: Deploy to Web App...
-Select ocpricingdev, the App Service instance which was created from Windows Azure portal. 
-To change destination of the deployement, 
+Select octoolbox, the App Service instance which was created from Windows Azure portal. 
+
+To change destination of the deployement, open .vscode\settings.json
 
