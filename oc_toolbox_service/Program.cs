@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using oc_toolbox_service.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,6 +13,8 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.PropertyNamingPolicy = null;
     options.JsonSerializerOptions.WriteIndented = true;
 });
+string toolboxDb = builder.Configuration.GetConnectionString("OCToolboxReader").ToString();
+Database.OCToolboxDbConnectionString = toolboxDb;
 
 var app = builder.Build();
 

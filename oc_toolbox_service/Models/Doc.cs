@@ -5,7 +5,6 @@ using System.Text.Json.Serialization;
 
 namespace oc_toolbox_service.Models
 {
-
     public class Doc
     {
         public int? DocId { get; set; }

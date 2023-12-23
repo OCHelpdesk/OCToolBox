@@ -35,3 +35,10 @@ Select octoolbox, the App Service instance which was created from Windows Azure 
 
 To change destination of the deployement, open .vscode\settings.json
 
+To specify connection string, open appsettings.json and add:
+  "ConnectionStrings": {
+    "OCToolboxReader": "Server=tcp:orkincanada.database.windows.net,1433;Initial Catalog=OCToolBox;Persist Security Info=False;User ID=orkinca_reader;Password=8F8kcrvUNQ#!u9e;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+  }
+Open Program.cs and add 
+ string toolboxDb = builder.Configuration.GetConnectionString("OCToolboxReader").ToString();
+
