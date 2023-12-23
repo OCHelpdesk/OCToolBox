@@ -1,0 +1,5 @@
+{
+  "appService.preDeployTask": "publish",
+  "appService.deploySubpath": "oc_toolbox_service\\bin\\Debug\\net7.0\\publish",
+  "appService.defaultWebAppToDeploy": "/subscriptions/78fd3293-f29c-4620-9603-8f685bf1b711/resourceGroups/AppService/providers/Microsoft.Web/sites/OCToolBox"
+}
