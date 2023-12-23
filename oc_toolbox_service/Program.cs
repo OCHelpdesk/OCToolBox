@@ -3,6 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddTransient<oc_toolbox_service.Services.ProductSetService>();
+builder.Services.AddTransient<oc_toolbox_service.Services.DocListService>();
 builder.Services.AddControllers();
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
