@@ -42,3 +42,10 @@ To specify connection string, open appsettings.json and add:
 Open Program.cs and add 
  string toolboxDb = builder.Configuration.GetConnectionString("OCToolboxReader").ToString();
 
+To add package System.Data.SqlClient, run command
+ dotnet add package System.Data.SqlClient
+A new item is added to the project file oc_toolbox_service.csproj
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
