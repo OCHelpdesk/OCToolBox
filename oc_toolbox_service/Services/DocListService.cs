@@ -79,7 +79,7 @@ order by DocCategoryNameFr, DocNameFr
                 string docType = (string)tbl.Rows[0]["DocType"];
                 ret.ContentType = docType.Equals("pdf", StringComparison.OrdinalIgnoreCase) ? "application/pdf" : "application/octet-stream";
                 ret.Content = (byte[])tbl.Rows[0]["DocData"];
-                ret.Name = tbl.Rows[0]["DocNameEn"].ToString().Replace("\\", "_").Replace("/", "_") + "." + docType;
+                ret.Name = ((string)tbl.Rows[0]["DocNameEn"]).Replace("\\", "_").Replace("/", "_") + "." + docType;
             }
             return ret;
         }

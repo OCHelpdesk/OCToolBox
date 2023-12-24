@@ -37,7 +37,7 @@ namespace oc_toolbox_service.Controllers
         public ActionResult DownloadDoc([FromQuery] string accessKey, [FromQuery] int docId)
         {
             DocFile file = DocListService.GetDocFile(accessKey, docId, false);
-            return File(file.Content, file.ContentType, file.Name);
+            return File(file.Content == null ? new byte[] { } : file.Content, file.ContentType == null ? "" : file.ContentType, file.Name);
         }
 
         public class DownloadDocRequest
@@ -52,7 +52,7 @@ namespace oc_toolbox_service.Controllers
         public ActionResult DownloadDocByPost(DownloadDocRequest request)
         {
             DocFile file = DocListService.GetDocFile(request.AccessKey, request.DocId, request.InFrench);
-            return File(file.Content, file.ContentType, file.Name);
+            return File(file.Content == null ? new byte[] { } : file.Content, file.ContentType == null ? "" : file.ContentType, file.Name);
         }
     }
 }

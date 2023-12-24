@@ -13,7 +13,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.PropertyNamingPolicy = null;
     options.JsonSerializerOptions.WriteIndented = true;
 });
-string toolboxDb = builder.Configuration.GetConnectionString("OCToolboxReader").ToString();
+string? toolboxDb = builder.Configuration.GetConnectionString("OCToolboxReader");
 Database.OCToolboxDbConnectionString = toolboxDb;
 
 var app = builder.Build();
