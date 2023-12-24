@@ -1,11 +1,10 @@
 using oc_toolbox_service.Models;
 using System.Data;
 using System.Data.SqlClient;
-using System.Net.Sockets;
 
 namespace oc_toolbox_service.Services
 {
-    public class DocListService
+    public class DocListService : ServiceBase
     {
         public DocListService(IWebHostEnvironment webHostEnvironment)
         {
@@ -20,7 +19,7 @@ namespace oc_toolbox_service.Services
             if (accessKey != ret.AccessKey)
                 throw new ArgumentException("Access Key Invalid");
             List<Doc> docs = new List<Doc>();
-            using (SqlConnection conn = new SqlConnection(Database.OCToolboxDbConnectionString))
+            using (SqlConnection conn = new SqlConnection(OCToolboxDbConnectionString))
             {
                 SqlDataAdapter adpt = new SqlDataAdapter();
                 adpt.SelectCommand = new SqlCommand();
@@ -63,7 +62,7 @@ order by DocCategoryNameFr, DocNameFr
             DocFile ret = new DocFile();
             if (accessKey != ret.AccessKey)
                 throw new ArgumentException("Access Key Invalid");
-            using (SqlConnection conn = new SqlConnection(Database.OCToolboxDbConnectionString))
+            using (SqlConnection conn = new SqlConnection(OCToolboxDbConnectionString))
             {
                 SqlDataAdapter adpt = new SqlDataAdapter();
                 adpt.SelectCommand = new SqlCommand();

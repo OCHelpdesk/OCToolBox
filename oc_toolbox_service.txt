@@ -40,7 +40,8 @@ To specify connection string, open appsettings.json and add:
     "OCToolboxReader": "Server=tcp:orkincanada.database.windows.net,1433;Initial Catalog=OCToolBox;Persist Security Info=False;User ID=orkinca_reader;Password=8F8kcrvUNQ#!u9e;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
   }
 Open Program.cs and add 
- string toolboxDb = builder.Configuration.GetConnectionString("OCToolboxReader").ToString();
+ string? toolboxDb = builder.Configuration.GetConnectionString("OCToolboxReader");
+ ServiceBase.OCToolboxDbConnectionString = toolboxDb;
 
 To add package System.Data.SqlClient, run command
  dotnet add package System.Data.SqlClient

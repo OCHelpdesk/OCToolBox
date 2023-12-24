@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using oc_toolbox_service.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +13,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.WriteIndented = true;
 });
 string? toolboxDb = builder.Configuration.GetConnectionString("OCToolboxReader");
-Database.OCToolboxDbConnectionString = toolboxDb;
+ServiceBase.OCToolboxDbConnectionString = toolboxDb;
 
 var app = builder.Build();
 
