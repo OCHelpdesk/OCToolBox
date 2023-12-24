@@ -30,4 +30,14 @@ namespace oc_toolbox_service.Models
             );
         }
     }
+
+    public class DocFile
+    {
+        [JsonIgnore]
+        public string AccessKey { get { return "B2C002F1-FA35-4F93-81FB-315D48A9342B"; } }
+        public int? Id { get; set; }
+        public byte[]? Content { get; set; }
+        public string? ContentType { get; set; }
+        public string? Name { get; set; }
+    }
 }

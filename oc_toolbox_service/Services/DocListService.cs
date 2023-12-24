@@ -57,5 +57,31 @@ order by DocCategoryNameFr, DocNameFr
             ret.Docs = docs.ToArray();
             return ret;
         }
+
+        public DocFile GetDocFile(string? accessKey, int? docId, bool? inFrench)
+        {
+            DocFile ret = new DocFile();
+            if (accessKey != ret.AccessKey)
+                throw new ArgumentException("Access Key Invalid");
+            using (SqlConnection conn = new SqlConnection(Database.OCToolboxDbConnectionString))
+            {
+                SqlDataAdapter adpt = new SqlDataAdapter();
+                adpt.SelectCommand = new SqlCommand();
+                adpt.SelectCommand.Connection = conn;
+                adpt.SelectCommand.CommandText = "select DocType, DocNameEn, DocData=DocDataEn from Doc where DocId=" + docId;
+                if (inFrench != null && (bool)inFrench)
+                {
+                    adpt.SelectCommand.CommandText = "select DocType, DocNameEn, DocData=DocDataFr from Doc where DocId=" + docId;
+                }
+                DataTable tbl = new DataTable();
+                adpt.Fill(tbl);
+                ret.Id = docId;
+                string docType = (string)tbl.Rows[0]["DocType"];
+                ret.ContentType = docType.Equals("pdf", StringComparison.OrdinalIgnoreCase) ? "application/pdf" : "application/octet-stream";
+                ret.Content = (byte[])tbl.Rows[0]["DocData"];
+                ret.Name = tbl.Rows[0]["DocNameEn"].ToString().Replace("\\", "_").Replace("/", "_") + "." + docType;
+            }
+            return ret;
+        }
     }
 }
