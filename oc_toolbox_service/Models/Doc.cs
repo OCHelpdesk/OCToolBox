@@ -7,13 +7,11 @@ namespace oc_toolbox_service.Models
 {
     public class Doc
     {
-        public int? DocId { get; set; }
-        public string? DocCategory { get; set; }
-        public string? DocType { get; set; }
-        public string? DocNameEn { get; set; }
-        public string? DocNameFr { get; set; }
-        public string? DocDescriptionEn { get; set; }
-        public string? DocDescriptionFr { get; set; }
+        public int? Id { get; set; }
+        public string? Category { get; set; }
+        public string? Type { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
         public bool? IsPublished { get; set; }
     }
 
