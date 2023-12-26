@@ -5,30 +5,174 @@ echo 	Installed React Native Tools, ES7+ React/Redux/React-Native/JS snippets (o
 echo		Prettier - Code formatter and Material Icon Theme
 echo 	Enabled Settings - Editor: Format On Save
 
+echo Follow the React Native CLI QuickStart guide for macOS and iOS
+echo https://reactnative.dev/docs/next/environment-setup
+
+echo React Native recommends installing Node and Watchman using Homebrew. 
+echo Run the following commands in a Terminal after installing Homebrew:
+echo brew install node
+echo brew install watchman
+
 echo make sure node installed
+echo If you have already installed Node on your system, make sure it is Node 18 or newer.
 node -v
 
 echo make sure watchman installed
+echo Watchman is a tool by Facebook for watching changes in the filesystem. 
+echo It is highly recommended you install it for better performance.
 watchman -v
 
 echo make sure ruby installed
+echo Ruby is an open-source programming language.
+echo RubyGems is a package manager for the Ruby programming language that provides a standard format for distributing 
+echo Ruby programs and libraries (in a self-contained format called a "gem"), a tool designed to easily manage the 
+echo installation of gems, and a server for distributing them.
+echo A Ruby gem is a bunch of perfectly packaged Ruby code that gives you access to custom methods somebody else wrote. 
+echo Gems just make the process of sharing code much easier.The custom methods inside of gems typically have specific 
+echo functionalities. 
 ruby -v
 rbenv install 2.7.5
 
 echo make sure cocoapods installed so to have pod
+echo CocoaPods is one of the dependency management system available for iOS, to manage library dependencies for Xcode projects.
+echo CocoaPods is a Ruby gem. You can install CocoaPods using the version of Ruby that ships with the latest version of macOS.
 pod --version
 echo sudo gem install cocoapods
 
-echo create project oc_toolbox_app
+echo create project octoolboxapp
+echo If you previously installed a global react-native-cli package, please remove it as it may cause unexpected issues:
 npm uninstall -g react-native-cli @react-native-community/cli
-npx react-native init oc_toolbox_app
+npx react-native init octoolboxapp
 
-cd oc_toolbox_app
+echo Got the following errors while installing bundler
+echo Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+echo An error occurred while installing json (2.7.1), and Bundler cannot continue.
+cd octoolboxapp
+echo Run `bundle install` to update and install the bundled gems.
+bundle install
+echo The same error
+echo An error occurred while installing json (2.7.1), and Bundler cannot continue.
+
+echo Refer to How to Fix Ruby Bundle Install Errors
+echo https://rollbar.com/blog/ruby-bundle-install-errors/
+echo One of the most common causes of bundle install errors is a missing or outdated version of the RubyGems package manager. 
+echo RubyGems is a package manager for the Ruby programming language that is used to manage the installation and updating of 
+echo Ruby libraries, also known as gems. If the version of RubyGems is outdated or missing, it may lead to errors when running 
+echo bundle install. (Refer to https://guides.rubygems.org for RubyGems. Run gem --help for basic info of running RubyGems.)
+echo To fix this issue, we can update RubyGems to the latest version by running the command:
+gem update --system
+echo Error installing rubygems-update:
+echo   There are no versions of rubygems-update (= 3.5.3) compatible with your Ruby & RubyGems
+echo 	 rubygems-update requires Ruby version >= 3.0.0. The current ruby version is 2.7.5.203.
+echo To list all available versions 
+rbenv install --list
+echo Install the latest ruby
+echo rbenv install 3.2.0
+echo To list all local versions.
+rbenv install --list-all / -L
+echo To choose the Ruby version for your project with, for example, choosing version 3.1.2:
+echo cd myproject
+echo rbenv local 3.1.2
+rbenv local 3.1.2
+echo Got 'rbenv: version `3.1.2' not installed'
+rbenv install 3.1.2
+echo Got:
+echo BUILD FAILED (macOS 13.6.1 using ruby-build 20221225)
+echo Inspect or clean up the working tree at /var/folders/6s/7mktd90d6rjbgtlxj_ss3d1c0000gp/T/ruby-build......
+echo Reboot Machine
+cd octoolbox
+rbenv install 3.2.0
+echo Got error: rbenv: cannot rehash: /Users/songli/.rbenv/shims/.rbenv-shim exists
+echo Removed the file
+rbenv install 3.2.0
+echo Succeeded! Installed ruby-3.2.0 to /Users/songli/.rbenv/versions/3.2.0
+echo Choose 3.2.0
+rbenv local 3.2.0
+echo A file .ruby-sersion is created in folder octoolbox.
+
+echo retry to create the project
+npm uninstall -g react-native-cli @react-native-community/cli
+npx react-native init octoolboxapp
+echo Error Installing CocoaPods dependencies
+sudo xcode-select --switch /Applications/Xcode.app
+echo Deleted the created octoolboxapp foleder
+npm uninstall -g react-native-cli @react-native-community/cli
+npx react-native init octoolboxapp
+echo Got: CocoaPods (https://cocoapods.org/) is not installed. Install it? Answered Yes, then
+echo Got:
+echo   Command failed: brew install cocoapods
+echo     Error: You have not agreed to the Xcode license. Please resolve this by running:
+echo     sudo xcodebuild -license accept
+echo Deleted folder octoolboxapp
+npm uninstall -g react-native-cli @react-native-community/cli
+npx react-native init octoolboxapp
+echo Error Installing CocoaPods dependencies
+
+echo Rebooted machine.
+rvm install "ruby-3.2.0" 
+echo ruby-3.2.0 extracted to /Users/songli/.rvm/src/ruby-3.2.0
+echo Installing ruby-3.2.0 with rvm succeeded.
+npm uninstall -g react-native-cli @react-native-community/cli
+npx react-native init octoolboxapp
+echo Got: CocoaPods (https://cocoapods.org/) is not installed. Install it? Answered Yes with Homebrew.
+echo Got: The error above occured while trying to install Installing CocoaPods. Please try again manually: brew install cocoapods
+echo rebooted the machine
+brew install cocoapods
+echo Warning: cocoapods 1.14.3 is already installed and up-to-date.
+echo To reinstall 1.14.3, run: brew reinstall cocoapods
+brew reinstall cocoapods
+echo retry to create the project
+npm uninstall -g react-native-cli @react-native-community/cli
+npx react-native init octoolboxapp
+echo Installing pods failed. This doesn't affect project initialization and you can safely proceed. 
+echo However, you will need to install pods manually when running iOS, follow additional steps in "Run instructions for iOS" 
+echo section.
+ecco ✖ Installing CocoaPods dependencies  (this may take a few minutes)
+echo info 💡 To enable automatic CocoaPods installation when building for iOS you can create react-native.config.js with 
+echo automaticPodsInstallation field. For more details, see 
+echo    https://github.com/react-native-community/cli/blob/main/docs/projects.md#projectiosautomaticpodsinstallation
+echo ✔ New project is already inside of a Git repo, skipping git init.
+echo Run instructions for Android:
+echo    • Have an Android emulator running (quickest way to get started), or a device connected.
+echo    • cd "/Users/songli/Projects/Utilities/OCToolBox/octoolboxapp" && npx react-native run-android
+echo Run instructions for iOS:
+echo    cd "/Users/songli/Projects/Utilities/OCToolBox/octoolboxapp/ios"
+echo    • Install Cocoapods
+echo      bundle install # you need to run this only once in your project.
+echo      • bundle exec 
+echo        pod install --repo-update
+echo        cd ..
+echo    npx react-native run-ios
+echo    - or -
+echo    • Open octoolboxapp/ios/octoolboxapp.xcodeproj in Xcode or run "xed -b ios"
+echo    • Hit the Run button
+echo Run instructions for macOS:
+echo    • See https://aka.ms/ReactNativeGuideMacOS for the latest up-to-date instructions.
+
+echo Running 'pod install --repo-update' in the ios folder succeeded
+echo [!] Please close any current Xcode sessions and use `octoolboxapp.xcworkspace` for this project from now on.
+echo Pod installation complete! There are 73 dependencies from the Podfile and 61 total pods installed.
+echo 
+echo [!] hermes-engine has added 1 script phase. Please inspect before executing a build. See 
+echo `https://guides.cocoapods.org/syntax/podspec.html#script_phases`
+echo for more information.
+
+cd..
+npx react-native run-ios
+echo error iOS devices or simulators not detected. Install simulators via Xcode or connect a physical iOS device
+echo open XCode, go to Settings -> Localtions and changed 'Command Line Tool' from Xcode 15.1 back to Xcode 14.3
+npx react-native run-ios
+echo Build failed.
+echo Opened octoolboxapp.xcworkspace with Xcode and build. Got error 'Library not found for -ld_classic'
+echo Re-ran pos install
+npx react-native run-ios --simulator="iPhone 14"
+echo Worked!!!!
+
 
 echo Navigating Between Screens with React Navigation
 echo 	https://reactnative.dev/docs/navigation
 echo Install React Navigation. 
-cd oc_toolbox_app
+cd octoolboxapp
 npm install @react-navigation/native @react-navigation/native-stack @react-navigation/bottom-tabs @react-navigation/drawer
 echo Install the required peer dependencies
 npm install react-native-screens react-native-safe-area-context
