@@ -196,6 +196,18 @@ npm i react-native-image-pan-zoom
 echo Refer to https://www.npmjs.com/package/react-native-background-actions
 npm i react-native-background-actions
 
+echo Refer to https://github.com/kurisu994/react-native-files-viewer
+npm install react-native-fs
+npm install react-native-files-viewer --save
+echo Got error 'upstream dependency conflict', which means the package requires an old version of React Native
+echo Ignore any potential incompetibilities and force the installation
+echo No Luch!!!
+echo npm install react-native-files-viewer --egacy-peer-deps
+echo cd ios
+echo pod 'RNFileViewer', path: '../node_modules/react-native-files-viewer'
+echo pod install
+echo cd ..
+
 cd ios
 pod install
 cd ..
