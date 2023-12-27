@@ -1,0 +1,227 @@
+[
+  {
+    "StringId": "BOSS #",
+    "StringEn": "BOSS #",
+    "StringFr": "# BOSS"
+  },
+  {
+    "StringId": "Category",
+    "StringEn": "Category",
+    "StringFr": "Catégorie"
+  },
+  {
+    "StringId": "CommService",
+    "StringEn": "Commercial Service",
+    "StringFr": "Service commercial"
+  },
+  {
+    "StringId": "Home",
+    "StringEn": "Home",
+    "StringFr": "Accueil"
+  },
+  {
+    "StringId": "HomeOCPrice",
+    "StringEn": "Orkin Canada Pricing",
+    "StringFr": "Les prix d'Orkin Canada"
+  },
+  {
+    "StringId": "HomePricing",
+    "StringEn": "Pricing",
+    "StringFr": "Les prix"
+  },
+  {
+    "StringId": "HomeProdPrice",
+    "StringEn": "Product",
+    "StringFr": "Produit"
+  },
+  {
+    "StringId": "HomeSelectCat",
+    "StringEn": "select a price category",
+    "StringFr": "sélectionnez une catégorie de prix"
+  },
+  {
+    "StringId": "HomeSvcPriceComm",
+    "StringEn": "Service - Commercial",
+    "StringFr": "Service - Commercial"
+  },
+  {
+    "StringId": "HomeSvcPriceResi",
+    "StringEn": "Service - Residential",
+    "StringFr": "Service - Résidentiel"
+  },
+  {
+    "StringId": "Manufactory",
+    "StringEn": "Manufacturer",
+    "StringFr": "Fournisseur"
+  },
+  {
+    "StringId": "National",
+    "StringEn": "National",
+    "StringFr": "National"
+  },
+  {
+    "StringId": "NationalSite",
+    "StringEn": "National Site",
+    "StringFr": "Site national"
+  },
+  {
+    "StringId": "PlsWait",
+    "StringEn": "Please Wait",
+    "StringFr": "Veuillez patienter"
+  },
+  {
+    "StringId": "Price",
+    "StringEn": "Price",
+    "StringFr": "Prix"
+  },
+  {
+    "StringId": "ProdCat",
+    "StringEn": "Product Category",
+    "StringFr": "Catégorie de produit"
+  },
+  {
+    "StringId": "ProdCatDesc",
+    "StringEn": "Category Description",
+    "StringFr": "Description de la catégorie"
+  },
+  {
+    "StringId": "ProdCatDescBird",
+    "StringEn": "Bird & Wildlife products",
+    "StringFr": "produits pour les oiseaux et la faune sauvage"
+  },
+  {
+    "StringId": "ProdCatDescCiger",
+    "StringEn": "Cigarette products",
+    "StringFr": "Cendriers"
+  },
+  {
+    "StringId": "ProdCatDescCleaner",
+    "StringEn": "Cleaning products and disinfectants",
+    "StringFr": "Produits de nettoyage et de désinfection"
+  },
+  {
+    "StringId": "ProdCatDescDrain",
+    "StringEn": "Drain service products",
+    "StringFr": "Produits d'entretien pour les drains"
+  },
+  {
+    "StringId": "ProdCatDescEquip",
+    "StringEn": "Pest control equipment",
+    "StringFr": "Équipement de lutte contre les parasites"
+  },
+  {
+    "StringId": "ProdCatDescInsect",
+    "StringEn": "Insect products",
+    "StringFr": "produits pour les insectes"
+  },
+  {
+    "StringId": "ProdCatDescOdour",
+    "StringEn": "Odour control products",
+    "StringFr": "Produits pour le contrôle des odeurs"
+  },
+  {
+    "StringId": "ProdCatDescPPE",
+    "StringEn": "Personal protective equipment",
+    "StringFr": "Équipement de protection personnelle"
+  },
+  {
+    "StringId": "ProdCatDescRodent",
+    "StringEn": "Rodent products",
+    "StringFr": "produits pour les rongeurs"
+  },
+  {
+    "StringId": "ProdCatDescSoakTank",
+    "StringEn": "Soak tank products",
+    "StringFr": "Produits pour les SoakTanks"
+  },
+  {
+    "StringId": "ProdCatDescWC",
+    "StringEn": "Washroom care products",
+    "StringFr": "Produits d'entretien des salles de bains"
+  },
+  {
+    "StringId": "ProdChooseFieldToSort",
+    "StringEn": "Select a Field to Sort",
+    "StringFr": "Choisissez un champ à trier"
+  },
+  {
+    "StringId": "ProdFavoriteFirst",
+    "StringEn": "Sort Favourite Products on Top",
+    "StringFr": "Trier par produits préférés en haut"
+  },
+  {
+    "StringId": "ProdName",
+    "StringEn": "Product Name",
+    "StringFr": "Nom du produit"
+  },
+  {
+    "StringId": "ProdNationalOff",
+    "StringEn": "national site {xxx}% discount",
+    "StringFr": "site national {xxx} % de réduction"
+  },
+  {
+    "StringId": "ProdNoOff",
+    "StringEn": "no discount available",
+    "StringFr": "pas de réduction disponible"
+  },
+  {
+    "StringId": "ProdOffApplied",
+    "StringEn": "{xxx}% discount applied",
+    "StringFr": "{xxx} % de remise appliquée"
+  },
+  {
+    "StringId": "ProdPCP#",
+    "StringEn": "PCP #",
+    "StringFr": "# Homologation"
+  },
+  {
+    "StringId": "ProdSubcat",
+    "StringEn": "Subcategories",
+    "StringFr": "Sous-catégories"
+  },
+  {
+    "StringId": "ProdSubcatSelect",
+    "StringEn": "Select a subcategory",
+    "StringFr": "Sélectionnez une sous-catégorie"
+  },
+  {
+    "StringId": "Product",
+    "StringEn": "Product",
+    "StringFr": "Produit"
+  },
+  {
+    "StringId": "ResiService",
+    "StringEn": "Residential Service",
+    "StringFr": "Service résidentiel"
+  },
+  {
+    "StringId": "SearchNotFoundAny",
+    "StringEn": "Your Search Result Could Not Be Found",
+    "StringFr": "votre recherche n'a aucun résultat"
+  },
+  {
+    "StringId": "SearchProd",
+    "StringEn": "search for products",
+    "StringFr": "rechercher des produits"
+  },
+  {
+    "StringId": "SearchProdInCat",
+    "StringEn": "search for products in category {xxx}",
+    "StringFr": "Rechercher des produits dans une catégorie"
+  },
+  {
+    "StringId": "Sort",
+    "StringEn": "Sort",
+    "StringFr": "Trier"
+  },
+  {
+    "StringId": "UnitPrice",
+    "StringEn": "Unit Price",
+    "StringFr": "Prix ​​unitaire"
+  },
+  {
+    "StringId": "UOM",
+    "StringEn": "UOM",
+    "StringFr": "UDM"
+  }
+]
