@@ -15,6 +15,11 @@
     "StringFr": "Service commercial"
   },
   {
+    "StringId": "Doc",
+    "StringEn": "Document",
+    "StringFr": "Document (Fr)"
+  },
+  {
     "StringId": "Home",
     "StringEn": "Home",
     "StringFr": "Accueil"
@@ -65,6 +70,11 @@
     "StringFr": "Site national"
   },
   {
+    "StringId": "OCToolbox",
+    "StringEn": "Orkin Canada Toolbox",
+    "StringFr": "Boîte à outils Orkin Canada (Fr)"
+  },
+  {
     "StringId": "PlsWait",
     "StringEn": "Please Wait",
     "StringFr": "Veuillez patienter"
@@ -73,6 +83,11 @@
     "StringId": "Price",
     "StringEn": "Price",
     "StringFr": "Prix"
+  },
+  {
+    "StringId": "Pricing",
+    "StringEn": "Pricing",
+    "StringFr": "Prix (Fr)"
   },
   {
     "StringId": "ProdCat",
