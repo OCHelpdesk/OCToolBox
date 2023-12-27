@@ -3,7 +3,6 @@ import { useState } from "react";
 import { View, Image, Text, TouchableWithoutFeedback, Alert  } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button } from '@rneui/base';
-import { CommonActions } from "@react-navigation/native";
 
 import TextString from '../components/TextString';
 import AppSettings from '../jsons/AppSettings.json'
@@ -11,47 +10,28 @@ import AppSettings from '../jsons/AppSettings.json'
 const AppHomeScreen = ({navigation}) => {
     const priceDataVersion = global.currentProductDataVersion == '' ? AppSettings.PriceDataVersion : global.currentProductDataVersion;
     const [stringLanguage, setLanguage] = useState('Français');
-    const [stringOCPrice, setStringOCPrice] = useState('Orkin Canada Pricing'.toUpperCase());
-    const [stringSelectCategory, setStringSelectCategory] = useState('select a price category');
-    const [stringProdPrice, setStringProdPrice] = useState('Product / Produit'.toUpperCase());
-    const [stringServicePriceComm, setStringServicePriceComm] = useState('Service - Commercial'.toLocaleUpperCase());
-    const [stringServicePriceResi, setStringServicePriceResi] = useState('Service - Residential'.toLocaleUpperCase());
+    const [stringOCToolbox, setStringOCToolbox] = useState('Orkin Canada Toolbox'.toUpperCase());
+    const [stringSelectCat, setStringSelectCat] = useState('select a toolbox category');
+    const [stringPricing, setStringPricing] = useState('Pricing');
+    const [stringDoc, setStringDoc] = useState('Document'.toUpperCase());
     TextString.getIsInFrench().then(
         () => {
-            //console.log('TextString.getIsInFrench().then');
             setLanguage(TextString.TargetLanguage());
-            setStringSelectCategory(TextString.Get('HomeSelectCat'));
-            //var prim = TextString.IsInFrench() ? 'fr' : 'en';
-            //var sec = TextString.IsInFrench() ? 'en' : 'fr';
-            //setStringOCPrice((TextString.Get('HomePricing', prim) + ' / ' + TextString.Get('HomePricing', sec)).toUpperCase());
-            //setStringProdPrice((TextString.Get('HomeProdPrice', prim) + ' / ' + TextString.Get('HomeProdPrice', sec)).toUpperCase());
-            setStringOCPrice(TextString.Get('HomeOCPrice').toUpperCase());
-            setStringProdPrice(TextString.Get('HomeProdPrice').toUpperCase());
-            setStringServicePriceComm(TextString.Get('HomeSvcPriceComm').toUpperCase());
-            setStringServicePriceResi(TextString.Get('HomeSvcPriceResi').toUpperCase());
-            //setStringServicePriceResi((TextString.Get('HomeSvcPriceResi', prim) + '\r\n' + TextString.Get('HomeSvcPriceResi', sec)).toUpperCase());    
+            setStringOCToolbox(TextString.Get('OCToolbox').toUpperCase());
+            setStringSelectCat(TextString.Get('HomeSelectToolboxCat'));
+            setStringPricing(TextString.Get('Pricing').toUpperCase());
+            setStringDoc(TextString.Get('Doc').toUpperCase());
             }
     ) 
     const toggleLanguage = () => {
         TextString.ToggleLanguage();
-        setLanguage(TextString.TargetLanguage());
-        setStringSelectCategory(TextString.Get('HomeSelectCat'));
-        //var prim = TextString.IsInFrench() ? 'fr' : 'en';
-        //var sec = TextString.IsInFrench() ? 'en' : 'fr';
-        //setStringOCPrice((TextString.Get('HomePricing', prim) + ' / ' + TextString.Get('HomePricing', sec)).toUpperCase());
-        //setStringProdPrice((TextString.Get('HomeProdPrice', prim) + ' / ' + TextString.Get('HomeProdPrice', sec)).toUpperCase());
-        setStringOCPrice(TextString.Get('HomeOCPrice').toUpperCase());
-        setStringProdPrice(TextString.Get('HomeProdPrice').toUpperCase());
-        setStringServicePriceComm(TextString.Get('HomeSvcPriceComm').toUpperCase());
-        setStringServicePriceResi(TextString.Get('HomeSvcPriceResi').toUpperCase());
-        //setStringServicePriceResi((TextString.Get('HomeSvcPriceResi', prim) + '\r\n' + TextString.Get('HomeSvcPriceResi', sec)).toUpperCase());    
+            setLanguage(TextString.TargetLanguage());
+            setStringOCToolbox(TextString.Get('OCToolbox').toUpperCase());
+            setStringSelectCat(TextString.Get('HomeSelectToolboxCat'));
+            setStringPricing(TextString.Get('Pricing').toUpperCase());
+            setStringDoc(TextString.Get('Doc').toUpperCase());
     }
 
-    //const screenWidth = parseInt(Dimensions.get('window').width);
-    //const menuBoxWidth = screenWidth - 40;
-    //const screenHeight = parseInt(Dimensions.get('window').height);
-    //const menuBoxHeight = 600;
-    //const menuBoxMarginTop = (screenHeight - menuBoxHeight) / 2 - 80;
     var timeLogoLastPressed = new Date().getTime();
     const setIsInPreviewMode = async(value) => {
         try {
@@ -84,47 +64,33 @@ const AppHomeScreen = ({navigation}) => {
                     onPressOut = { () => { if (((new Date().getTime()) - timeLogoLastPressed) > 3000) toggleIsInPreviewMode(); }}
                 >
                     <View style={{width: '95%', height: 50, borderBottomWidth: 1, borderBottomColor: "#ff0000", justifyContent: "center", alignItems: 'center'}}>
-                        <Text style={{fontWeight: "bold", color: "#ffffff", fontSize: 20, paddingTop: 10, paddingBottom: 10}}>{stringOCPrice}</Text>
+                        <Text style={{fontWeight: "bold", color: "#ffffff", fontSize: 20, paddingTop: 10, paddingBottom: 10}}>{stringOCToolbox}</Text>
                     </View>
                 </TouchableWithoutFeedback>
                 <View style={{paddingTop: 20, paddingBottom: 0, alignItems: 'center'}}>
-                    <Text style={{ fontWeight: "bold", color: "#ffffff", fontSize: 14}}>{stringSelectCategory}</Text>
+                    <Text style={{ fontWeight: "bold", color: "#ffffff", fontSize: 14}}>{stringSelectCat}</Text>
                 </View>
                 <View style={{flex: 3, alignItems: 'center', justifyContent: 'space-evenly', alignSelf: 'stretch',}}>
                     <Button 
-                        title={stringProdPrice}
+                        title={stringPricing}
                         titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 20 }}
                         type="outline" 
                         buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
                         onPress={() => {
-                            //if (global.isProductDataLoaded) {
-                            //    navigation.dispatch(CommonActions.reset({index: 0, routes: [{ name: "ProductCategory" }]})); 
-                            //}
-                            //else {
-                                navigation.navigate('Splash', { waitFor: 'productDownload', routedFrom: "Home" }) 
-                            //}
+                            //navigation.navigate('Splash', { waitFor: 'productDownload', routedFrom: "Home" }) 
                         }}
                     />
                     <Button 
-                        title={stringServicePriceComm}
+                        title={stringDoc}
                         titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 20 }}
                         type="outline" 
                         buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
                         onPress={() => {
-                            navigation.navigate('CommercialService') 
-                        }}
-                    />
-                    <Button 
-                        title={stringServicePriceResi}
-                        titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 20 }}
-                        type="outline" 
-                        buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
-                        onPress={() => { 
-                            navigation.navigate('ResidentialService')
+                            //navigation.navigate('CommercialService') 
                         }}
                     />
                 </View>
-                <View style={{paddingTop: 40, paddingBottom: 40, alignItems: 'center'}}>
+                <View style={{paddingTop: 120, paddingBottom: 40, alignItems: 'center'}}>
                     <Button 
                         title={stringLanguage}
                         titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 20 }}

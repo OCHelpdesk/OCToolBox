@@ -45,6 +45,11 @@
     "StringFr": "sélectionnez une catégorie de prix"
   },
   {
+    "StringId": "HomeSelectToolboxCat",
+    "StringEn": "select a toolbox category",
+    "StringFr": "sélectionner une catégorie de boîte à outils (Fr)"
+  },
+  {
     "StringId": "HomeSvcPriceComm",
     "StringEn": "Service - Commercial",
     "StringFr": "Service - Commercial"

@@ -168,20 +168,19 @@ echo Re-ran pos install
 npx react-native run-ios --simulator="iPhone 14"
 echo Worked!!!!
 
+cd octoolboxapp
 
 echo Navigating Between Screens with React Navigation
 echo 	https://reactnative.dev/docs/navigation
 echo Install React Navigation. 
-cd octoolboxapp
 npm install @react-navigation/native @react-navigation/native-stack @react-navigation/bottom-tabs @react-navigation/drawer
+
 echo Install the required peer dependencies
 npm install react-native-screens react-native-safe-area-context
+
 echo async-storage is not a dependency. Install it so to run pod for both of the packages.
 npm install @react-native-async-storage/async-storage
 echo For iOS with bare React Native project, make sure you have Cocoapods installed. Then install the pods to complete the installation:
-cd ios
-pod install
-cd ..
 
 echo Refer to https://www.npmjs.com/package/react-native-vector-icons, install Vector Icons
 npm install --save react-native-vector-icons
@@ -196,14 +195,13 @@ npm i react-native-image-pan-zoom
 
 echo Refer to https://www.npmjs.com/package/react-native-background-actions
 npm i react-native-background-actions
+
 cd ios
 pod install
 cd ..
-echo Refer to https://www.interviewcrak.in/2022/12/how-to-run-react-native-app-in.html, some XCode work needed
-
 
 echo start the app
-npx react-native run-ios
+npx react-native run-ios --simulator="iPhone 14"
 
 /*
 To add an app icon, open the ios Xcode workspace (must be the workspace instead of the project, would have building errors otherwise) with Xcode, select Images->AppIcon and drag&drop icon images to the image boxes.
