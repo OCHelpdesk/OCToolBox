@@ -197,7 +197,6 @@ echo Refer to https://www.npmjs.com/package/react-native-background-actions
 npm i react-native-background-actions
 
 echo Refer to https://github.com/kurisu994/react-native-files-viewer
-npm install react-native-fs
 npm install react-native-files-viewer --save
 echo Got error 'upstream dependency conflict', which means the package requires an old version of React Native
 echo Ignore any potential incompetibilities and force the installation
@@ -207,6 +206,16 @@ echo cd ios
 echo pod 'RNFileViewer', path: '../node_modules/react-native-files-viewer'
 echo pod install
 echo cd ..
+
+echo Refer to How to Access File System with RN to install and use react-native-fs
+echo https://blog.logrocket.com/how-to-access-file-systems-react-native/
+npm install react-native-fs --save
+echo Link react-native-fs with the app's native code
+npx react-native link react-native-fs
+echo Due to autolinking, link and unlink commands have been removed. For info of link, refer to https://reactnative.dev/docs/linking-libraries-ios
+echo Open settings.gradle file and the linking should be there. If not then only manually add
+
+
 
 cd ios
 pod install

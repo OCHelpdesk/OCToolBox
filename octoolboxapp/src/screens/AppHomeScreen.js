@@ -86,7 +86,7 @@ const AppHomeScreen = ({navigation}) => {
                         type="outline" 
                         buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
                         onPress={() => {
-                            //navigation.navigate('CommercialService') 
+                            navigation.navigate('DocList') 
                         }}
                     />
                 </View>

@@ -6,6 +6,7 @@ import BackgroundService from 'react-native-background-actions';
 
 import AppSettings from './src/jsons/AppSettings.json'
 import AppHomeScreen from './src/screens/AppHomeScreen';
+import DocListScreen from './src/screens/DocListScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,7 +26,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator >
-        <Stack.Screen name="Home" component={AppHomeScreen} options={{
+        <Stack.Screen name="AppHome" component={AppHomeScreen} options={{
           headerBackVisible: false,
           title: 'OCTOOLBOX',
           headerTitleAlign: 'center',          
@@ -33,6 +34,15 @@ function App() {
           headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0, },
           headerShadowVisible: false,
         }}/>
+        <Stack.Screen name="DocList" component={DocListScreen} options={{
+          //headerShown: false,
+          headerBackVisible: false,
+          title: 'Doc. List',
+          headerTitleAlign: 'center',          
+          headerTintColor: '#ffffff',
+          headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0, },
+          headerShadowVisible: false,
+        }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
