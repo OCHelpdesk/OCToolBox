@@ -1,16 +1,27 @@
 import * as React from 'react';
 import { View, SafeAreaView, FlatList, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from '@rneui/base';
 import { CommonActions } from "@react-navigation/native";
+import RNFS from 'react-native-fs';
 
 import DocCard from '../components/DocCard';
 import TextString from '../components/TextString';
 
 const DocListScreen = ({navigation}) => {
+    const getFileContent = async (path) => {
+      console.log('Calling RNFS.readDir');
+      const arrayOfReadDirItem = await RNFS.readDir(path);
+      console.log('Iterate through the return array');
+      for (var i = 0; i < arrayOfReadDirItem.length; i++) {
+        //For definition of type ReadDirItem, Refer https://www.npmjs.com/package/react-native-fs
+        console.log(arrayOfReadDirItem[i].name);
+      }
+    };
+
     const screenTitle = TextString.Get('Doc').toUpperCase();
     setTimeout(() => {
       navigation.setOptions({ title: screenTitle });
+      getFileContent(RNFS.MainBundlePath); //DownloadFolder=RNFS.DownloadDirectoryPath, AppFolder=RNFS.MainBundlePath
     }, 200);
 
     const docs = 
@@ -19,13 +30,17 @@ const DocListScreen = ({navigation}) => {
         DocId: 1,
         DocCategory: 'Category 1',
         DocName: 'Doc 1',
-        DocDescription: 'Doc 1 Description'
+        DocDescription: 'Doc 1 Description',
+        DocIcon: 'file-pdf-o',
+        DocIconColor: '#ff0000'
       },
       {
         DocId: 2,
         DocCategory: 'Category 2',
         DocName: 'Doc 2',
-        DocDescription: 'Doc 2 Description'
+        DocDescription: 'Doc 2 Description',
+        DocIcon: 'file-excel-o',
+        DocIconColor: '#009900'
       }
     ]
 

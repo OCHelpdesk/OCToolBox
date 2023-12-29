@@ -35,7 +35,7 @@ class DocCard extends Component {
             <View style={{flexDirection: 'row', height: 24}}>
               <Text style={styles.dataFieldCaption}>Category:</Text>
               <Text style={{flex: 1, }}>{this.props.doc.DocCategory}</Text>
-              <Icon name='file-pdf-o' size={16} color='#ff0000' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
+              <Icon name={this.props.doc.DocIcon} size={16} color={this.props.doc.DocIconColor} style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
             <View style={{flexDirection: 'row', height: 24}}>
               <Text style={styles.dataFieldCaption}>Name:</Text>
