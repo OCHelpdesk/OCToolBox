@@ -24,7 +24,7 @@ class DocCard extends Component {
         <View>
           <TouchableOpacity
             style={{
-              height: 80, 
+              height: 100, 
               width: '100%', 
               borderWidth: 0, borderColor: "#ff0000", borderRadius: 5, 
               marginLeft: 4, marginTop: 2, padding: 4,
@@ -32,13 +32,13 @@ class DocCard extends Component {
             }}
             onPress={this.onDocSelected}
           >
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', height: 24}}>
               <Text style={styles.dataFieldCaption}>Category:</Text>
               <Text style={{flex: 1, }}>{this.props.doc.DocCategory}</Text>
-              <Icon name='heart' size={24} color='#cccccc' style={{width: 40, textAlign: "center", textAlignVertical: "top"}}/>
+              <Icon name='file-pdf-o' size={16} color='#ff0000' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={styles.dataFieldCaption}>Doc. Name:</Text>
+            <View style={{flexDirection: 'row', height: 24}}>
+              <Text style={styles.dataFieldCaption}>Name:</Text>
               <Text style={{flex: 1, }}>{this.props.doc.DocName}</Text>
             </View>
             <View style={{flexDirection: 'row'}}>

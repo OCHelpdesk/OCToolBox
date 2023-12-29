@@ -214,14 +214,18 @@ npx react-native link react-native-fs
 echo Due to autolinking, link and unlink commands have been removed. For info of link, refer to https://reactnative.dev/docs/linking-libraries-ios
 echo Open settings.gradle file and the linking should be there. If not then only manually add
 
-
-
 cd ios
 pod install
 cd ..
 
 echo start the app
 npx react-native run-ios --simulator="iPhone 14"
+
+/*
+Open app Xcode workspace
+From OCToolboxApp -> OCToolboxApp -> Info, add a new key 'Status bar style' and select Light Content as value of the key
+*/
+
 
 /*
 To add an app icon, open the ios Xcode workspace (must be the workspace instead of the project, would have building errors otherwise) with Xcode, select Images->AppIcon and drag&drop icon images to the image boxes.
