@@ -182,11 +182,10 @@ echo async-storage is not a dependency. Install it so to run pod for both of the
 npm install @react-native-async-storage/async-storage
 echo For iOS with bare React Native project, make sure you have Cocoapods installed. Then install the pods to complete the installation:
 
-echo Refer to https://www.npmjs.com/package/react-native-vector-icons, install Vector Icons
+echo Refer to https://www.npmjs.com/package/react-native-vector-icons
+echo to install Vector Icons and setup Vector Icons for iOS
 npm install --save react-native-vector-icons
-echo Follow https://www.npmjs.com/package/react-native-vector-icons#ios to add the fonts to the Xcode project.
-echo For how to add fonds, refer to https://codewithchris.com/common-mistakes-with-adding-custom-fonts-to-your-ios-app/#includefonts
-echo Note if run pod install after adding the fonts, the fonts must be removed from Copy Bundle Resources of Build Phases. Otherwise, the project cannot be built.  
+
 
 echo Refer to https://reactnativeelements.com/, install React Native Elements, one of the most popular package (another is react native paper)
 npm install @rneui/base @rneui/themed

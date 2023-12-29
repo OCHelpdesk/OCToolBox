@@ -28,7 +28,7 @@ function App() {
       <Stack.Navigator >
         <Stack.Screen name="AppHome" component={AppHomeScreen} options={{
           headerBackVisible: false,
-          title: 'OCTOOLBOX',
+          title: 'ORKIN CANADA',
           headerTitleAlign: 'center',          
           headerTintColor: '#ffffff',
           headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0, },

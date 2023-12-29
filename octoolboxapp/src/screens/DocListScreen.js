@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, SafeAreaView, FlatList, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from '@rneui/base';
 import { CommonActions } from "@react-navigation/native";
 
