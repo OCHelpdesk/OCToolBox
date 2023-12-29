@@ -17,11 +17,13 @@ const DocListScreen = ({navigation}) => {
     [
       {
         DocId: 1,
+        DocCategory: 'Category 1',
         DocName: 'Doc 1',
         DocDescription: 'Doc 1 Description'
       },
       {
         DocId: 2,
+        DocCategory: 'Category 2',
         DocName: 'Doc 2',
         DocDescription: 'Doc 2 Description'
       }

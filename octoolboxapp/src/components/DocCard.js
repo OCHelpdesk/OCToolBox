@@ -33,12 +33,17 @@ class DocCard extends Component {
             onPress={this.onDocSelected}
           >
             <View style={{flexDirection: 'row'}}>
+              <Text style={styles.dataFieldCaption}>Category:</Text>
+              <Text style={{flex: 1, }}>{this.props.doc.DocCategory}</Text>
+              <Icon name='heart' size={24} color='#cccccc' style={{width: 40, textAlign: "center", textAlignVertical: "top"}}/>
+            </View>
+            <View style={{flexDirection: 'row'}}>
               <Text style={styles.dataFieldCaption}>Doc. Name:</Text>
               <Text style={{flex: 1, }}>{this.props.doc.DocName}</Text>
             </View>
             <View style={{flexDirection: 'row'}}>
               <Text style={styles.dataFieldCaption}>Description:</Text>
-              <Text style={{flex: 1, }}>{this.props.doc.DocName}</Text>
+              <Text style={{flex: 1, }}>{this.props.doc.DocDescription}</Text>
             </View>
           </TouchableOpacity>
         </View>
