@@ -9,7 +9,7 @@ import TextString from '../components/TextString';
 
 const DocListScreen = ({navigation}) => {
     const getFileContent = async (path) => {
-      console.log('Calling RNFS.readDir');
+      console.log('Calling RNFS.readDir on ' + path);
       const arrayOfReadDirItem = await RNFS.readDir(path);
       console.log('Iterate through the return array');
       for (var i = 0; i < arrayOfReadDirItem.length; i++) {
@@ -21,7 +21,10 @@ const DocListScreen = ({navigation}) => {
     const screenTitle = TextString.Get('Doc').toUpperCase();
     setTimeout(() => {
       navigation.setOptions({ title: screenTitle });
-      getFileContent(RNFS.MainBundlePath); //DownloadFolder=RNFS.DownloadDirectoryPath, AppFolder=RNFS.MainBundlePath
+      //AppFolder=RNFS.MainBundlePath
+      //AppDocFolder=RNFS.DocumentDirectoryPath
+      //DownloadFolder=RNFS.DownloadDirectoryPath (Android and Windows only)
+      getFileContent(RNFS.DocumentDirectoryPath); 
     }, 200);
 
     const docs = 
