@@ -31,16 +31,16 @@ const DocListScreen = ({navigation}) => {
     [
       {
         DocId: 1,
-        DocCategory: 'Category 1',
-        DocName: 'Doc 1',
+        DocCategory: 'CATEGORY 1',
+        DocName: 'DOC 1',
         DocDescription: 'Doc 1 Description',
         DocIcon: 'file-pdf-o',
         DocIconColor: '#ff0000'
       },
       {
         DocId: 2,
-        DocCategory: 'Category 2',
-        DocName: 'Doc 2',
+        DocCategory: 'CATEGORY 2',
+        DocName: 'DOC 2',
         DocDescription: 'Doc 2 Description',
         DocIcon: 'file-excel-o',
         DocIconColor: '#009900'

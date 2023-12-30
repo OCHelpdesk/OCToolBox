@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import {StyleSheet, Text, TouchableOpacity, View, Dimensions } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import IconEx from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from '@rneui/base';
 import TextString from './TextString';
 
@@ -35,11 +36,12 @@ class DocCard extends Component {
             <View style={{flexDirection: 'row', height: 24}}>
               <Text style={styles.dataFieldCaption}>Category:</Text>
               <Text style={{flex: 1, }}>{this.props.doc.DocCategory}</Text>
-              <Icon name={this.props.doc.DocIcon} size={16} color={this.props.doc.DocIconColor} style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
+              <IconEx name='lock-open-outline' size={20} color='#999999' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
             <View style={{flexDirection: 'row', height: 24}}>
               <Text style={styles.dataFieldCaption}>Name:</Text>
               <Text style={{flex: 1, }}>{this.props.doc.DocName}</Text>
+              <Icon name={this.props.doc.DocIcon} size={16} color={this.props.doc.DocIconColor} style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
             <View style={{flexDirection: 'row'}}>
               <Text style={styles.dataFieldCaption}>Description:</Text>
