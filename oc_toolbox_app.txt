@@ -195,17 +195,6 @@ npm i react-native-image-pan-zoom
 echo Refer to https://www.npmjs.com/package/react-native-background-actions
 npm i react-native-background-actions
 
-echo Refer to https://github.com/kurisu994/react-native-files-viewer
-npm install react-native-files-viewer --save
-echo Got error 'upstream dependency conflict', which means the package requires an old version of React Native
-echo Ignore any potential incompetibilities and force the installation
-echo No Luch!!!
-echo npm install react-native-files-viewer --egacy-peer-deps
-echo cd ios
-echo pod 'RNFileViewer', path: '../node_modules/react-native-files-viewer'
-echo pod install
-echo cd ..
-
 echo Refer to How to Access File System with RN to install and use react-native-fs
 echo https://blog.logrocket.com/how-to-access-file-systems-react-native/
 npm install react-native-fs --save
@@ -213,6 +202,38 @@ echo Link react-native-fs with the app's native code
 npx react-native link react-native-fs
 echo Due to autolinking, link and unlink commands have been removed. For info of link, refer to https://reactnative.dev/docs/linking-libraries-ios
 echo Open settings.gradle file and the linking should be there. If not then only manually add
+
+echo Refer to https://github.com/kurisu994/react-native-files-viewer
+npm install react-native-files-viewer --save
+echo Got error 'upstream dependency conflict', which means the package requires an old version of React Native
+echo npm ERR! ERESOLVE unable to resolve dependency tree
+echo npm ERR! 
+echo npm ERR! While resolving: octoolboxapp@0.0.1
+echo npm ERR! Found: react@18.2.0
+echo npm ERR! node_modules/react
+echo npm ERR!   react@"18.2.0" from the root project
+echo npm ERR! 
+echo npm ERR! Could not resolve dependency:
+echo npm ERR! peer react@"^16.3.0" from react-native-files-viewer@1.0.7
+echo npm ERR! node_modules/react-native-files-viewer
+echo npm ERR!   react-native-files-viewer@"*" from the root project
+echo npm ERR! 
+echo npm ERR! Fix the upstream dependency conflict, or retry
+echo npm ERR! this command with --force or --legacy-peer-deps
+echo npm ERR! to accept an incorrect (and potentially broken) dependency resolution.
+npm config set legacy-peer-deps true
+npm install react-native-files-viewer --save
+echo RNFileViewer Installed!!! The following 3 file were changed idicating installation
+echo   package-lock.json, package.json, ios/Podfile.lock 
+echo Build Failed!
+echo Build Failed with Xcode too! Due to RNFileViewerModule.h not found in module.
+echo   node_modules/react-native-files-viewer/ios/RNFileViewer.m
+echo Open folder node_modules/react-native-files-viewer/ios, RNFileViewerModule.h not existing!
+echo Instead, RNFileViewer.h existing. 
+echo Open RNFileViewer.m, change RNFileViewerModule.h to RNFileViewer.h
+echo Xcode clean build folder and build.
+echo Build Succeeded!!!
+
 
 cd ios
 pod install
