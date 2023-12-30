@@ -15,19 +15,20 @@ namespace oc_toolbox_service.Controllers
 
         [HttpGet]
         //api/DocList?AccessKey=B2C002F1-FA35-4F93-81FB-315D48A9342B
-        public DocList Get([FromQuery] string accessKey) => DocListService.GetDocList(accessKey, false);
+        public DocList Get([FromQuery] string accessKey) => DocListService.GetDocList(accessKey, false, true);
 
         public class DocListRequest
         {
             public string? AccessKey { get; set; }
             public bool? InFrench { get; set; }
+            public bool? InPreview { get; set; }
         }
 
         [Route("GetByPost")]
         [HttpPost]
         public DocList GetByPost(DocListRequest request)
         {
-            var ret = DocListService.GetDocList(request.AccessKey, request.InFrench);
+            var ret = DocListService.GetDocList(request.AccessKey, request.InFrench, request.InPreview);
             return ret;
         }
 

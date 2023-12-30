@@ -13,7 +13,7 @@ namespace oc_toolbox_service.Services
 
         public IWebHostEnvironment WebHostEnvironment { get; }
 
-        public DocList GetDocList(string? accessKey, bool? inFrench)
+        public DocList GetDocList(string? accessKey, bool? inFrench, bool? inPreview)
         {
             DocList ret = new DocList();
             if (accessKey != ret.AccessKey)
@@ -27,7 +27,7 @@ namespace oc_toolbox_service.Services
                 adpt.SelectCommand.CommandText = @"
 select DocId, Category=DocCategoryNameEn, Type=DocType, Name=DocNameEn, Description=DocDescriptionEn, IsPublished
 from Doc inner join DocCategory Cat on Doc.DocCategoryId = Cat.DocCategoryId
-where Doc.IsDeleted = 0 and DocDataEn is not null
+where Doc.IsDeleted = 0 and DocDataEn is not null and IsPublished in (@IsPublished)
 order by DocCategoryNameEn, DocNameEn
 ";
                 if (inFrench != null && (bool)inFrench)
@@ -35,10 +35,11 @@ order by DocCategoryNameEn, DocNameEn
                     adpt.SelectCommand.CommandText = @"
 select DocId, Category=DocCategoryNameFr, Type=DocType, Name=DocNameFr, Description=DocDescriptionFr, IsPublished
 from Doc inner join DocCategory Cat on Doc.DocCategoryId = Cat.DocCategoryId
-where Doc.IsDeleted = 0 and DocDataFr is not null
+where Doc.IsDeleted = 0 and DocDataFr is not null and IsPublished in (@IsPublished)
 order by DocCategoryNameFr, DocNameFr
 ";
                 }
+                adpt.SelectCommand.CommandText = adpt.SelectCommand.CommandText.Replace("@IsPublished", inPreview == null || !((bool)inPreview) ? "1" : "0,1");
                 DataTable tbl = new DataTable();
                 adpt.Fill(tbl);
                 for (int i = 0; i < tbl.Rows.Count; i++)
