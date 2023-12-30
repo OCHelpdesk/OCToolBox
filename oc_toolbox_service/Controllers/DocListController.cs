@@ -34,10 +34,10 @@ namespace oc_toolbox_service.Controllers
 
         [Route("DownloadDoc")]
         [HttpGet]
-        //api/DocList/DownloadDoc?AccessKey=B2C002F1-FA35-4F93-81FB-315D48A9342B&DocId=2
-        public ActionResult DownloadDoc([FromQuery] string accessKey, [FromQuery] int docId)
+        //api/DocList/DownloadDoc?AccessKey=B2C002F1-FA35-4F93-81FB-315D48A9342B&DocId=2&InFrench=0
+        public ActionResult DownloadDoc([FromQuery] string accessKey, [FromQuery] int docId, [FromQuery] int inFrench)
         {
-            DocFile file = DocListService.GetDocFile(accessKey, docId, false);
+            DocFile file = DocListService.GetDocFile(accessKey, docId, inFrench == 1 ? true : false);
             return File(file.Content == null ? new byte[] { } : file.Content, file.ContentType == null ? "" : file.ContentType, file.Name);
         }
 
