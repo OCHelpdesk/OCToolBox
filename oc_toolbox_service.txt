@@ -52,4 +52,5 @@ A new item is added to the project file oc_toolbox_service.csproj
 
 To add client IP to the Azure SQL server firewall,
 https://msftplayground.com/2017/01/adding-your-client-ip-to-the-azure-sql-server-firewall/
+
  1 minute read

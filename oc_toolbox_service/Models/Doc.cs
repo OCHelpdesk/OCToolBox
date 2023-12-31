@@ -12,6 +12,10 @@ namespace oc_toolbox_service.Models
         public string? Type { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
+        public string? FileName { get; set; }
+        public int? SizeKB { get; set; }
+        public string? IconName { get; set; }
+        public string? IconColor { get; set; }
         public bool? IsPublished { get; set; }
     }
 

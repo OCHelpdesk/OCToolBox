@@ -24,22 +24,12 @@ namespace oc_toolbox_service.Services
                 SqlDataAdapter adpt = new SqlDataAdapter();
                 adpt.SelectCommand = new SqlCommand();
                 adpt.SelectCommand.Connection = conn;
-                adpt.SelectCommand.CommandText = @"
-select DocId, Category=DocCategoryNameEn, Type=DocType, Name=DocNameEn, Description=DocDescriptionEn, IsPublished
-from Doc inner join DocCategory Cat on Doc.DocCategoryId = Cat.DocCategoryId
-where Doc.IsDeleted = 0 and DocDataEn is not null and IsPublished in (@IsPublished)
-order by DocCategoryNameEn, DocNameEn
-";
-                if (inFrench != null && (bool)inFrench)
-                {
-                    adpt.SelectCommand.CommandText = @"
-select DocId, Category=DocCategoryNameFr, Type=DocType, Name=DocNameFr, Description=DocDescriptionFr, IsPublished
-from Doc inner join DocCategory Cat on Doc.DocCategoryId = Cat.DocCategoryId
-where Doc.IsDeleted = 0 and DocDataFr is not null and IsPublished in (@IsPublished)
-order by DocCategoryNameFr, DocNameFr
-";
-                }
-                adpt.SelectCommand.CommandText = adpt.SelectCommand.CommandText.Replace("@IsPublished", inPreview == null || !((bool)inPreview) ? "1" : "0,1");
+                adpt.SelectCommand.CommandType = CommandType.StoredProcedure;
+                adpt.SelectCommand.CommandText = "DocList";
+                adpt.SelectCommand.Parameters.Add(new SqlParameter("@inFrench", SqlDbType.Bit));
+                adpt.SelectCommand.Parameters.Add(new SqlParameter("@forPreview", SqlDbType.Bit));
+                adpt.SelectCommand.Parameters[0].Value = inFrench == null || !((bool)inFrench) ? false : true;
+                adpt.SelectCommand.Parameters[1].Value = inPreview == null || !((bool)inPreview) ? false : true;
                 DataTable tbl = new DataTable();
                 adpt.Fill(tbl);
                 for (int i = 0; i < tbl.Rows.Count; i++)
@@ -50,6 +40,10 @@ order by DocCategoryNameFr, DocNameFr
                     doc.Type = (string)tbl.Rows[i]["Type"];
                     doc.Name = (string)tbl.Rows[i]["Name"];
                     doc.Description = tbl.Rows[i]["Description"].ToString();
+                    doc.FileName = (string)tbl.Rows[i]["FileName"];
+                    doc.SizeKB = (int)tbl.Rows[i]["SizeKB"];
+                    doc.IconName = (string)tbl.Rows[i]["IconName"];
+                    doc.IconColor = (string)tbl.Rows[i]["IconColor"];
                     doc.IsPublished = (bool)tbl.Rows[i]["IsPublished"];
                     docs.Add(doc);
                 }
