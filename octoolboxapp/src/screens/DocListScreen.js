@@ -3,6 +3,7 @@ import { View, SafeAreaView, FlatList } from 'react-native';
 import { Button } from '@rneui/base';
 import { CommonActions } from "@react-navigation/native";
 import RNFS from 'react-native-fs';
+import FileViewer from 'react-native-file-viewer'
 
 import DocCard from '../components/DocCard';
 import TextString from '../components/TextString';
@@ -67,15 +68,21 @@ const DocListScreen = ({navigation}) => {
       var isExisting = await RNFS.exists(fileName)
       if (isExisting) {
         await RNFS.unlink(fileName); //Remove the file
-        console.log('File ' + fileName + ' Deleted');        
+        //console.log('File ' + fileName + ' Deleted');        
       }
       var url = AppSettings.UrlDocData.replace('@DocId', docId).replace('@InFrench', TextString.IsInFrench() ? '1' : '0');
-      console.log(url);
+      //console.log(url);
       await RNFS.downloadFile({fromUrl: url, toFile: fileName}).promise
       .then((res) => {
-        // Success
-        filesInDir(RNFS.DocumentDirectoryPath); 
-        //FileViewer.open(fileName);
+        //Success
+        // filesInDir(RNFS.DocumentDirectoryPath); 
+        FileViewer.open(fileName)
+        .then(() => {
+          //console.log('Opened ' + fileName)
+        })
+        .catch((err) => {
+          console.log(err); 
+        });
       })
       .catch((res) => {
         console.log("Didn't get the file downloaded!");
