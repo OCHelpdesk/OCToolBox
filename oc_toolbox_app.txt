@@ -203,6 +203,9 @@ npx react-native link react-native-fs
 echo Due to autolinking, link and unlink commands have been removed. For info of link, refer to https://reactnative.dev/docs/linking-libraries-ios
 echo Open settings.gradle file and the linking should be there. If not then only manually add
 
+echo RNFS doesn't support download by Post request. To use Post, an common option is to install react-native-fetch-blob
+echo Refer to https://stackoverflow.com/questions/47988017/downloading-a-binary-file-with-post-method-in-react-native
+
 echo Refer to https://github.com/kurisu994/react-native-files-viewer
 npm install react-native-files-viewer --save
 echo Got error 'upstream dependency conflict', which means the package requires an old version of React Native
@@ -236,9 +239,9 @@ echo Build Succeeded!!!
 echo The installed package doesn't have method open! Uninstall it!
 npm uninstall --save-dev react-native-files-viewer 
 echo Ran 'pod install' to remove it from the pod project
-
-echo RNFS doesn't support download by post request. Install react-native-fetch-blob
-echo Refer to https://stackoverflow.com/questions/47988017/downloading-a-binary-file-with-post-method-in-react-native
+echo Wrong package isntalled!!! It's supposed to install react-native-file-viewer, instead of react-native-fileS-viewer
+echo Refer to https://github.com/vinzscam/react-native-file-viewer
+npm install react-native-file-viewer --save
 
 cd ios
 pod install
