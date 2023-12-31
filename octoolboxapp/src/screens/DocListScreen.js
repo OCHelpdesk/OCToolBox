@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { View, SafeAreaView, FlatList, StyleSheet, Alert } from 'react-native';
+import { View, SafeAreaView, FlatList } from 'react-native';
 import { Button } from '@rneui/base';
 import { CommonActions } from "@react-navigation/native";
-import RNFS, { resumeDownload } from 'react-native-fs';
+import RNFS from 'react-native-fs';
 
 import DocCard from '../components/DocCard';
 import TextString from '../components/TextString';
@@ -71,8 +71,15 @@ const DocListScreen = ({navigation}) => {
       }
       var url = AppSettings.UrlDocData.replace('@DocId', docId).replace('@InFrench', TextString.IsInFrench() ? '1' : '0');
       console.log(url);
-      await RNFS.downloadFile({fromUrl: url, toFile: fileName}).promise;
-      filesInDir(RNFS.DocumentDirectoryPath); 
+      await RNFS.downloadFile({fromUrl: url, toFile: fileName}).promise
+      .then((res) => {
+        // Success
+        filesInDir(RNFS.DocumentDirectoryPath); 
+        //FileViewer.open(fileName);
+      })
+      .catch((res) => {
+        console.log("Didn't get the file downloaded!");
+      });
     }
 
     const renderDoc = ({ item }) => (

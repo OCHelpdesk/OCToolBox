@@ -233,6 +233,9 @@ echo Instead, RNFileViewer.h existing.
 echo Open RNFileViewer.m, change RNFileViewerModule.h to RNFileViewer.h
 echo Xcode clean build folder and build.
 echo Build Succeeded!!!
+echo The installed package doesn't have method open! Uninstall it!
+npm uninstall --save-dev react-native-files-viewer 
+echo Ran 'pod install' to remove it from the pod project
 
 echo RNFS doesn't support download by post request. Install react-native-fetch-blob
 echo Refer to https://stackoverflow.com/questions/47988017/downloading-a-binary-file-with-post-method-in-react-native
