@@ -15,7 +15,8 @@ BEGIN
 		   Category = case when isnull(@inFrench, 0) = 0 then DocCategoryNameEn else DocCategoryNameFr end, 
 		   Type = DocType, 
 		   Name = case when isnull(@inFrench, 0) = 0 then DocNameEn else DocNameFr end, 
-		   Description = case when isnull(@inFrench, 0) = 0 then DocDescriptionEn else DocDescriptionFr end, 
+		   Description = case when isnull(@inFrench, 0) = 0 then DocDescriptionEn else DocDescriptionFr end,
+		   DateLastUpdated = convert(nvarchar(10), LastUpdatedTime, 120), 
 		   SizeKB = cast((case when isnull(@inFrench, 0) = 0 then datalength(DocDataEn) else datalength(DocDataFr) end) / 8192 as int),
 		   FileName = replace(replace(replace(DocNameEn, '\', '_'), '/', '_'), '.', '_') + '.' + DocType,
 		   IconName = 

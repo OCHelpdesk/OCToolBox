@@ -40,6 +40,7 @@ namespace oc_toolbox_service.Services
                     doc.Type = (string)tbl.Rows[i]["Type"];
                     doc.Name = (string)tbl.Rows[i]["Name"];
                     doc.Description = tbl.Rows[i]["Description"].ToString();
+                    doc.DateLastUpdated = tbl.Rows[i]["DateLastUpdated"].ToString();
                     doc.FileName = (string)tbl.Rows[i]["FileName"];
                     doc.SizeKB = (int)tbl.Rows[i]["SizeKB"];
                     doc.IconName = (string)tbl.Rows[i]["IconName"];
