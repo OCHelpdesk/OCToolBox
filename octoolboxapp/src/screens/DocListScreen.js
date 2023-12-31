@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { View, SafeAreaView, FlatList, StyleSheet } from 'react-native';
+import { View, SafeAreaView, FlatList, StyleSheet, Alert } from 'react-native';
 import { Button } from '@rneui/base';
 import { CommonActions } from "@react-navigation/native";
-import RNFS from 'react-native-fs';
+import RNFS, { resumeDownload } from 'react-native-fs';
 
 import DocCard from '../components/DocCard';
 import TextString from '../components/TextString';
+import AppSettings from '../jsons/AppSettings.json'
 
 const DocListScreen = ({navigation}) => {
-    const getFileContent = async (path) => {
-      console.log('Calling RNFS.readDir on ' + path);
-      const arrayOfReadDirItem = await RNFS.readDir(path);
+    const filesInDir = async (dirPath) => {
+      console.log('Calling RNFS.readDir on ' + dirPath);
+      const arrayOfReadDirItem = await RNFS.readDir(dirPath);
       console.log('Iterate through the return array');
       for (var i = 0; i < arrayOfReadDirItem.length; i++) {
         //For definition of type ReadDirItem, Refer https://www.npmjs.com/package/react-native-fs
@@ -18,41 +19,66 @@ const DocListScreen = ({navigation}) => {
       }
     };
 
+
     const screenTitle = TextString.Get('Doc').toUpperCase();
     setTimeout(() => {
       navigation.setOptions({ title: screenTitle });
-      //AppFolder=RNFS.MainBundlePath
-      //AppDocFolder=RNFS.DocumentDirectoryPath
-      //DownloadFolder=RNFS.DownloadDirectoryPath (Android and Windows only)
-      getFileContent(RNFS.DocumentDirectoryPath); 
+      //Works for iOS: AppFolder=RNFS.MainBundlePath
+      //Works for iOS: AppDocFolder=RNFS.DocumentDirectoryPath
+      //Doesn't Work for iOS: DownloadFolder=RNFS.DownloadDirectoryPath (Android and Windows only)
+      //filesInDir(RNFS.DocumentDirectoryPath); 
     }, 200);
 
     const docs = 
     [
       {
-        DocId: 1,
-        DocCategory: 'CATEGORY 1',
-        DocName: 'DOC 1',
-        DocDescription: 'Doc 1 Description',
+        DocId: 2,
+        DocCategory: 'BOSS Instructions',
+        DocType: 'pdf',
+        DocName: 'Mobile Photos for OC',
+        DocDescription: 'Instructions on taking phones while performing services with BOSS',
         DocIcon: 'file-pdf-o',
         DocIconColor: '#ff0000'
       },
       {
-        DocId: 2,
-        DocCategory: 'CATEGORY 2',
-        DocName: 'DOC 2',
-        DocDescription: 'Doc 2 Description',
+        DocId: 3,
+        DocCategory: 'Customer Instructions',
+        DocType: 'pdf',
+        DocName: 'BGIS RealMobile Instruction',
+        DocDescription: 'Instructions on RealMobile, an app to submit service info to BGIS for services on BGIS sites',
         DocIcon: 'file-excel-o',
         DocIconColor: '#009900'
       }
     ]
 
+    const viewDoc = async (docId) => {
+      //console.log('View Doc with Id: ' + docId);
+      var fileName = '';
+      for (var d = 0; d < docs.length; d++) {
+        if (docs[d].DocId == docId) {
+          fileName = RNFS.DocumentDirectoryPath + '/' + docs[d].DocName + '.' + docs[d].DocType ;
+          break;
+        }
+      }
+      if (fileName == '') {
+        console.log('No doc is with : ' + docId);        
+        return;
+      }
+      var isExisting = await RNFS.exists(fileName)
+      if (isExisting) {
+        await RNFS.unlink(fileName); //Remove the file
+        console.log('File ' + fileName + ' Deleted');        
+      }
+      var url = AppSettings.UrlDocData.replace('@DocId', docId).replace('@InFrench', TextString.IsInFrench() ? '1' : '0');
+      console.log(url);
+      await RNFS.downloadFile({fromUrl: url, toFile: fileName}).promise;
+      filesInDir(RNFS.DocumentDirectoryPath); 
+    }
+
     const renderDoc = ({ item }) => (
       <DocCard 
         doc={item} 
-        onCategorySelected={(docId) => {
-
-        }}
+        onDocSelected={(docId) => { viewDoc(docId); }}
       />
     );  
 
@@ -74,7 +100,7 @@ const DocListScreen = ({navigation}) => {
           <View style={{height: 2, width: '100%', backgroundColor: "#663333"}} />
           <View style={{height: 2, width: '100%', backgroundColor: "#993333"}} />
           <View style={{height: 1, width: '100%', backgroundColor: "#ff0000"}} />
-          <View style={[styles.buttonListContainer, {flex: 0, height: 40, width: '100%', backgroundColor: '#333333', marginBottom: 12,}]}>
+          <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'center', height: 40, width: '100%', backgroundColor: '#333333', marginBottom: 12,}}>
               <View style={[{width: "100%"}]}>
                 <Button 
                   title={TextString.Get('Home').toUpperCase()}
@@ -91,17 +117,5 @@ const DocListScreen = ({navigation}) => {
     );
   };
 
-
-const styles = StyleSheet.create({
-  buttonListContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-  },
-  buttonContainer: {
-    flex: 1,
-  },
-});
   
 export default DocListScreen

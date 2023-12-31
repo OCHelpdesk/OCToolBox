@@ -25,7 +25,7 @@ class DocCard extends Component {
         <View>
           <TouchableOpacity
             style={{
-              height: 100, 
+              height: 120, 
               width: '100%', 
               borderWidth: 0, borderColor: "#ff0000", borderRadius: 5, 
               marginLeft: 4, marginTop: 2, padding: 4,
@@ -34,16 +34,16 @@ class DocCard extends Component {
             onPress={this.onDocSelected}
           >
             <View style={{flexDirection: 'row', height: 24}}>
-              <Text style={styles.dataFieldCaption}>Category:</Text>
-              <Text style={{flex: 1, }}>{this.props.doc.DocCategory}</Text>
+              <Text style={styles.dataFieldCaption}>{'Category:'.toUpperCase()}</Text>
+              <Text style={{flex: 1, }}>{this.props.doc.DocCategory.toUpperCase()}</Text>
             </View>
             <View style={{flexDirection: 'row', height: 24}}>
-              <Text style={styles.dataFieldCaption}>Name:</Text>
-              <Text style={{flex: 1, }}>{this.props.doc.DocName}</Text>
+              <Text style={styles.dataFieldCaption}>{'Name:'.toUpperCase()}</Text>
+              <Text style={{flex: 1, }}>{this.props.doc.DocName.toUpperCase()}</Text>
               <Icon name={this.props.doc.DocIcon} size={16} color={this.props.doc.DocIconColor} style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
             <View style={{flexDirection: 'row'}}>
-              <Text style={styles.dataFieldCaption}>Description:</Text>
+              <Text style={styles.dataFieldCaption}>{'Description:'.toUpperCase()}</Text>
               <Text style={{flex: 1, }}>{this.props.doc.DocDescription}</Text>
               <Icon name='ban' size={18} color='#ff6666' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
@@ -55,7 +55,7 @@ class DocCard extends Component {
     
   const styles = StyleSheet.create({
     dataFieldCaption: {
-      width: 80,
+      width: 100,
       fontSize: 12, 
       fontWeight: "bold", 
       color: "#666666",
