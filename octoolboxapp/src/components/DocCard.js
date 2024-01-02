@@ -16,7 +16,7 @@ class DocCard extends Component {
 
     onDocSelected = () => {
       if (this.props.onDocSelected !== undefined && this.props.onDocSelected != null && typeof this.props.onDocSelected === 'function')
-        this.props.onDocSelected(this.props.doc.DocId);  
+        this.props.onDocSelected(this.props.doc.Id);  
     };
   
     render() {
@@ -25,7 +25,7 @@ class DocCard extends Component {
         <View>
           <TouchableOpacity
             style={{
-              height: 120, 
+              height: 130, 
               width: '100%', 
               borderWidth: 0, borderColor: "#ff0000", borderRadius: 5, 
               marginLeft: 4, marginTop: 2, padding: 4,
@@ -35,17 +35,23 @@ class DocCard extends Component {
           >
             <View style={{flexDirection: 'row', height: 24}}>
               <Text style={styles.dataFieldCaption}>{'Category:'.toUpperCase()}</Text>
-              <Text style={{flex: 1, }}>{this.props.doc.DocCategory.toUpperCase()}</Text>
+              <Text style={{flex: 1, }}>{this.props.doc.Category.toUpperCase()}</Text>
+              <Icon name={this.props.doc.IconName} size={16} color={this.props.doc.IconColor} style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
             <View style={{flexDirection: 'row', height: 24}}>
               <Text style={styles.dataFieldCaption}>{'Name:'.toUpperCase()}</Text>
-              <Text style={{flex: 1, }}>{this.props.doc.DocName.toUpperCase()}</Text>
-              <Icon name={this.props.doc.DocIcon} size={16} color={this.props.doc.DocIconColor} style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
+              <Text style={{flex: 1, }}>{this.props.doc.Name.toUpperCase()}</Text>
+              <Icon name='circle-thin' size={16} color='#ffffff' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
             <View style={{flexDirection: 'row'}}>
               <Text style={styles.dataFieldCaption}>{'Description:'.toUpperCase()}</Text>
-              <Text style={{flex: 1, }}>{this.props.doc.DocDescription}</Text>
-              <Icon name='ban' size={18} color='#ff6666' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
+              <Text style={{flex: 1, }}>{this.props.doc.SizeKB}KB, {this.props.doc.DateLastUpdated}</Text>
+              <Icon name='circle-thin' size={16} color='#ffffff' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.dataFieldCaption}>{' '}</Text>
+              <Text style={{flex: 1, }}>{this.props.doc.Description}</Text>
+              <Icon name='circle-thin' size={16} color='#ffffff' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
           </TouchableOpacity>
         </View>

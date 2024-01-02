@@ -6,6 +6,7 @@ import BackgroundService from 'react-native-background-actions';
 
 import AppSettings from './src/jsons/AppSettings.json'
 import AppHomeScreen from './src/screens/AppHomeScreen';
+import DocWaitListScreen from './src/screens/DocWaitListScreen';
 import DocListScreen from './src/screens/DocListScreen';
 
 const Stack = createNativeStackNavigator();
@@ -34,10 +35,19 @@ function App() {
           headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0, },
           headerShadowVisible: false,
         }}/>
+        <Stack.Screen name="DocWaitList" component={DocWaitListScreen} options={{
+          //headerShown: false,
+          headerBackVisible: false,
+          title: 'Please Wait...',
+          headerTitleAlign: 'center',          
+          headerTintColor: '#ffffff',
+          headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0, },
+          headerShadowVisible: false,
+        }} />
         <Stack.Screen name="DocList" component={DocListScreen} options={{
           //headerShown: false,
           headerBackVisible: false,
-          title: 'Doc. List',
+          title: 'Document',
           headerTitleAlign: 'center',          
           headerTintColor: '#ffffff',
           headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0, },
