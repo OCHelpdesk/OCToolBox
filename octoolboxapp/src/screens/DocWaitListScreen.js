@@ -64,16 +64,6 @@ class DocWaitListScreen extends Component {
       <View style={{height: 2, width: '100%', backgroundColor: "#993333"}} />
       <View style={{height: 1, width: '100%', backgroundColor: "#ff0000"}} />
       <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'center', height: 40, width: '100%', backgroundColor: '#333333', marginBottom: 12,}}>
-          <View style={[{width: "100%"}]}>
-            <Button 
-              title={TextString.Get('Home').toUpperCase()}
-              titleStyle={{ fontSize: 16, fontWeight: 'bold', color: '#ffffff' }}
-              icon={{ name: 'home', type: 'font-awesome', size: 16, color: '#ffffff', }}
-              iconContainerStyle={{ marginRight: 6 }}
-              buttonStyle={{ backgroundColor: '#333333', }}
-              onPress={() => { this.navigation.dispatch(CommonActions.reset({index: 0, routes: [{ name: "AppHome" }]})); }}
-            />
-          </View>
       </View>
       <View style={{height: 1, width: '100%', backgroundColor: "#ff0000"}} /></View>
     )

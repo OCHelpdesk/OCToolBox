@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useState } from "react";
-import { View, Image, Text, TouchableWithoutFeedback, Alert  } from 'react-native';
+import { View, Image, Text, TouchableWithoutFeedback, Alert, Modal, Dimensions, TouchableOpacity  } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from '@rneui/base';
 
 import TextString from '../components/TextString';
@@ -13,7 +14,12 @@ const AppHomeScreen = ({navigation}) => {
     const [stringOCToolbox, setStringOCToolbox] = useState('Orkin Canada Toolbox'.toUpperCase());
     const [stringSelectCat, setStringSelectCat] = useState('select a toolbox category');
     const [stringPricing, setStringPricing] = useState('Pricing');
+    const [stringSelectPricingCat, setStringSelectPricingCat] = useState('select a price category');
+    const [stringProdPrice, setStringProdPrice] = useState('Product / Produit'.toUpperCase());
+    const [stringServicePriceComm, setStringServicePriceComm] = useState('Service - Commercial'.toLocaleUpperCase());
+    const [stringServicePriceResi, setStringServicePriceResi] = useState('Service - Residential'.toLocaleUpperCase());
     const [stringDoc, setStringDoc] = useState('Document'.toUpperCase());
+    const [isPricingMenuOpen, setIsPricingMenuOpen] = useState(false);
     TextString.getIsInFrench().then(
         () => {
             var screenTitle = TextString.Get('OCToolbox').toUpperCase() + ' - ORKIN CANADA';
@@ -22,8 +28,12 @@ const AppHomeScreen = ({navigation}) => {
             setStringOCToolbox(TextString.Get('OCToolbox').toUpperCase());
             setStringSelectCat(TextString.Get('HomeSelectToolboxCat'));
             setStringPricing(TextString.Get('Pricing').toUpperCase());
+            setStringSelectPricingCat(TextString.Get('HomeSelectCat').toUpperCase());
+            setStringProdPrice(TextString.Get('HomeProdPrice').toUpperCase());
+            setStringServicePriceComm(TextString.Get('HomeSvcPriceComm').toUpperCase());
+            setStringServicePriceResi(TextString.Get('HomeSvcPriceResi').toUpperCase());
             setStringDoc(TextString.Get('Doc').toUpperCase());
-            }
+        }
     ) 
     const toggleLanguage = () => {
         TextString.ToggleLanguage();
@@ -33,6 +43,10 @@ const AppHomeScreen = ({navigation}) => {
             setStringOCToolbox(TextString.Get('OCToolbox').toUpperCase());
             setStringSelectCat(TextString.Get('HomeSelectToolboxCat'));
             setStringPricing(TextString.Get('Pricing').toUpperCase());
+            setStringSelectPricingCat(TextString.Get('HomeSelectCat').toUpperCase());
+            setStringProdPrice(TextString.Get('HomeProdPrice').toUpperCase());
+            setStringServicePriceComm(TextString.Get('HomeSvcPriceComm').toUpperCase());
+            setStringServicePriceResi(TextString.Get('HomeSvcPriceResi').toUpperCase());
             setStringDoc(TextString.Get('Doc').toUpperCase());
     }
 
@@ -47,14 +61,67 @@ const AppHomeScreen = ({navigation}) => {
       }
     const toggleIsInPreviewMode = () => {
         var title = global.isInPreviewMode ? 'Exit Data Preview Mode?' : 'Start Data Preview Mode?';
-        var msg = global.isInPreviewMode ? "" : "In preview mode, the app uses the next version of price data which is about to release.\n\nPreview mode is retained until you exit it."
+        var msg = global.isInPreviewMode ? "" : "Preview mode enables features in testing and loads data about to release.\n\nPreview mode is retained until you exit it."
         Alert.alert(title, msg, [
             {text: 'YES', onPress: () => {global.isProductDataLoaded = false; setIsInPreviewMode(!global.isInPreviewMode); }, style: 'yes'},
             {text: 'NO', style: 'no',},
         ]);    
       }
+    const screenHeight = parseInt(Dimensions.get('window').height);
+    const modalBoxHeight = 300;
+    const modalBoxMarginTop = (screenHeight - modalBoxHeight) / 2;
     return (
         <View style={{width: '100%', height: '100%', flexDirection: "column", alignItems: 'center', backgroundColor: "#333333"}}>
+            <Modal visible={isPricingMenuOpen} transparent={true}>
+                <View style={{backgroundColor: "#000000cc", flex: 1}}>
+                    <View 
+                        style={{
+                            height: modalBoxHeight, 
+                            marginRight: 40, marginLeft: 40, marginTop: modalBoxMarginTop,
+                            padding: 8,
+                            backgroundColor: "#333333",
+                            borderWidth: 1, borderColor: "#ff0000", borderRadius: 5,
+                    }}>
+                        <TouchableOpacity
+                            style={{flexDirection: "row", borderBottomWidth: 1, borderBottomColor: "#333333"}}
+                            onPress={() => { setIsPricingMenuOpen(false); }}
+                        >
+                            <Text style={{flex: 1, alignSelf: 'stretch', fontSize: 12, fontWeight: "bold", color: "#ffffff", paddingTop: 4, paddingLeft: 4}}>{stringSelectPricingCat}</Text>
+                            <Icon name="close" size={22} color="#ffffff" style={{flex: 0, width: 22, }} />
+                        </TouchableOpacity>
+                        <View style={{height: 2, borderBottomWidth: 1, borderBottomColor: "#ff0000", paddingBottom: 8, alignItems: 'center'}}></View>
+                        <View style={{flex: 3, alignItems: 'center', justifyContent: 'space-evenly', alignSelf: 'stretch',}}>
+                            <Button 
+                                title={stringProdPrice}
+                                titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 16 }}
+                                type="outline" 
+                                buttonStyle={{ width: 240, height: 40, borderWidth: 1, borderColor: "#ffffff", borderRadius: 5 }}
+                                onPress={() => {
+                                    //navigation.navigate('Splash', { waitFor: 'productDownload', routedFrom: "Home" }) 
+                                }}
+                            />
+                            <Button 
+                                title={stringServicePriceComm}
+                                titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 16 }}
+                                type="outline" 
+                                buttonStyle={{ width: 240, height: 40, borderWidth: 1, borderColor: "#ffffff", borderRadius: 5 }}
+                                onPress={() => {
+                                    //navigation.navigate('Splash', { waitFor: 'productDownload', routedFrom: "Home" }) 
+                                }}
+                            />
+                            <Button 
+                                title={stringServicePriceResi}
+                                titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 16 }}
+                                type="outline" 
+                                buttonStyle={{ width: 240, height: 40, borderWidth: 1, borderColor: "#ffffff", borderRadius: 5 }}
+                                onPress={() => {
+                                    //navigation.navigate('Splash', { waitFor: 'productDownload', routedFrom: "Home" }) 
+                                }}
+                            />
+                        </View>
+                    </View>
+                </View>
+            </Modal>
             <View style={{height: 2, width: '100%', backgroundColor: "#993333"}} />
             <View style={{height: 2, width: '100%', backgroundColor: "#663333"}} />
             <View
@@ -81,7 +148,7 @@ const AppHomeScreen = ({navigation}) => {
                         type="outline" 
                         buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
                         onPress={() => {
-                            //navigation.navigate('Splash', { waitFor: 'productDownload', routedFrom: "Home" }) 
+                            setIsPricingMenuOpen(true);
                         }}
                     />
                     <Button 
