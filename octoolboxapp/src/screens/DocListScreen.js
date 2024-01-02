@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, SafeAreaView, FlatList } from 'react-native';
+import { View, SafeAreaView, FlatList, Text, Modal, Dimensions, TouchableOpacity, Image } from 'react-native';
 import { Button } from '@rneui/base';
 import { CommonActions } from "@react-navigation/native";
 import RNFS from 'react-native-fs';
@@ -17,6 +17,7 @@ class DocListScreen extends Component {
     //when DocWaitList submitted the navigation request. 
     this.navigation = props.navigation;
     this.docs = props.route.docs;
+    this.state = { isPleaseWaitOpen: false };
     const screenTitle = TextString.Get('Doc').toUpperCase();
     setTimeout(() => {
       this.navigation.setOptions({ title: screenTitle });
@@ -58,13 +59,16 @@ class DocListScreen extends Component {
     .then((res) => {
       //Success
       //filesInDir(RNFS.DocumentDirectoryPath); 
-      FileViewer.open(fileName)
-      .then(() => {
-        //console.log('Opened ' + fileName)
-      })
-      .catch((err) => {
-        console.log(err); 
-      });
+      this.setState({isPleaseWaitOpen: false})
+      setTimeout(() => {
+        FileViewer.open(fileName)
+        .then(() => {
+          //console.log('Opened ' + fileName)
+        })
+        .catch((err) => {
+          console.log(err); 
+        });
+      }, 100);
     })
     .catch((res) => {
       console.log("Didn't get the file downloaded!");
@@ -74,15 +78,37 @@ class DocListScreen extends Component {
   renderDoc = ({ item }) => (
     <DocCard 
       doc={item} 
-      onDocSelected={(docId) => { this.viewDoc(docId); }}
+      onDocSelected={(docId) => {
+        this.setState({isPleaseWaitOpen: true})
+        setTimeout(() => { this.viewDoc(docId); }, 100);
+      }}
     />
   );
 
   render() {
     //console.log('DocListScreen Rendering Screen')
     //console.log(this.docs);
+    const screenHeight = parseInt(Dimensions.get('window').height);
+    const modalBoxHeight = 260;
+    const modalBoxMarginTop = (screenHeight - modalBoxHeight) / 2;
     return (
         <View style={{ height: '100%', flexDirection: "column", alignItems: 'flex-start', backgroundColor: '#333333',}}>
+            <Modal visible={this.state.isPleaseWaitOpen} transparent={true}>
+                <View style={{backgroundColor: "#000000cc", flex: 1}}>
+                    <View 
+                        style={{
+                            height: modalBoxHeight, 
+                            marginRight: 60, marginLeft: 60, marginTop: modalBoxMarginTop,
+                            padding: 8,
+                            backgroundColor: "#00000000",
+                            borderWidth: 1, borderColor: "#00000000", borderRadius: 10,
+                    }}>
+                        <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-evenly', alignSelf: 'stretch',}}>
+                          <Image source={require('../../assets/oc/LadyBug.gif')} style={{ width: 100, height: 100, }} />
+                        </View>
+                    </View>
+                </View>
+            </Modal>
           <View style={{height: 2, width: '100%', backgroundColor: "#993333"}} />
           <View style={{height: 2, width: '100%', backgroundColor: "#663333"}} />
             <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'stretch', backgroundColor: '#333333',}}>
