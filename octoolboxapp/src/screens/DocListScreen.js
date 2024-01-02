@@ -80,7 +80,7 @@ class DocListScreen extends Component {
       doc={item} 
       onDocSelected={(docId) => {
         this.setState({isPleaseWaitOpen: true})
-        setTimeout(() => { this.viewDoc(docId); }, 100);
+        setTimeout(() => { this.viewDoc(docId); }, 2000);
       }}
     />
   );
@@ -94,7 +94,7 @@ class DocListScreen extends Component {
     return (
         <View style={{ height: '100%', flexDirection: "column", alignItems: 'flex-start', backgroundColor: '#333333',}}>
             <Modal visible={this.state.isPleaseWaitOpen} transparent={true}>
-                <View style={{backgroundColor: "#000000cc", flex: 1}}>
+                <View style={{backgroundColor: "#00000000", flex: 1}}>
                     <View 
                         style={{
                             height: modalBoxHeight, 

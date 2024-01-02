@@ -1,0 +1,72 @@
+[
+  {
+    "id": "CONTRÔLE DES ODEURS",
+    "name": "CONTRÔLE DES ODEURS",
+    "description": "Produits pour le contrôle des odeurs",
+    "image": "oc/odour control",
+    "subcategories": ["CONTRÔLE DES ODEURS"]
+  },
+  {
+    "id": "ENTRETIEN DES SALLES DE TOILETTES",
+    "name": "ENTRETIEN DES SALLES DE TOILETTES",
+    "description": "Produits d'entretien des salles de bains",
+    "image": "oc/washroom care",
+    "subcategories": ["AUTOCLEAN", "AUTOCLEAN: DISPENSERS", "AUTOCLEAN: PIÈCES", "AUTOFLUSH", "AUTOFLUSH: PIÈCES", "AUTOFOAM", "AUTOFOAM: DISPENSERS", "AUTOFOAM: SAVON", "AUTOFRESH", "AUTOFRESH: DISPENSERS", "CLEANSEAT", "CLEANSEAT: DISPENSERS", "CLEANSEAT: RECHARGES", "CONTRÔLE DES ODEURS", "CONTRÔLE DES ODEURS: DISPENSERS", "CONTRÔLE DES ODEURS: RECHARGES", "CONTRÔLE DES ODEURS: URINOIR", "HYGIÈNE", "HYGIÈNE DES MAINS", "HYGIÈNE DES MAINS: DÉSINFECTANT", "HYGIÈNE DES MAINS: DISPENSERS", "HYGIÈNE DES MAINS: SAVON", "HYGIÈNE: DÉSINFECTANT", "HYGIÈNE: DISPENSERS", "HYGIÈNE: POUBELLE", "HYGIÈNE: SAVON", "URINOIR", "URINOIR: DISPENSERS", "WASHROOM CARE", "WASHROOM CARE: DISPENSERS"]
+  },
+  {
+    "id": "ENTRETIEN DES VIDANGES",
+    "name": "ENTRETIEN DES VIDANGES",
+    "description": "Produits d'entretien pour les drains",
+    "image": "oc/drain maintenance",
+    "subcategories": ["MOUSSE"]
+  },
+  {
+    "id": "EPI",
+    "name": "EPI",
+    "description": "Équipement de protection personnelle",
+    "image": "oc/ppe",
+    "subcategories": ["COMBINAISON", "GANTS", "MASQUES"]
+  },
+  {
+    "id": "ÉQUIPEMENT",
+    "name": "ÉQUIPEMENT",
+    "description": "Équipement de lutte contre les parasites",
+    "image": "oc/equipment",
+    "subcategories": []
+  },
+  {
+    "id": "INSECTES",
+    "name": "INSECTES",
+    "description": "produits pour les insectes",
+    "image": "oc/pest/insect",
+    "subcategories": ["FOURMIS", "FOURMIS: STATION D'APPÂT", "GUÊPES", "GUÊPES: AÉROSOL", "GUÊPES: ÉQUIPEMENT", "GUÊPES: INSECTICIDE", "GUÊPES: PIÈGES", "INSECTES", "INSECTES: APPÂT", "INSECTES: GLUAUX", "INSECTES: INSECTICIDE", "INSECTES: MONITEURS", "INSECTES: PIÈGES", "INSECTES: STATION D'APPÂT", "MOUCHES", "MOUCHES: GLUAUX", "MOUCHES: PIÈGES", "MOUCHES: PIÈGES LUMINEUX", "MOUCHES: STATION D'APPÂT", "MOUSTIQUES", "MOUSTIQUES: GLUAUX", "MOUSTIQUES: PIÈGES", "PUNAISES DE LIT", "PUNAISES DE LIT: AÉROSOL", "PUNAISES DE LIT: APPÂT", "PUNAISES DE LIT: COUVRES", "PUNAISES DE LIT: INSECTICIDE", "PUNAISES DE LIT: MONITEURS", "SPP", "SPP: MONITEURS", "TERMITES", "TERMITES: MONITEURS", "TIQUES"]
+  },
+  {
+    "id": "OISEAUX / FAUNE",
+    "name": "OISEAUX / FAUNE",
+    "description": "produits pour les oiseaux et la faune sauvage",
+    "image": "oc/pest/bird & wildlife",
+    "subcategories": ["CHAUVES-SOURIS", "CHAUVES-SOURIS: PIÈGES", "FAUNE", "FAUNE: ÉQUIPEMENT", "FAUNE: EXCLUSION", "FAUNE: PIÈGES", "MOUFFETTES", "MOUFFETTES: PIÈGES", "OISEAUX", "OISEAUX: DETERRENTS", "OISEAUX: PIÈGES", "OISEAUX: POINTES"]
+  },
+  {
+    "id": "PRODUITS DE NETTOYAGE",
+    "name": "PRODUITS DE NETTOYAGE",
+    "description": "Produits de nettoyage et de désinfection",
+    "image": "oc/cleaner",
+    "subcategories": ["ACTIZYME", "DÉSINFECTANT", "MOUSSE"]
+  },
+  {
+    "id": "RONGEURS",
+    "name": "RONGEURS",
+    "description": "produits pour les rongeurs",
+    "image": "oc/pest/rodent",
+    "subcategories": ["RATS", "RATS: GLUAUX", "RATS: PIÈGES", "RONGEURS", "RONGEURS: APPÂT", "RONGEURS: EXCLUSION", "RONGEURS: GLUAUX", "RONGEURS: PIÈGES", "RONGEURS: RODENTICIDE", "RONGEURS: STATION D'APPÂT", "SOURIS", "SOURIS: GLUAUX", "SOURIS: PIÈGES"]
+  },
+  {
+    "id": "SOAK TANK",
+    "name": "SOAK TANK",
+    "description": "Produits pour les SoakTanks",
+    "image": "oc/soak tank",
+    "subcategories": ["CHIMIQUE"]
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "BIRD & WILDLIFE",
+    "name": "BIRD & WILDLIFE",
+    "description": "Bird & Wildlife products",
+    "image": "oc/pest/bird & wildlife",
+    "subcategories": ["BATS", "BATS: TRAPS", "BIRDS", "BIRDS: DETERRENTS", "BIRDS: SPIKES", "BIRDS: TRAPS", "SKUNKS", "SKUNKS: TRAPS", "WILDLIFE", "WILDLIFE: EQUIPMENT", "WILDLIFE: EXCLUSION", "WILDLIFE: TRAPS"]
+  },
+  {
+    "id": "CLEANING PRODUCTS",
+    "name": "CLEANING PRODUCTS",
+    "description": "Cleaning products and disinfectants",
+    "image": "oc/cleaner",
+    "subcategories": ["ACTIZYME", "DISINFECTANT", "FOAM"]
+  },
+  {
+    "id": "DRAIN MAINTENANCE",
+    "name": "DRAIN MAINTENANCE",
+    "description": "Drain service products",
+    "image": "oc/drain maintenance",
+    "subcategories": ["FOAM"]
+  },
+  {
+    "id": "EQUIPMENT",
+    "name": "EQUIPMENT",
+    "description": "Pest control equipment",
+    "image": "oc/equipment",
+    "subcategories": []
+  },
+  {
+    "id": "INSECTS",
+    "name": "INSECTS",
+    "description": "Insect products",
+    "image": "oc/pest/insect",
+    "subcategories": ["ANTS", "ANTS: BAIT STATION", "BED BUGS", "BED BUGS: AEROSOL", "BED BUGS: BAIT", "BED BUGS: ENCASEMENTS", "BED BUGS: INSECTICIDE", "BED BUGS: MONITORS", "FLIES", "FLIES: BAIT STATION", "FLIES: FLY LIGHTS", "FLIES: GLUEBOARDS", "FLIES: TRAPS", "INSECTS", "INSECTS: BAIT", "INSECTS: BAIT STATION", "INSECTS: GLUEBOARDS", "INSECTS: INSECTICIDE", "INSECTS: MONITORS", "INSECTS: TRAPS", "MOSQUITOES", "MOSQUITOES: GLUEBOARDS", "MOSQUITOES: TRAPS", "SPP", "SPP: MONITORS", "TERMITES", "TERMITES: MONITORS", "TICKS", "WASPS", "WASPS: AEROSOL", "WASPS: EQUIPMENT", "WASPS: INSECTICIDE", "WASPS: TRAPS"]
+  },
+  {
+    "id": "ODOUR CONTROL",
+    "name": "ODOUR CONTROL",
+    "description": "Odour control products",
+    "image": "oc/odour control",
+    "subcategories": ["ODOUR CONTROL", "ODOUR CONTROL: DISPENSERS"]
+  },
+  {
+    "id": "PPE",
+    "name": "PPE",
+    "description": "Personal protective equipment",
+    "image": "oc/ppe",
+    "subcategories": ["COVERALLS", "GLOVES", "MASKS"]
+  },
+  {
+    "id": "RODENTS",
+    "name": "RODENTS",
+    "description": "Rodent products",
+    "image": "oc/pest/rodent",
+    "subcategories": ["MICE", "MICE: GLUEBOARDS", "MICE: TRAPS", "RATS", "RATS: GLUEBOARDS", "RATS: TRAPS", "RODENTS", "RODENTS: BAIT", "RODENTS: BAIT STATION", "RODENTS: EXCLUSION", "RODENTS: GLUEBOARDS", "RODENTS: RODENTICIDE", "RODENTS: TRAPS"]
+  },
+  {
+    "id": "SOAK TANK",
+    "name": "SOAK TANK",
+    "description": "Soak tank products",
+    "image": "oc/soak tank",
+    "subcategories": ["CHEMICAL"]
+  },
+  {
+    "id": "WASHROOM CARE",
+    "name": "WASHROOM CARE",
+    "description": "Washroom care products",
+    "image": "oc/washroom care",
+    "subcategories": ["AUTOCLEAN", "AUTOCLEAN: DISPENSERS", "AUTOCLEAN: PARTS", "AUTOFLUSH", "AUTOFLUSH: PARTS", "AUTOFOAM", "AUTOFOAM: DISPENSERS", "AUTOFOAM: SOAP", "AUTOFRESH", "AUTOFRESH: DISPENSERS", "CLEANSEAT", "CLEANSEAT: DISPENSERS", "CLEANSEAT: REFILLS", "HAND HYGIENE", "HAND HYGIENE: DISPENSERS", "HAND HYGIENE: SANITIZER", "HAND HYGIENE: SOAP", "HYGIENE", "HYGIENE: BIN", "ODOUR CONTROL", "ODOUR CONTROL: DISPENSERS", "ODOUR CONTROL: REFILLS", "ODOUR CONTROL: URINAL", "PAPER PRODUCTS", "PAPER PRODUCTS: DISPENSERS", "URINAL", "URINAL: DISPENSERS", "WASHROOM CARE", "WASHROOM CARE: DISPENSERS"]
+  }
+]

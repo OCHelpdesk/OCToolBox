@@ -9,7 +9,31 @@ import TextString from '../components/TextString';
 import AppSettings from '../jsons/AppSettings.json'
 
 const AppHomeScreen = ({navigation}) => {
-    const priceDataVersion = global.currentProductDataVersion == '' ? AppSettings.PriceDataVersion : global.currentProductDataVersion;
+    const [priceDataVersion, setPriceDataVersion] = useState(AppSettings.PriceDataVersion);
+    const getPriceDataVersion = async() => {
+      try {
+        var v = await AsyncStorage.getItem('@UserSettings_PriceDataVersion')
+        setPriceDataVersion( v !== null ? v : AppSettings.PriceDataVersion)
+      } catch(e) {
+        console.error(e);
+      }    
+    }
+    getPriceDataVersion().then(() => {
+        //console.log('AppHomeScreen.getPriceDataVersion Executed!');
+    });
+
+    global.isInPreviewMode = false
+    const getIsInPreviewMode = async() => {
+      try {
+        var v = await AsyncStorage.getItem('@UserSettings_IsInPreviewMode')
+        global.isInPreviewMode = v !== null ? (v == 'true') : false;
+        //console.log('AppHomeScreen.getIsInPreviewMode Executed!');
+      } catch(e) {
+        global.isInPreviewMode = false;
+      }    
+    }
+    getIsInPreviewMode();  
+    
     const [stringLanguage, setLanguage] = useState('Français');
     const [stringOCToolbox, setStringOCToolbox] = useState('Orkin Canada Toolbox'.toUpperCase());
     const [stringSelectCat, setStringSelectCat] = useState('select a toolbox category');
@@ -20,6 +44,7 @@ const AppHomeScreen = ({navigation}) => {
     const [stringServicePriceResi, setStringServicePriceResi] = useState('Service - Residential'.toLocaleUpperCase());
     const [stringDoc, setStringDoc] = useState('Document'.toUpperCase());
     const [isPricingMenuOpen, setIsPricingMenuOpen] = useState(false);
+
     TextString.getIsInFrench().then(
         () => {
             var screenTitle = TextString.Get('OCToolbox').toUpperCase() + ' - ORKIN CANADA';
@@ -63,7 +88,7 @@ const AppHomeScreen = ({navigation}) => {
         var title = global.isInPreviewMode ? 'Exit Data Preview Mode?' : 'Start Data Preview Mode?';
         var msg = global.isInPreviewMode ? "" : "Preview mode enables features in testing and loads data about to release.\n\nPreview mode is retained until you exit it."
         Alert.alert(title, msg, [
-            {text: 'YES', onPress: () => {global.isProductDataLoaded = false; setIsInPreviewMode(!global.isInPreviewMode); }, style: 'yes'},
+            {text: 'YES', onPress: () => {global.isPriceDataLoaded = false; setIsInPreviewMode(!global.isInPreviewMode); }, style: 'yes'},
             {text: 'NO', style: 'no',},
         ]);    
       }

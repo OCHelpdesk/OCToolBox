@@ -5,25 +5,143 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import BackgroundService from 'react-native-background-actions';
 
 import AppSettings from './src/jsons/AppSettings.json'
+import ProductCard from './src/components/ProductCard';
+import ProductCategoryCard from './src/components/ProductCategoryCard';
+
 import AppHomeScreen from './src/screens/AppHomeScreen';
 import DocWaitListScreen from './src/screens/DocWaitListScreen';
 import DocListScreen from './src/screens/DocListScreen';
 
 const Stack = createNativeStackNavigator();
 
-function App() {
-  global.currentProductDataVersion = '';
-  global.isInPreviewMode = false
-  const getIsInPreviewMode = async() => {
+// You can do anything in your task such as network requests, timers and so on,
+// as long as it doesn't touch UI. Once your task completes (i.e. the promise is resolved),
+// React Native will go into "paused" mode (unless there are other tasks running,
+// or there is a foreground app).
+const backgroundTask = async (taskDataArguments) => {
+  const { delay } = taskDataArguments;
+  const runBackgroundTask = async() => {
     try {
-      var v = await AsyncStorage.getItem('@UserSettings_IsInPreviewMode')
-      global.isInPreviewMode = v !== null ? (v == 'true') : false;
-    } catch(e) {
-      global.isInPreviewMode = false;
-    }    
+      var timeLastCheckPriceUpdateStr = await AsyncStorage.getItem('@gbTask_TimeLastCheckPriceUpdate');
+      var timeNow = new Date();
+      if (timeLastCheckPriceUpdateStr == null) {
+        var startedAt = timeNow.toString();
+        await AsyncStorage.setItem('@gbTask_TimeLastCheckPriceUpdate', startedAt);
+        console.log('GbTask Started at ' + startedAt + '.');
+        timeNow.setHours(timeNow.getHours() - 2);
+        timeLastCheckPriceUpdateStr = timeNow.toString();
+      }
+      {
+        var timeNow = new Date();
+        var timeLastCheckPriceUpdate = Date.parse(timeLastCheckPriceUpdateStr);
+        if ((Math.abs(timeNow.getTime() - timeLastCheckPriceUpdate) / (60 * 60 * 1000)) >= 1) {
+          console.log('GbTask Triggered at ' + timeNow.toString() + '.');
+          var isInPreviewMode = await AsyncStorage.getItem('@UserSettings_IsInPreviewMode')
+          isInPreviewMode = isInPreviewMode == null ? 'false' : isInPreviewModeStr;
+          var priceDataVersion = await AsyncStorage.getItem('@UserSettings_PriceDataVersion')
+          priceDataVersion = priceDataVersion == null ? AppSettings.PriceDataVersion : priceDataVersion;
+          var apiURL = AppSettings.UrlPriceData;
+          var request = {
+            method: 'POST',
+            headers: { Accept: 'application/json', 'Content-Type': 'application/json; charset=utf-8', },
+            body: JSON.stringify({
+              AccessKey: AppSettings.AppServiceAccessKey,
+              AppSideVersionNumber: priceDataVersion,
+              RequestVersionNumberOnly: false,
+              RequestPreviewVersion: isInPreviewMode == 'true',
+            }),
+          }
+          fetch(apiURL, request)
+          .then((response) => response.json())
+          .then(async (responseJson) => {
+            var isGoodResponse = responseJson != null && responseJson.Version !== undefined && responseJson.Version !== null;
+            if (isGoodResponse && responseJson.Version === priceDataVersion) {
+              await AsyncStorage.setItem('@gbTask_TimeLastCheckPriceUpdate', timeNow.toString());
+              console.log("GbTask: No Updates.");
+            }
+            else if (isGoodResponse) {
+              console.log("GbTask: Has Updates.");
+              isGoodResponse = isGoodResponse &&
+                responseJson.ProductCategories !== undefined && responseJson.ProductCategories !== null &&
+                responseJson.ProductCategoriesFr !== undefined && responseJson.ProductCategoriesFr !== null &&
+                responseJson.Products !== undefined && responseJson.Products !== null &&
+                responseJson.ProductsFr !== undefined && responseJson.ProductsFr !== null;
+              if (isGoodResponse) {
+                console.log("GbTask: Updates Fetched.");
+                ProductCategoryCard.AllEnCards = responseJson.ProductCategories;
+                ProductCategoryCard.AllFrCards = responseJson.ProductCategoriesFr;
+                ProductCard.AllEnCards = responseJson.Products;
+                ProductCard.AllFrCards = responseJson.ProductsFr;
+                for (const p of ProductCard.AllEnCards)  { p.isFavorite = false; }
+                for (const p of ProductCard.AllFrCards)  { p.isFavorite = false; }
+                var favorites = [];
+                const jsonString = await AsyncStorage.getItem('@AppSettings_FavoriteProducts');
+                if (jsonString != null) favorites = JSON.parse(jsonString);
+                for (const p of ProductCard.AllEnCards)  { p.isFavorite = favorites.includes(p.ProductId); }
+                for (const p of ProductCard.AllFrCards)  { p.isFavorite = favorites.includes(p.ProductId); }
+                await AsyncStorage.setItem('@UserSettings_PriceDataVersion', responseJson.Version);
+                global.isPriceDataLoaded = true;
+                await AsyncStorage.setItem('@gbTask_TimeLastCheckPriceUpdate', timeNow.toString());
+                console.log("GbTask: Updates Applied. Version #: " + responseJson.Version);
+              }
+              else {
+                console.error("GbTask: Updates Not Acceptable.");
+              }
+            }
+            else {
+              console.error("GbTask: Updates Missing Version #.");
+            }
+            return responseJson;
+          })
+          .catch((error) => {
+            console.error("GbTask Error while Fetching Product Data Updates: " + error);
+          });
+        }  
+      }
+    } catch (e) {
+      console.error(e.toString())
+    }
   }
-  getIsInPreviewMode();
-  
+  const backgroundTaskSleep = (time) => new Promise((resolve) => setTimeout(() => resolve(), time));
+  // An infinite loop task
+  await new Promise( async (resolve) => {
+      for (let i = 0; BackgroundService.isRunning(); i++) {
+          runBackgroundTask();
+          //await backgroundTaskSleep(delay);
+          await backgroundTaskSleep(60 * 1000); //wait a minute
+      }
+  });
+};
+const backgroundTaskOptions = {
+  taskName: 'OCToolboxBgTask',
+  taskTitle: 'OC Toolbox Background Task',
+  taskDesc: 'Background Task to do Price Update and Others',
+  taskIcon: { name: 'ic_launcher', type: 'mipmap',}, //Android Required. Notification icon.
+  color: '#ff00ff', //Notification color. Default: "#ffffff".
+  linkingURI: 'yourSchemeHere://chat/jane', // For more info, see Deep Linking on https://www.npmjs.com/package/react-native-background-actions
+  parameters: { delay: 1000, },
+};
+
+
+function App() {
+  const startBackgroundService = async() => {
+    await AsyncStorage.removeItem('@UserSettings_PriceDataVersion');
+    await AsyncStorage.removeItem('@gbTask_TimeLastCheckPriceUpdate');
+    await BackgroundService.start(backgroundTask, backgroundTaskOptions);
+    await BackgroundService.updateNotification({taskDesc: 'OC Toolbox Background Task Started'}); // Only Android, iOS will ignore this call  
+    //iOS will also run everything here in the background until .stop() is called
+  }
+  /*
+  If you call stop() on background no new tasks will be able to be started! 
+  Don't call .start() twice, as it will stop performing previous background tasks 
+  and start a new one. 
+  If .start() is called on the backgound, it will not have any effect.  
+  */
+  const stopBackgroundService = async() => {
+    await BackgroundService.stop();
+  }
+  startBackgroundService();
+
   return (
     <NavigationContainer>
       <Stack.Navigator >
