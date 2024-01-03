@@ -47,7 +47,9 @@ class DocWaitListScreen extends Component {
     const screenTitle = TextString.Get('PlsWait').toUpperCase();
     setTimeout(() => {
       this.navigation.setOptions({ title: screenTitle });
-      this.loadDocList();
+      setTimeout(() => {
+        this.loadDocList();
+      }, 1000);
     }, 200);
   }
 

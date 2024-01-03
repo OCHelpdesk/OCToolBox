@@ -3,6 +3,7 @@ import { StyleSheet, Text, Image, TouchableOpacity, View, TouchableWithoutFeedba
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TextString from '../components/TextString';
+import AppSettings from '../jsons/AppSettings.json'
 import Products from '../jsons/Products.json';
 import ProductsFr from '../jsons/ProductsFr.json';
 
@@ -15,7 +16,7 @@ class ProductCard extends Component {
       for (const p of ProductCard.AllEnCards)  { p.isFavorite = false; }
       for (const p of ProductCard.AllFrCards)  { p.isFavorite = false; }
       try {
-        const jsonString = await AsyncStorage.getItem('@AppSettings_FavoriteProducts');
+        const jsonString = await AsyncStorage.getItem(AppSettings.FavoriteProductsSettingName);
         const favorites = jsonString != null ? JSON.parse(jsonString) : [];
         for (const p of ProductCard.AllEnCards)  { p.isFavorite = favorites.includes(p.ProductId); }
         for (const p of ProductCard.AllFrCards)  { p.isFavorite = favorites.includes(p.ProductId); }
@@ -68,7 +69,7 @@ class ProductCard extends Component {
           if (p.isFavorite && !favorites.includes(p.ProductId)) favorites.push(p.ProductId); 
         }
         const jsonString = JSON.stringify(favorites)
-        AsyncStorage.setItem('@AppSettings_FavoriteProducts', jsonString)
+        AsyncStorage.setItem(AppSettings.FavoriteProductsSettingName, jsonString)
         .then(() => { /*console.log('Favorite products saved: ' + jsonString);*/ } )
         .catch(error => { console.log('Error saving favorite products: ' + error); } );
     }

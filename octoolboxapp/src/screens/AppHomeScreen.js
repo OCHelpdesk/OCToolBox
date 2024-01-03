@@ -12,20 +12,24 @@ const AppHomeScreen = ({navigation}) => {
     const [priceDataVersion, setPriceDataVersion] = useState(AppSettings.PriceDataVersion);
     const getPriceDataVersion = async() => {
       try {
-        var v = await AsyncStorage.getItem('@UserSettings_PriceDataVersion')
-        setPriceDataVersion( v !== null ? v : AppSettings.PriceDataVersion)
+        var v = await AsyncStorage.getItem(AppSettings.PriceDataVersionSettingName);
+        setPriceDataVersion( v !== null ? v : AppSettings.PriceDataVersion );
       } catch(e) {
         console.error(e);
       }    
     }
-    getPriceDataVersion().then(() => {
-        //console.log('AppHomeScreen.getPriceDataVersion Executed!');
-    });
+    //Wait 2 seconds for the background price data download task to complete the download
+    //and then update the price data version number.
+    setTimeout(() => {
+        getPriceDataVersion().then(() => {
+            //console.log('AppHomeScreen.getPriceDataVersion Executed!');
+        });
+    }, 2000);
 
     global.isInPreviewMode = false
     const getIsInPreviewMode = async() => {
       try {
-        var v = await AsyncStorage.getItem('@UserSettings_IsInPreviewMode')
+        var v = await AsyncStorage.getItem(AppSettings.IsInPreviewModeSettingName);
         global.isInPreviewMode = v !== null ? (v == 'true') : false;
         //console.log('AppHomeScreen.getIsInPreviewMode Executed!');
       } catch(e) {
@@ -35,7 +39,7 @@ const AppHomeScreen = ({navigation}) => {
     getIsInPreviewMode();  
     
     const [stringLanguage, setLanguage] = useState('Français');
-    const [stringOCToolbox, setStringOCToolbox] = useState('Orkin Canada Toolbox'.toUpperCase());
+    const [stringOCToolbox, setStringOCToolbox] = useState('OC Pro Toolbox'.toUpperCase());
     const [stringSelectCat, setStringSelectCat] = useState('select a toolbox category');
     const [stringPricing, setStringPricing] = useState('Pricing');
     const [stringSelectPricingCat, setStringSelectPricingCat] = useState('select a price category');
@@ -47,7 +51,7 @@ const AppHomeScreen = ({navigation}) => {
 
     TextString.getIsInFrench().then(
         () => {
-            var screenTitle = TextString.Get('OCToolbox').toUpperCase() + ' - ORKIN CANADA';
+            var screenTitle = 'OC ' + TextString.Get('OCToolbox').toUpperCase();
             navigation.setOptions({ title: screenTitle });
             setLanguage(TextString.TargetLanguage());
             setStringOCToolbox(TextString.Get('OCToolbox').toUpperCase());
@@ -62,7 +66,7 @@ const AppHomeScreen = ({navigation}) => {
     ) 
     const toggleLanguage = () => {
         TextString.ToggleLanguage();
-            var screenTitle = TextString.Get('OCToolbox').toUpperCase() + ' - ORKIN CANADA';
+            var screenTitle = 'OC ' + TextString.Get('OCToolbox').toUpperCase();
             navigation.setOptions({ title: screenTitle });
             setLanguage(TextString.TargetLanguage());
             setStringOCToolbox(TextString.Get('OCToolbox').toUpperCase());
@@ -78,7 +82,7 @@ const AppHomeScreen = ({navigation}) => {
     var timeLogoLastPressed = new Date().getTime();
     const setIsInPreviewMode = async(value) => {
         try {
-            await AsyncStorage.setItem('@UserSettings_IsInPreviewMode', value ? 'true' : 'false');
+            await AsyncStorage.setItem(AppSettings.IsInPreviewModeSettingName, value ? 'true' : 'false');
             global.isInPreviewMode = value;
         } catch (e) {
             console.log('Unable to ' + (value ? 'set' : 'reset') + ' preview mode.');
@@ -88,7 +92,7 @@ const AppHomeScreen = ({navigation}) => {
         var title = global.isInPreviewMode ? 'Exit Data Preview Mode?' : 'Start Data Preview Mode?';
         var msg = global.isInPreviewMode ? "" : "Preview mode enables features in testing and loads data about to release.\n\nPreview mode is retained until you exit it."
         Alert.alert(title, msg, [
-            {text: 'YES', onPress: () => {global.isPriceDataLoaded = false; setIsInPreviewMode(!global.isInPreviewMode); }, style: 'yes'},
+            {text: 'YES', onPress: () => { setIsInPreviewMode(!global.isInPreviewMode); }, style: 'yes'},
             {text: 'NO', style: 'no',},
         ]);    
       }
@@ -121,8 +125,9 @@ const AppHomeScreen = ({navigation}) => {
                                 titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 16 }}
                                 type="outline" 
                                 buttonStyle={{ width: 240, height: 40, borderWidth: 1, borderColor: "#ffffff", borderRadius: 5 }}
-                                onPress={() => {
-                                    //navigation.navigate('Splash', { waitFor: 'productDownload', routedFrom: "Home" }) 
+                                onPress={() => { 
+                                    setIsPricingMenuOpen(false);
+                                    setTimeout(() => { navigation.navigate('PriceDataDownload'); }, 200);
                                 }}
                             />
                             <Button 
@@ -130,8 +135,9 @@ const AppHomeScreen = ({navigation}) => {
                                 titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 16 }}
                                 type="outline" 
                                 buttonStyle={{ width: 240, height: 40, borderWidth: 1, borderColor: "#ffffff", borderRadius: 5 }}
-                                onPress={() => {
-                                    //navigation.navigate('Splash', { waitFor: 'productDownload', routedFrom: "Home" }) 
+                                onPress={() => { 
+                                    setIsPricingMenuOpen(false);
+                                    setTimeout(() => { navigation.navigate('CommercialService'); }, 200);
                                 }}
                             />
                             <Button 
@@ -139,8 +145,9 @@ const AppHomeScreen = ({navigation}) => {
                                 titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 16 }}
                                 type="outline" 
                                 buttonStyle={{ width: 240, height: 40, borderWidth: 1, borderColor: "#ffffff", borderRadius: 5 }}
-                                onPress={() => {
-                                    //navigation.navigate('Splash', { waitFor: 'productDownload', routedFrom: "Home" }) 
+                                onPress={() => { 
+                                    setIsPricingMenuOpen(false);
+                                    setTimeout(() => { navigation.navigate('ResidentialService'); }, 200);
                                 }}
                             />
                         </View>
@@ -181,9 +188,7 @@ const AppHomeScreen = ({navigation}) => {
                         titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 20 }}
                         type="outline" 
                         buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
-                        onPress={() => {
-                            navigation.navigate('DocWaitList') 
-                        }}
+                        onPress={() => { navigation.navigate('DocWaitList'); }}
                     />
                 </View>
                 <View style={{paddingTop: 120, paddingBottom: 40, alignItems: 'center'}}>

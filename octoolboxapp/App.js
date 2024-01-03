@@ -11,6 +11,11 @@ import ProductCategoryCard from './src/components/ProductCategoryCard';
 import AppHomeScreen from './src/screens/AppHomeScreen';
 import DocWaitListScreen from './src/screens/DocWaitListScreen';
 import DocListScreen from './src/screens/DocListScreen';
+import PriceDataDownloadScreen from './src/screens/PriceDataDownloadScreen';
+import ProductCategoryScreen from './src/screens/ProductCategoryScreen';
+import ProductScreen from './src/screens/ProductScreen';
+import RateCardCommercialServiceScreen from './src/screens/RateCardCommercialServiceScreen';
+import RateCardResidentialServiceScreen from './src/screens/RateCardResidentialServiceScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,23 +27,25 @@ const backgroundTask = async (taskDataArguments) => {
   const { delay } = taskDataArguments;
   const runBackgroundTask = async() => {
     try {
-      var timeLastCheckPriceUpdateStr = await AsyncStorage.getItem('@gbTask_TimeLastCheckPriceUpdate');
+      var timeLastCheckPriceUpdateStr = await AsyncStorage.getItem(AppSettings.BgTaskTimeLastCheckPriceUpdateSettingName);
       var timeNow = new Date();
       if (timeLastCheckPriceUpdateStr == null) {
         var startedAt = timeNow.toString();
-        await AsyncStorage.setItem('@gbTask_TimeLastCheckPriceUpdate', startedAt);
+        await AsyncStorage.setItem(AppSettings.BgTaskTimeLastCheckPriceUpdateSettingName, startedAt);
         console.log('GbTask Started at ' + startedAt + '.');
-        timeNow.setHours(timeNow.getHours() - 2);
+        if (timeNow.getHours() >= 2) {
+          timeNow.setHours(timeNow.getHours() - 2);
+        }
         timeLastCheckPriceUpdateStr = timeNow.toString();
       }
       {
-        var timeNow = new Date();
+        timeNow = new Date();
         var timeLastCheckPriceUpdate = Date.parse(timeLastCheckPriceUpdateStr);
         if ((Math.abs(timeNow.getTime() - timeLastCheckPriceUpdate) / (60 * 60 * 1000)) >= 1) {
           console.log('GbTask Triggered at ' + timeNow.toString() + '.');
-          var isInPreviewMode = await AsyncStorage.getItem('@UserSettings_IsInPreviewMode')
+          var isInPreviewMode = await AsyncStorage.getItem(AppSettings.IsInPreviewModeSettingName)
           isInPreviewMode = isInPreviewMode == null ? 'false' : isInPreviewModeStr;
-          var priceDataVersion = await AsyncStorage.getItem('@UserSettings_PriceDataVersion')
+          var priceDataVersion = await AsyncStorage.getItem(AppSettings.PriceDataVersionSettingName)
           priceDataVersion = priceDataVersion == null ? AppSettings.PriceDataVersion : priceDataVersion;
           var apiURL = AppSettings.UrlPriceData;
           var request = {
@@ -56,7 +63,7 @@ const backgroundTask = async (taskDataArguments) => {
           .then(async (responseJson) => {
             var isGoodResponse = responseJson != null && responseJson.Version !== undefined && responseJson.Version !== null;
             if (isGoodResponse && responseJson.Version === priceDataVersion) {
-              await AsyncStorage.setItem('@gbTask_TimeLastCheckPriceUpdate', timeNow.toString());
+              await AsyncStorage.setItem(AppSettings.BgTaskTimeLastCheckPriceUpdateSettingName, timeNow.toString());
               console.log("GbTask: No Updates.");
             }
             else if (isGoodResponse) {
@@ -75,13 +82,12 @@ const backgroundTask = async (taskDataArguments) => {
                 for (const p of ProductCard.AllEnCards)  { p.isFavorite = false; }
                 for (const p of ProductCard.AllFrCards)  { p.isFavorite = false; }
                 var favorites = [];
-                const jsonString = await AsyncStorage.getItem('@AppSettings_FavoriteProducts');
+                const jsonString = await AsyncStorage.getItem(AppSettings.FavoriteProductsSettingName);
                 if (jsonString != null) favorites = JSON.parse(jsonString);
                 for (const p of ProductCard.AllEnCards)  { p.isFavorite = favorites.includes(p.ProductId); }
                 for (const p of ProductCard.AllFrCards)  { p.isFavorite = favorites.includes(p.ProductId); }
-                await AsyncStorage.setItem('@UserSettings_PriceDataVersion', responseJson.Version);
-                global.isPriceDataLoaded = true;
-                await AsyncStorage.setItem('@gbTask_TimeLastCheckPriceUpdate', timeNow.toString());
+                await AsyncStorage.setItem(AppSettings.PriceDataVersionSettingName, responseJson.Version);
+                await AsyncStorage.setItem(AppSettings.BgTaskTimeLastCheckPriceUpdateSettingName, timeNow.toString());
                 console.log("GbTask: Updates Applied. Version #: " + responseJson.Version);
               }
               else {
@@ -125,8 +131,8 @@ const backgroundTaskOptions = {
 
 function App() {
   const startBackgroundService = async() => {
-    await AsyncStorage.removeItem('@UserSettings_PriceDataVersion');
-    await AsyncStorage.removeItem('@gbTask_TimeLastCheckPriceUpdate');
+    await AsyncStorage.removeItem(AppSettings.PriceDataVersionSettingName);
+    await AsyncStorage.removeItem(AppSettings.BgTaskTimeLastCheckPriceUpdateSettingName);
     await BackgroundService.start(backgroundTask, backgroundTaskOptions);
     await BackgroundService.updateNotification({taskDesc: 'OC Toolbox Background Task Started'}); // Only Android, iOS will ignore this call  
     //iOS will also run everything here in the background until .stop() is called
@@ -171,6 +177,51 @@ function App() {
           headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0, },
           headerShadowVisible: false,
         }} />
+        <Stack.Screen name="PriceDataDownload" component={PriceDataDownloadScreen} options={{
+          //headerShown: false,
+          headerBackVisible: false,
+          title: 'PLEAE WAIT......',
+          headerTitleAlign: 'center',          
+          headerTintColor: '#ffffff',
+          headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0, },
+          headerShadowVisible: false,
+        }}/>
+        <Stack.Screen name="ProductCategory" component={ProductCategoryScreen} options={{
+          //headerShown: false,
+          headerBackVisible: false,
+          title: 'PRODUCT CATEGORY',
+          headerTitleAlign: 'center',          
+          headerTintColor: '#ffffff',
+          headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0, },
+          headerShadowVisible: false,
+        }} />
+        <Stack.Screen name="Product" component={ProductScreen} options={{ 
+          //headerShown: false, 
+          headerBackVisible: true,
+          title: 'PRODUCT',
+          headerTitleAlign: 'center',          
+          headerTintColor: '#ffffff',
+          headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0},
+          headerShadowVisible: false,
+        }}  />
+        <Stack.Screen name="CommercialService" component={RateCardCommercialServiceScreen} options={{ 
+          //headerShown: false, 
+          headerBackVisible: true,
+          title: 'COMMERCIAL SERVICE',
+          headerTitleAlign: 'center',          
+          headerTintColor: '#ffffff',
+          headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0},
+          headerShadowVisible: false,
+        }}  />
+        <Stack.Screen name="ResidentialService" component={RateCardResidentialServiceScreen} options={{ 
+          //headerShown: false, 
+          headerBackVisible: true,
+          title: 'RESIDENTIAL SERVICE',
+          headerTitleAlign: 'center',          
+          headerTintColor: '#ffffff',
+          headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0},
+          headerShadowVisible: false,
+        }}  />
       </Stack.Navigator>
     </NavigationContainer>
   );
