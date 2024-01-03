@@ -18,9 +18,9 @@ const AppHomeScreen = ({navigation}) => {
         console.error(e);
       }    
     }
-    //Wait 2 seconds for the background price data download task to complete the download
-    //and then update the price data version number.
-    setTimeout(() => {
+    //Keep checking price data version as the background price data download task can find and 
+    //download a new version.
+    setInterval(() => {
         getPriceDataVersion().then(() => {
             //console.log('AppHomeScreen.getPriceDataVersion Executed!');
         });
@@ -127,6 +127,7 @@ const AppHomeScreen = ({navigation}) => {
                                 buttonStyle={{ width: 240, height: 40, borderWidth: 1, borderColor: "#ffffff", borderRadius: 5 }}
                                 onPress={() => { 
                                     setIsPricingMenuOpen(false);
+                                    clearInterval();
                                     setTimeout(() => { navigation.navigate('PriceDataDownload'); }, 200);
                                 }}
                             />
@@ -137,6 +138,7 @@ const AppHomeScreen = ({navigation}) => {
                                 buttonStyle={{ width: 240, height: 40, borderWidth: 1, borderColor: "#ffffff", borderRadius: 5 }}
                                 onPress={() => { 
                                     setIsPricingMenuOpen(false);
+                                    clearInterval();
                                     setTimeout(() => { navigation.navigate('CommercialService'); }, 200);
                                 }}
                             />
@@ -147,6 +149,7 @@ const AppHomeScreen = ({navigation}) => {
                                 buttonStyle={{ width: 240, height: 40, borderWidth: 1, borderColor: "#ffffff", borderRadius: 5 }}
                                 onPress={() => { 
                                     setIsPricingMenuOpen(false);
+                                    clearInterval();
                                     setTimeout(() => { navigation.navigate('ResidentialService'); }, 200);
                                 }}
                             />
@@ -179,16 +182,14 @@ const AppHomeScreen = ({navigation}) => {
                         titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 20 }}
                         type="outline" 
                         buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
-                        onPress={() => {
-                            setIsPricingMenuOpen(true);
-                        }}
+                        onPress={() => { setIsPricingMenuOpen(true); }}
                     />
                     <Button 
                         title={stringDoc}
                         titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 20 }}
                         type="outline" 
                         buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
-                        onPress={() => { navigation.navigate('DocWaitList'); }}
+                        onPress={() => { clearInterval(); navigation.navigate('DocWaitList'); }}
                     />
                 </View>
                 <View style={{paddingTop: 120, paddingBottom: 40, alignItems: 'center'}}>
