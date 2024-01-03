@@ -92,7 +92,7 @@ const AppHomeScreen = ({navigation}) => {
         var title = global.isInPreviewMode ? 'Exit Data Preview Mode?' : 'Start Data Preview Mode?';
         var msg = global.isInPreviewMode ? "" : "Preview mode enables features in testing and loads data about to release.\n\nPreview mode is retained until you exit it."
         Alert.alert(title, msg, [
-            {text: 'YES', onPress: () => { setIsInPreviewMode(!global.isInPreviewMode); }, style: 'yes'},
+            {text: 'YES', onPress: () => { setIsInPreviewMode(!global.isInPreviewMode); AsyncStorage.removeItem(AppSettings.PriceDataVersionSettingName); }, style: 'yes'},
             {text: 'NO', style: 'no',},
         ]);    
       }

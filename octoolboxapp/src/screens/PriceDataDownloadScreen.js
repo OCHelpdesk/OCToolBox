@@ -39,7 +39,6 @@ const PriceDataDownloadScreen = ({navigation, route}) => {
               responseJson.ProductsFr !== undefined && responseJson.ProductsFr !== null;
             if (isGoodResponse) {
               console.log("Full package of the product price data has been downloaded! Version #: " + responseJson.Version);
-              global.currentProductDataVersion = responseJson.Version;
               ProductCategoryCard.AllEnCards = responseJson.ProductCategories;
               ProductCategoryCard.AllFrCards = responseJson.ProductCategoriesFr;
               ProductCard.AllEnCards = responseJson.Products;
@@ -56,6 +55,7 @@ const PriceDataDownloadScreen = ({navigation, route}) => {
               }           
               for (const p of ProductCard.AllEnCards)  { p.isFavorite = favorites.includes(p.ProductId); }
               for (const p of ProductCard.AllFrCards)  { p.isFavorite = favorites.includes(p.ProductId); }
+              await AsyncStorage.setItem(AppSettings.PriceDataVersionSettingName, responseJson.Version);
               navigation.dispatch(CommonActions.reset({index: 0, routes: [{ name: navStackScreenNameGoTo }]}));
             }
             else {
