@@ -11,7 +11,7 @@ const RateCardResidentialServiceScreen = ({navigation, route}) => {
     }, 200);
     const screenWidth = parseInt(Dimensions.get('window').width);
     const screenHeight = parseInt(Dimensions.get('window').height) - 80;
-    const imgWidth = 592, imgHeight = 1250;
+    const imgWidth = 592, imgHeight = 1480;
     var imgScale = screenWidth / imgWidth;
     var imgViewWidth = screenWidth;
     var imgViewHeight = parseInt(imgHeight * imgScale + '');
@@ -22,14 +22,14 @@ const RateCardResidentialServiceScreen = ({navigation, route}) => {
             imageWidth={imgWidth}
             imageHeight={imgHeight}
             enableCenterFocus={false}
-            centerOn={{x: 90, y: 210, scale: 1, duration: 0.1}}
+            centerOn={{x: 100, y: 360, scale: 1, duration: 0.1}}
             >
             {
               TextString.IsInFrench()
               &&
               <Image 
                 style={{width: imgViewWidth, height: imgViewHeight}}
-                source={require('../../assets/oc/RateCardPage4Fr.jpg')}
+                source={require('../../assets/oc/RC2024ResiFr.png')}
               />
             }
             {
@@ -37,7 +37,7 @@ const RateCardResidentialServiceScreen = ({navigation, route}) => {
               &&
               <Image 
                 style={{width: imgViewWidth, height: imgViewHeight}}
-                source={require('../../assets/oc/RateCardPage4.jpg')}
+                source={require('../../assets/oc/RC2024ResiEn.png')}
               />
             }
         </ImageZoom>
