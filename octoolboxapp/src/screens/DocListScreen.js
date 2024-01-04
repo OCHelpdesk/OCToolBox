@@ -5,7 +5,7 @@ import { CommonActions } from "@react-navigation/native";
 import RNFS from 'react-native-fs';
 import FileViewer from 'react-native-file-viewer'
 
-import DocCard from '../components/DocCard';
+import DocCard from '../components/DocCardEx';
 import TextString from '../components/TextString';
 import AppSettings from '../jsons/AppSettings.json'
 
@@ -35,7 +35,7 @@ class DocListScreen extends Component {
   };
 
 
-  viewDoc = async (docId) => {
+  viewDoc = async (docId, docCard) => {
     //console.log('View Doc with Id: ' + docId);
     var fileName = '';
     for (var d = 0; d < this.docs.length; d++) {
@@ -59,7 +59,8 @@ class DocListScreen extends Component {
     .then((res) => {
       //Success
       //filesInDir(RNFS.DocumentDirectoryPath); 
-      this.setState({isPleaseWaitOpen: false})
+      //this.setState({isPleaseWaitOpen: false})
+      docCard.hidePleaseWait();
       setTimeout(() => {
         FileViewer.open(fileName)
         .then(() => {
@@ -78,9 +79,10 @@ class DocListScreen extends Component {
   renderDoc = ({ item }) => (
     <DocCard 
       doc={item} 
-      onDocSelected={(docId) => {
-        this.setState({isPleaseWaitOpen: true})
-        setTimeout(() => { this.viewDoc(docId); }, 2000);
+      onDocSelected={(docId, docCard) => {
+        //this.setState({isPleaseWaitOpen: true})
+        docCard.showPleaseWait();
+        setTimeout(() => { this.viewDoc(docId, docCard); }, 2000);
       }}
     />
   );
