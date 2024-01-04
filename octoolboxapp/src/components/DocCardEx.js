@@ -65,6 +65,9 @@ class DocCardEx extends Component {
               style={{
                 height: cardHeight, width: cardWidth, position: "absolute", top: 0, left: 0, 
                 flex: 1, alignItems: 'center', justifyContent: 'space-evenly', alignSelf: 'stretch',
+                borderWidth: 0, borderColor: "#ff0000", borderRadius: 5, 
+                marginLeft: 4, marginTop: 2, padding: 4,
+                backgroundColor: "#00000066"
               }}
             >
               <Image source={require('../../assets/oc/LadyBug.gif')} style={{ width: 40, height: 40, }} />
