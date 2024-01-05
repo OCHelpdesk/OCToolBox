@@ -262,17 +262,20 @@ To add an image to the splash screen, add an image set to Images, open LaunchScr
 */
 
 /*
+Open app with VSCode
+iOS -> octoolboxapp -> info.plist -> CFBundleDisplayName, Change the string to Pro Toolbox.
 Open app Xcode workspace
-From OCPrice -> OCPrice -> Info, change Bundle Display Name to OCPricing
-From OCPrice -> Signing & Capabilties Tab, check Automatically Manage Signin, change Team to Orkin Canada Corporation and change Bundle Identifier to com.orkincanada.pricing.test
+From octoolboxapp -> General, change Display Name to Pro Toolbox
+From octoolboxapp -> Signing & Capabilties Tab, check Automatically Manage Signin, change Team to Orkin Canada Corporation and change Bundle Identifier to com.orkincanada.octoolbox
 Clean Build Folder
 Build
 */
 
 /*
-To change version and build #s
-XCode -> OCPrice -> General -> Version #: 2.0, Build #: 3
-VSCode -> iOS -> OCPrice -> info.plist -> CFBundleShortVersionString: 2.0, CFBundleVersion: 3
+To change version. Each release must have a unique version number.
+AppSettins.js -> "AppVersion" : "1.0.1 (5)",
+XCode -> octoolboxapp -> General -> Version #: 1.0.1, Build #: 5
+VSCode -> iOS -> octoolboxapp -> info.plist -> CFBundleShortVersionString: 1.0.1, CFBundleVersion: 5
 */
 
 
