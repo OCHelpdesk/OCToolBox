@@ -251,6 +251,21 @@ echo start the app
 npx react-native run-ios --simulator="iPhone 14"
 
 /*
+Moved to Xcode V15, Got Error while Building:
+    Make sure you’re running a packager server or
+    have include a .jsbundle file in your application
+    bundle.
+Follow https://onexlab-io.medium.com/no-bundle-url-present-fixed-ca2688a80f66 to create a main.jsbundle.
+1) Open the package.json file, in 'scripts' section and append the following line.
+   "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --assets-dest='ios' --dev=false --platform='ios'"
+2) Run the following command to generate main.jsbundle file in the ios folder. 
+   npm run build:ios
+3) Add main.jsbundle to the Xcode project
+   octoolboxapp -> Build Phases -> Copy Bundle Resources -> +
+   find and select main.jsbundle, and then select 'Copy items if needed' and 'Create groups'
+*/
+
+/*
 Open app Xcode workspace
 From OCToolboxApp -> OCToolboxApp -> Info, add a new key 'Status bar style' and select Light Content as value of the key
 */
