@@ -254,7 +254,7 @@ npx react-native run-ios --simulator="iPhone 14"
 Moved to Xcode V15. Ran the app with Xcode on a Simulator. Got an Error:
     No bundle URL present.
     Make sure you're running a packager server or have included a .jsbundle file in your application bundle.
-This is because the Metro dev server did not started. Start the server:  
+This is because the Metro dev server did not start. Start the server:  
     cd octoolboxapp
     npm start
 and then run the app from Xcode.
