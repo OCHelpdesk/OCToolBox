@@ -261,6 +261,31 @@ and then run the app from Xcode.
 */
 
 /*
+Set Xcode destination to device, built, failed at build phase 'Bundle React Native code and images' with error
+message 'Command PhaseScriptExecution failed with a nonzero exit code'.
+Expanded content of the phase. Saw the phase run script ../node_modules/react-native/scripts/react-native-xcode.sh
+Opened the script file. Added some echo lines to trace the execution. Rebuilt. Found the script failed at line 
+    IP=$(ipconfig getifaddr en${num})
+when the num was 0. This line finds IP of the Mac and assigned to variable IP. en0 means wire network or wireless
+if wire not existing while en1 means wireless.
+From a Terminal window, running
+    IP=$(ipconfig getifaddr en0)
+and
+    echo "$IP"
+got a blank return while running    
+    IP=$(ipconfig getifaddr en1)
+and
+    echo "$IP"
+got ip of the Mac.
+Opened the script file and change line
+    for num in 0 1 2 3 4 5 6 7 8; do
+to
+    for num in 1; do
+so to get the ip from en1.
+GOT THE PROBLEM FIXED!!!.  
+*/
+
+/*
 Open app Xcode workspace
 From OCToolboxApp -> OCToolboxApp -> Info, add a new key 'Status bar style' and select Light Content as value of the key
 */
