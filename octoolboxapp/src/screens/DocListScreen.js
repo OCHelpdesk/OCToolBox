@@ -82,7 +82,7 @@ class DocListScreen extends Component {
       onDocSelected={(docId, docCard) => {
         //this.setState({isPleaseWaitOpen: true})
         docCard.showPleaseWait();
-        setTimeout(() => { this.viewDoc(docId, docCard); }, 2000);
+        setTimeout(() => { this.viewDoc(docId, docCard); }, 100);
       }}
     />
   );

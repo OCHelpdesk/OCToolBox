@@ -49,7 +49,7 @@ class DocWaitListScreen extends Component {
       this.navigation.setOptions({ title: screenTitle });
       setTimeout(() => {
         this.loadDocList();
-      }, 1000);
+      }, 100);
     }, 200);
   }
 

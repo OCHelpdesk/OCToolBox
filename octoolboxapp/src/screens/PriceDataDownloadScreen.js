@@ -74,7 +74,7 @@ const PriceDataDownloadScreen = ({navigation, route}) => {
           alert(plsTryAgain);
           navigation.dispatch(CommonActions.reset({index: 0, routes: [{ name: navStackScreenNameGoBack }]}));
         });
-      }, 1000);
+      }, 100);
     }, 200);
     return (
         <View style={{flex: 1, flexDirection: "column", alignItems: 'flex-start', backgroundColor: '#333333',}}>
