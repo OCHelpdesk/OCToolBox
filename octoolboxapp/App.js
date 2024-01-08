@@ -44,7 +44,7 @@ const backgroundTask = async (taskDataArguments) => {
         if ((Math.abs(timeNow.getTime() - timeLastCheckPriceUpdate) / (60 * 60 * 1000)) >= 1) {
           console.log('GbTask Triggered at ' + timeNow.toString() + '.');
           var isInPreviewMode = await AsyncStorage.getItem(AppSettings.IsInPreviewModeSettingName)
-          isInPreviewMode = isInPreviewMode == null ? 'false' : isInPreviewModeStr;
+          isInPreviewMode = isInPreviewMode == null ? 'false' : isInPreviewMode;
           var priceDataVersion = await AsyncStorage.getItem(AppSettings.PriceDataVersionSettingName)
           priceDataVersion = priceDataVersion == null ? AppSettings.PriceDataVersion : priceDataVersion;
           var apiURL = AppSettings.UrlPriceData;
