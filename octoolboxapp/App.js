@@ -198,6 +198,7 @@ function App() {
         <Stack.Screen name="Product" component={ProductScreen} options={{ 
           //headerShown: false, 
           headerBackVisible: true,
+          headerBackTitleVisible: false,
           title: 'PRODUCT',
           headerTitleAlign: 'center',          
           headerTintColor: '#ffffff',
@@ -207,6 +208,7 @@ function App() {
         <Stack.Screen name="CommercialService" component={RateCardCommercialServiceScreen} options={{ 
           //headerShown: false, 
           headerBackVisible: true,
+          headerBackTitleVisible: false,
           title: 'COMMERCIAL SERVICE',
           headerTitleAlign: 'center',          
           headerTintColor: '#ffffff',
@@ -216,6 +218,7 @@ function App() {
         <Stack.Screen name="ResidentialService" component={RateCardResidentialServiceScreen} options={{ 
           //headerShown: false, 
           headerBackVisible: true,
+          headerBackTitleVisible: false,
           title: 'RESIDENTIAL SERVICE',
           headerTitleAlign: 'center',          
           headerTintColor: '#ffffff',

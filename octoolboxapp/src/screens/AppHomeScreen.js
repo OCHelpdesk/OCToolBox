@@ -51,7 +51,7 @@ const AppHomeScreen = ({navigation}) => {
 
     TextString.getIsInFrench().then(
         () => {
-            var screenTitle = 'OC ' + TextString.Get('OCToolbox').toUpperCase();
+            var screenTitle = 'ORKIN CANADA ' + TextString.Get('OCToolbox').toUpperCase();
             navigation.setOptions({ title: screenTitle });
             setLanguage(TextString.TargetLanguage());
             setStringOCToolbox(TextString.Get('OCToolbox').toUpperCase());
@@ -66,7 +66,7 @@ const AppHomeScreen = ({navigation}) => {
     ) 
     const toggleLanguage = () => {
         TextString.ToggleLanguage();
-            var screenTitle = 'OC ' + TextString.Get('OCToolbox').toUpperCase();
+            var screenTitle = 'ORKIN CANADA ' + TextString.Get('OCToolbox').toUpperCase();
             navigation.setOptions({ title: screenTitle });
             setLanguage(TextString.TargetLanguage());
             setStringOCToolbox(TextString.Get('OCToolbox').toUpperCase());
