@@ -15,8 +15,9 @@ class DocListScreen extends Component {
     //By console.log(props), you can see props has properties of navigation, route, etc. 
     //Note property name of route doesn't have s while the parameter name is routes, having s, 
     //when DocWaitList submitted the navigation request. 
+    //console.log(props)
     this.navigation = props.navigation;
-    this.docs = props.route.docs;
+    this.docs = props.route.docs != null ? props.route.docs : props.route.params.docs;
     this.state = { isPleaseWaitOpen: false };
     const screenTitle = TextString.Get('Doc').toUpperCase();
     setTimeout(() => {

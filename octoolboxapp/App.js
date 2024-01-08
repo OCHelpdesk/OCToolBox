@@ -170,7 +170,8 @@ function App() {
         }} />
         <Stack.Screen name="DocList" component={DocListScreen} options={{
           //headerShown: false,
-          headerBackVisible: false,
+          headerBackVisible: true,
+          headerBackTitleVisible: false,
           title: 'Document',
           headerTitleAlign: 'center',          
           headerTintColor: '#ffffff',
@@ -188,7 +189,8 @@ function App() {
         }}/>
         <Stack.Screen name="ProductCategory" component={ProductCategoryScreen} options={{
           //headerShown: false,
-          headerBackVisible: false,
+          headerBackVisible: true,
+          headerBackTitleVisible: false,
           title: 'PRODUCT CATEGORY',
           headerTitleAlign: 'center',          
           headerTintColor: '#ffffff',

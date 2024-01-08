@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { useState } from "react";
 import { View, Image, Text, TouchableWithoutFeedback, Alert, Modal, Dimensions, TouchableOpacity  } from 'react-native';
+import { CommonActions } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from '@rneui/base';
 
+import ProductCard from '../components/ProductCard';
+import ProductCategoryCard from '../components/ProductCategoryCard';
 import TextString from '../components/TextString';
 import AppSettings from '../jsons/AppSettings.json'
 
@@ -48,6 +51,7 @@ const AppHomeScreen = ({navigation}) => {
     const [stringServicePriceResi, setStringServicePriceResi] = useState('Service - Residential'.toLocaleUpperCase());
     const [stringDoc, setStringDoc] = useState('Document'.toUpperCase());
     const [isPricingMenuOpen, setIsPricingMenuOpen] = useState(false);
+    const [isPleasWaitOpen, setIsPleasWaitOpen] = useState(false);
 
     TextString.getIsInFrench().then(
         () => {
@@ -96,13 +100,112 @@ const AppHomeScreen = ({navigation}) => {
             {text: 'NO', style: 'no',},
         ]);    
       }
+
+    loadPriceData = async () => {
+        var apiURL = AppSettings.UrlPriceData;
+        var request = {
+          method: 'POST',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json; charset=utf-8', },
+          body: JSON.stringify({
+            AccessKey: AppSettings.AppServiceAccessKey,
+            AppSideVersionNumber: "0.0", //Force to download the full package, no matter what price data version the app is having.
+            RequestVersionNumberOnly: false,
+            RequestPreviewVersion: global.isInPreviewMode,
+          }),
+        }
+        fetch(apiURL, request)
+        .then((response) => response.json())
+        .then(async (responseJson) => {
+          var isGoodResponse = responseJson != null && responseJson.Version !== undefined && responseJson.Version !== null;
+          if (isGoodResponse) {
+            isGoodResponse = isGoodResponse &&
+              responseJson.ProductCategories !== undefined && responseJson.ProductCategories !== null &&
+              responseJson.ProductCategoriesFr !== undefined && responseJson.ProductCategoriesFr !== null &&
+              responseJson.Products !== undefined && responseJson.Products !== null &&
+              responseJson.ProductsFr !== undefined && responseJson.ProductsFr !== null;
+            if (isGoodResponse) {
+              console.log("Full package of the product price data has been downloaded! Version #: " + responseJson.Version);
+              ProductCategoryCard.AllEnCards = responseJson.ProductCategories;
+              ProductCategoryCard.AllFrCards = responseJson.ProductCategoriesFr;
+              ProductCard.AllEnCards = responseJson.Products;
+              ProductCard.AllFrCards = responseJson.ProductsFr;
+              for (const p of ProductCard.AllEnCards)  { p.isFavorite = false; }
+              for (const p of ProductCard.AllFrCards)  { p.isFavorite = false; }
+              var favorites = [];
+              try {
+                const jsonString = await AsyncStorage.getItem(AppSettings.FavoriteProductsSettingName);
+                if (jsonString != null) 
+                  favorites = JSON.parse(jsonString);
+              } catch(e) {
+                console.error('Error loading favorite products: ' + e);
+              }           
+              for (const p of ProductCard.AllEnCards)  { p.isFavorite = favorites.includes(p.ProductId); }
+              for (const p of ProductCard.AllFrCards)  { p.isFavorite = favorites.includes(p.ProductId); }
+              await AsyncStorage.setItem(AppSettings.PriceDataVersionSettingName, responseJson.Version);
+              setIsPleasWaitOpen(false);
+              setTimeout( () => { clearInterval(); navigation.navigate('ProductCategory'); }, 200);
+            }
+            else {
+              setIsPleasWaitOpen(false);
+              //alert(plsTryAgain);
+            }
+          }
+          else {
+            setIsPleasWaitOpen(false);
+            //alert(plsTryAgain);
+          }
+          return responseJson;
+        })
+        .catch((error) => {
+          setIsPleasWaitOpen(false);
+          console.error("Error while Download Data: " + error);
+          //alert(plsTryAgain);
+        });
+    }
+
+    loadDocList = async () => {
+        //console.log('Loading Doc List');
+        var apiURL = AppSettings.UrlDocList;
+        var request = {
+          method: 'POST',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json; charset=utf-8', },
+          body: JSON.stringify({
+            AccessKey: AppSettings.AppServiceAccessKey,
+            InFrench: TextString.IsInFrench(),
+            InPreview: global.isInPreviewMode,
+          }),
+        }
+        fetch(apiURL, request)
+        .then((response) => response.json())
+        .then(async (responseJson) => {
+          setIsPleasWaitOpen(false);
+          //console.log('Doc List Loaded');
+          setTimeout(() => {
+            //console.log(responseJson.Docs);
+            //this.props.navigation.navigate('DocList', {docs: responseJson.Docs})
+            if (responseJson != null && responseJson.Docs != null) {
+                clearInterval();
+                navigation.navigate('DocList', {docs: responseJson.Docs });
+            }
+            else {
+              console.error("Didn't get document list downloaded.");
+            }
+          }, 200);
+          return responseJson;
+        })
+        .catch((error) => {
+          console.error("Error while Loading Doc List: " + error);
+          setIsPleasWaitOpen(false);
+        });
+      }
+    
     const screenHeight = parseInt(Dimensions.get('window').height);
-    const modalBoxHeight = 300;
+    const modalBoxHeight = 320;
     const modalBoxMarginTop = (screenHeight - modalBoxHeight) / 2;
     return (
         <View style={{width: '100%', height: '100%', flexDirection: "column", alignItems: 'center', backgroundColor: "#333333"}}>
             <Modal visible={isPricingMenuOpen} transparent={true}>
-                <View style={{backgroundColor: "#000000cc", flex: 1}}>
+                <View style={{backgroundColor: "#00000066", flex: 1}}>
                     <View 
                         style={{
                             height: modalBoxHeight, 
@@ -127,8 +230,8 @@ const AppHomeScreen = ({navigation}) => {
                                 buttonStyle={{ width: 240, height: 40, borderWidth: 1, borderColor: "#ffffff", borderRadius: 5 }}
                                 onPress={() => { 
                                     setIsPricingMenuOpen(false);
-                                    clearInterval();
-                                    setTimeout(() => { navigation.navigate('PriceDataDownload'); }, 200);
+                                    setIsPleasWaitOpen(true);
+                                    setTimeout(() => { loadPriceData(); }, 2000);
                                 }}
                             />
                             <Button 
@@ -154,6 +257,21 @@ const AppHomeScreen = ({navigation}) => {
                                 }}
                             />
                         </View>
+                    </View>
+                </View>
+            </Modal>
+            <Modal visible={isPleasWaitOpen} transparent={true}>
+                <View style={{backgroundColor: "#00000066", flex: 1}}>
+                    <View 
+                        style={{
+                            height: modalBoxHeight, 
+                            marginRight: 40, marginLeft: 40, marginTop: modalBoxMarginTop,
+                            padding: 8,
+                            backgroundColor: "#00000000",
+                            borderWidth: 0, borderColor: "#ff0000", borderRadius: 5,
+                            alignItems: 'center', justifyContent: 'center', alignSelf: 'stretch', 
+                    }}>
+                        <Image source={require('../../assets/oc/LadyBug.gif')} style={{ width: 100, height: 100, }} />
                     </View>
                 </View>
             </Modal>
@@ -189,7 +307,10 @@ const AppHomeScreen = ({navigation}) => {
                         titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 20 }}
                         type="outline" 
                         buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
-                        onPress={() => { clearInterval(); navigation.navigate('DocWaitList'); }}
+                        onPress={() => { 
+                            setIsPleasWaitOpen(true);
+                            setTimeout(() => { loadDocList(); }, 2000);
+                        }}
                     />
                 </View>
                 <View style={{paddingTop: 120, paddingBottom: 40, alignItems: 'center'}}>

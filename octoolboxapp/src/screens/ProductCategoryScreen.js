@@ -112,6 +112,7 @@ const ProductCategoryScreen = ({navigation}) => {
                 />
               </View>
               {
+              /*
               global.isInPreviewMode &&
               <View style={[{width: "60%"}]}>
                 <Button 
@@ -124,33 +125,9 @@ const ProductCategoryScreen = ({navigation}) => {
                     navigation.dispatch(CommonActions.reset({index: 0, routes: [{ name: "PriceDataDownload", goTo : "ProductCategory", goBack: "ProductCategory" }]})); 
                   }}
                 />
-              </View>              
+              </View>
+              */
               }
-              {/*
-              <View style={styles.buttonContainer}>
-                <IconButton 
-                  ref={siteTypeButtonRef}
-                  title={siteTypeButtonTitle}
-                  titleStyle={{ color: '#ffffff' }}
-                  icon={siteTypeButtonIcon}
-                  iconContainerStyle={{ marginRight: 6 }}
-                  buttonStyle={{ backgroundColor: '#333333', }}
-                  onPress={() => {
-                    global.isNationalSite = !global.isNationalSite; 
-                    siteTypeButtonToggle();
-                  }}
-                />
-              </View>
-              <View style={styles.buttonContainer}>
-                <Button 
-                  title="Advanced"
-                  icon={{ name: 'search', type: 'font-awesome', size: 16, color: '#ffffff', }}
-                  iconContainerStyle={{ marginRight: 6 }}
-                  buttonStyle={{ backgroundColor: '#333333', }}
-                  onPress={() => { searchBox.switchToAdvancedSearch(); }}
-                />
-              </View>
-              */}
           </View>
           <View style={{height: 1, width: '100%', backgroundColor: "#ff0000"}} />
       </View>
