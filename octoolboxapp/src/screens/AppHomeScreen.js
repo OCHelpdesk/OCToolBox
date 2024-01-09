@@ -51,7 +51,7 @@ const AppHomeScreen = ({navigation}) => {
     const [stringServicePriceResi, setStringServicePriceResi] = useState('Service - Residential'.toLocaleUpperCase());
     const [stringDoc, setStringDoc] = useState('Document'.toUpperCase());
     const [isPricingMenuOpen, setIsPricingMenuOpen] = useState(false);
-    const [isPleasWaitOpen, setIsPleasWaitOpen] = useState(false);
+    const [isPleaseWaitOpen, setIsPleaseWaitOpen] = useState(false);
 
     TextString.getIsInFrench().then(
         () => {
@@ -142,22 +142,22 @@ const AppHomeScreen = ({navigation}) => {
               for (const p of ProductCard.AllEnCards)  { p.isFavorite = favorites.includes(p.ProductId); }
               for (const p of ProductCard.AllFrCards)  { p.isFavorite = favorites.includes(p.ProductId); }
               await AsyncStorage.setItem(AppSettings.PriceDataVersionSettingName, responseJson.Version);
-              setIsPleasWaitOpen(false);
-              setTimeout( () => { clearInterval(); navigation.navigate('ProductCategory'); }, 200);
+              setIsPleaseWaitOpen(false);
+              setTimeout( () => { clearInterval(); navigation.navigate('ProductCategory'); }, 100);
             }
             else {
-              setIsPleasWaitOpen(false);
+              setIsPleaseWaitOpen(false);
               //alert(plsTryAgain);
             }
           }
           else {
-            setIsPleasWaitOpen(false);
+            setIsPleaseWaitOpen(false);
             //alert(plsTryAgain);
           }
           return responseJson;
         })
         .catch((error) => {
-          setIsPleasWaitOpen(false);
+          setIsPleaseWaitOpen(false);
           console.error("Error while Download Data: " + error);
           //alert(plsTryAgain);
         });
@@ -178,24 +178,19 @@ const AppHomeScreen = ({navigation}) => {
         fetch(apiURL, request)
         .then((response) => response.json())
         .then(async (responseJson) => {
-          setIsPleasWaitOpen(false);
-          //console.log('Doc List Loaded');
-          setTimeout(() => {
-            //console.log(responseJson.Docs);
-            //this.props.navigation.navigate('DocList', {docs: responseJson.Docs})
-            if (responseJson != null && responseJson.Docs != null) {
-                clearInterval();
-                navigation.navigate('DocList', {docs: responseJson.Docs });
-            }
-            else {
+          if (responseJson != null && responseJson.Docs != null) {
+              setIsPleaseWaitOpen(false);
+              setTimeout( () => { clearInterval(); navigation.navigate('DocList', {docs: responseJson.Docs }); }, 100);
+          }
+          else {
+              setIsPleaseWaitOpen(false);
               console.error("Didn't get document list downloaded.");
-            }
-          }, 200);
+          }
           return responseJson;
         })
         .catch((error) => {
-          console.error("Error while Loading Doc List: " + error);
-          setIsPleasWaitOpen(false);
+            setIsPleaseWaitOpen(false);
+            console.error("Error while Loading Doc List: " + error);
         });
       }
     
@@ -230,7 +225,7 @@ const AppHomeScreen = ({navigation}) => {
                                 buttonStyle={{ width: 240, height: 40, borderWidth: 1, borderColor: "#ffffff", borderRadius: 5 }}
                                 onPress={() => { 
                                     setIsPricingMenuOpen(false);
-                                    setIsPleasWaitOpen(true);
+                                    setIsPleaseWaitOpen(true);
                                     setTimeout(() => { loadPriceData(); }, 2000);
                                 }}
                             />
@@ -260,7 +255,7 @@ const AppHomeScreen = ({navigation}) => {
                     </View>
                 </View>
             </Modal>
-            <Modal visible={isPleasWaitOpen} transparent={true}>
+            <Modal visible={isPleaseWaitOpen} transparent={true}>
                 <View style={{backgroundColor: "#00000066", flex: 1}}>
                     <View 
                         style={{
@@ -308,7 +303,7 @@ const AppHomeScreen = ({navigation}) => {
                         type="outline" 
                         buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
                         onPress={() => { 
-                            setIsPleasWaitOpen(true);
+                            setIsPleaseWaitOpen(true);
                             setTimeout(() => { loadDocList(); }, 2000);
                         }}
                     />
