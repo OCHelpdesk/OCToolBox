@@ -63,10 +63,10 @@ namespace oc_toolbox_service.Services
                 SqlDataAdapter adpt = new SqlDataAdapter();
                 adpt.SelectCommand = new SqlCommand();
                 adpt.SelectCommand.Connection = conn;
-                adpt.SelectCommand.CommandText = "select DocType, DocNameEn, DocData=DocDataEn from Doc where DocId=" + docId;
+                adpt.SelectCommand.CommandText = "select DocType=DocTypeEn, DocNameEn, DocData=DocDataEn from Doc where DocId=" + docId;
                 if (inFrench != null && (bool)inFrench)
                 {
-                    adpt.SelectCommand.CommandText = "select DocType, DocNameEn, DocData=DocDataFr from Doc where DocId=" + docId;
+                    adpt.SelectCommand.CommandText = "select DocType=DocTypeFr, DocNameEn, DocData=DocDataFr from Doc where DocId=" + docId;
                 }
                 DataTable tbl = new DataTable();
                 adpt.Fill(tbl);
