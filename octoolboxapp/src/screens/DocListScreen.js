@@ -26,22 +26,12 @@ class DocListScreen extends Component {
     }, 200);
   }
 
-  filesInDir = async (dirPath) => {
-    console.log('Calling RNFS.readDir on ' + dirPath);
-    const arrayOfReadDirItem = await RNFS.readDir(dirPath);
-    console.log('Iterate through the return array');
-    for (var i = 0; i < arrayOfReadDirItem.length; i++) {
-      //For definition of type ReadDirItem, Refer https://www.npmjs.com/package/react-native-fs
-      console.log(arrayOfReadDirItem[i].name);
-    }
-  };
-
   viewDoc = async (docId, docCard) => {
     //console.log('View Doc with Id: ' + docId);
     var fileName = '';
     for (var d = 0; d < this.docs.length; d++) {
       if (this.docs[d].Id == docId) {
-        fileName = RNFS.DocumentDirectoryPath + '/' + this.docs[d].FileName;
+        fileName = RNFS.DocumentDirectoryPath + AppSettings.TempFileSubfolder + '/' + this.docs[d].FileName;
         break;
       }
     }
@@ -59,8 +49,6 @@ class DocListScreen extends Component {
     await RNFS.downloadFile({fromUrl: url, toFile: fileName}).promise
     .then((res) => {
       //Success
-      //filesInDir(RNFS.DocumentDirectoryPath); 
-      //this.setState({isPleaseWaitOpen: false})
       docCard.hidePleaseWait();
       setTimeout(() => {
         FileViewer.open(fileName)
@@ -113,14 +101,13 @@ class DocListScreen extends Component {
           this.setState({isPleaseWaitOpen: false});
           console.error("Error while Loading Doc List: " + error);
       });
-    }, 2000);
+    }, 1000);
   }
   
   renderDoc = ({ item }) => (
     <DocCard 
       doc={item} 
       onDocSelected={(docId, docCard) => {
-        //this.setState({isPleaseWaitOpen: true})
         docCard.showPleaseWait();
         setTimeout(() => { this.viewDoc(docId, docCard); }, 100);
       }}

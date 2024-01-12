@@ -226,7 +226,7 @@ const AppHomeScreen = ({navigation}) => {
                                 onPress={() => { 
                                     setIsPricingMenuOpen(false);
                                     setIsPleaseWaitOpen(true);
-                                    setTimeout(() => { loadPriceData(); }, 2000);
+                                    setTimeout(() => { loadPriceData(); }, 1000);
                                 }}
                             />
                             <Button 
@@ -304,7 +304,7 @@ const AppHomeScreen = ({navigation}) => {
                         buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
                         onPress={() => { 
                             setIsPleaseWaitOpen(true);
-                            setTimeout(() => { loadDocList(); }, 2000);
+                            setTimeout(() => { loadDocList(); }, 1000);
                         }}
                     />
                 </View>

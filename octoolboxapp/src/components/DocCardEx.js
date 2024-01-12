@@ -44,7 +44,7 @@ class DocCardEx extends Component {
             </View>
             <View style={{flexDirection: 'row', height: 24}}>
               <Text style={styles.dataFieldCaption}>{'Name:'.toUpperCase()}</Text>
-              <Text style={{flex: 1, }}>{this.props.doc.Name.toUpperCase()}</Text>
+              <Text style={{flex: 1, fontWeight: "bold", color: "#ff0000", }}>{this.props.doc.Name.toUpperCase()}</Text>
               <Icon name='circle-thin' size={16} color='#ffffff' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
             <View style={{flexDirection: 'row'}}>

@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BackgroundService from 'react-native-background-actions';
+import RNFS from 'react-native-fs';
 
 import AppSettings from './src/jsons/AppSettings.json'
 import ProductCard from './src/components/ProductCard';
@@ -43,6 +44,28 @@ const backgroundTask = async (taskDataArguments) => {
         var timeLastCheckPriceUpdate = Date.parse(timeLastCheckPriceUpdateStr);
         if ((Math.abs(timeNow.getTime() - timeLastCheckPriceUpdate) / (60 * 60 * 1000)) >= 1) {
           console.log('GbTask Triggered at ' + timeNow.toString() + '.');
+          try {
+              //console.log('Clean up old temp files.');
+              const tempFolder = RNFS.DocumentDirectoryPath + AppSettings.TempFileSubfolder;
+              const folderExists = await RNFS.exists(tempFolder)
+              if (!folderExists) {
+                RNFS.mkdir(tempFolder)
+                console.log(tempFolder + " Created");
+              }
+              //RNFS.readDir return an array of type ReadDirItem 
+              //For definition of ReadDirItem, Refer https://www.npmjs.com/package/react-native-fs
+              const arrayOfReadDirItem = await RNFS.readDir(tempFolder);
+              //console.log('Iterate through files in the temp folder, unlink old ones');
+              for (var i = 0; i < arrayOfReadDirItem.length; i++) {
+                //if is file and created 24 hours ago, removed it
+                if (arrayOfReadDirItem[i].isFile && (Math.abs(timeNow.getTime() - arrayOfReadDirItem[i].ctime.getTime()) / (60 * 60 * 1000)) >= 24) {
+                  console.log("    Remove ./documents" + AppSettings.TempFileSubfolder + "/" + arrayOfReadDirItem[i].name);
+                  await RNFS.unlink(tempFolder + "/" + arrayOfReadDirItem[i].name);
+                }
+              }
+          } catch (ex) {
+              console.error('Error occurred while clean up files temp folder: ' + ex);
+          }
           var isInPreviewMode = await AsyncStorage.getItem(AppSettings.IsInPreviewModeSettingName)
           isInPreviewMode = isInPreviewMode == null ? 'false' : isInPreviewMode;
           var priceDataVersion = await AsyncStorage.getItem(AppSettings.PriceDataVersionSettingName)
