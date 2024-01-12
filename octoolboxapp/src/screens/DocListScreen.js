@@ -18,7 +18,8 @@ class DocListScreen extends Component {
     //console.log(props)
     this.navigation = props.navigation;
     this.docs = props.route.docs != null ? props.route.docs : props.route.params.docs;
-    this.state = { isPleaseWaitOpen: false };
+    this.state = { isPleaseWaitOpen: false, docs: this.docs };
+    this.docCardList = React.createRef();
     const screenTitle = TextString.Get('Doc').toUpperCase();
     setTimeout(() => {
       this.navigation.setOptions({ title: screenTitle });
@@ -34,7 +35,6 @@ class DocListScreen extends Component {
       console.log(arrayOfReadDirItem[i].name);
     }
   };
-
 
   viewDoc = async (docId, docCard) => {
     //console.log('View Doc with Id: ' + docId);
@@ -76,6 +76,45 @@ class DocListScreen extends Component {
       console.log("Didn't get the file downloaded!");
     });
   }
+
+  refreshDocList = async() => {
+    this.setState({isPleaseWaitOpen: true});
+    setTimeout(() => {
+      var apiURL = AppSettings.UrlDocList;
+      var request = {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json; charset=utf-8', },
+        body: JSON.stringify({
+          AccessKey: AppSettings.AppServiceAccessKey,
+          InFrench: TextString.IsInFrench(),
+          InPreview: global.isInPreviewMode,
+        }),
+      }
+      fetch(apiURL, request)
+      .then((response) => response.json())
+      .then(async (responseJson) => {
+        if (responseJson != null && responseJson.Docs != null) {
+            this.setState({isPleaseWaitOpen: false});
+            setTimeout( () => { 
+              this.docs = responseJson.Docs;
+              this.setState({docs: this.docs});
+              setTimeout(() => {
+                this.docCardList.current.scrollToIndex({ index: 0, animated: true} );
+              }, 100) 
+            }, 100);
+        }
+        else {
+            this.setState({isPleaseWaitOpen: false});
+            console.error("Didn't get document list downloaded.");
+        }
+        return responseJson;
+      })
+      .catch((error) => {
+          this.setState({isPleaseWaitOpen: false});
+          console.error("Error while Loading Doc List: " + error);
+      });
+    }, 2000);
+  }
   
   renderDoc = ({ item }) => (
     <DocCard 
@@ -97,7 +136,7 @@ class DocListScreen extends Component {
     return (
         <View style={{ height: '100%', flexDirection: "column", alignItems: 'flex-start', backgroundColor: '#333333',}}>
             <Modal visible={this.state.isPleaseWaitOpen} transparent={true}>
-                <View style={{backgroundColor: "#00000000", flex: 1}}>
+                <View style={{backgroundColor: "#00000066", flex: 1}}>
                     <View 
                         style={{
                             height: modalBoxHeight, 
@@ -115,10 +154,11 @@ class DocListScreen extends Component {
           <View style={{height: 2, width: '100%', backgroundColor: "#993333"}} />
           <View style={{height: 2, width: '100%', backgroundColor: "#663333"}} />
             <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'stretch', backgroundColor: '#333333',}}>
-              <FlatList 
+              <FlatList
+                ref={this.docCardList} 
                 style={{margin:0, marginTop: 2, padding:8, width: '100%',}}
                 contentContainerStyle={{ paddingBottom: 12}}
-                data={this.docs} 
+                data={this.state.docs} 
                 renderItem={this.renderDoc} 
                 keyExtractor={(item, index) => { return item.Id; }}
                 ItemSeparatorComponent={() => <View style={{height: 4}} />}
@@ -129,7 +169,7 @@ class DocListScreen extends Component {
           <View style={{height: 2, width: '100%', backgroundColor: "#993333"}} />
           <View style={{height: 1, width: '100%', backgroundColor: "#ff0000"}} />
           <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'center', height: 40, width: '100%', backgroundColor: '#333333', marginBottom: 12,}}>
-              <View style={[{width: "100%"}]}>
+              <View style={[{width: "50%"}]}>
                 <Button 
                   title={TextString.Get('Home').toUpperCase()}
                   titleStyle={{ fontSize: 16, fontWeight: 'bold', color: '#ffffff' }}
@@ -137,6 +177,16 @@ class DocListScreen extends Component {
                   iconContainerStyle={{ marginRight: 6 }}
                   buttonStyle={{ backgroundColor: '#333333', }}
                   onPress={() => { this.navigation.dispatch(CommonActions.reset({index: 0, routes: [{ name: "AppHome" }]})); }}
+                />
+              </View>
+              <View style={[{width: "50%"}]}>
+                <Button 
+                  title={TextString.Get('Refresh').toUpperCase()}
+                  titleStyle={{ fontSize: 16, fontWeight: 'bold', color: '#ffffff' }}
+                  icon={{ name: 'refresh', type: 'font-awesome', size: 16, color: '#ffffff', }}
+                  iconContainerStyle={{ marginRight: 6 }}
+                  buttonStyle={{ backgroundColor: '#333333', }}
+                  onPress={() => { this.refreshDocList(); }}
                 />
               </View>
           </View>

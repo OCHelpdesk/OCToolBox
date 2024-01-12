@@ -48,7 +48,8 @@ class TextString {
                 return locale === undefined ? (global.isFr ? s.StringFr : s.StringEn) : (locale.toUpperCase() == 'FR' ? s.StringFr : s.StringEn);
             }
         }
-       return '(text string for Id ' + stringId + ' not found)';    
+        console.log('(text string for Id ' + stringId + ' not found)')
+        return stringId;    
     };
 }
 

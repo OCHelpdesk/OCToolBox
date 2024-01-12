@@ -17,7 +17,7 @@
   {
     "StringId": "Doc",
     "StringEn": "Document",
-    "StringFr": "Document (Fr)"
+    "StringFr": "Document"
   },
   {
     "StringId": "Home",
@@ -47,7 +47,7 @@
   {
     "StringId": "HomeSelectToolboxCat",
     "StringEn": "select a toolbox category",
-    "StringFr": "sélectionner une catégorie de boîte à outils (Fr)"
+    "StringFr": "sélectionner une catégorie de boîte à outils"
   },
   {
     "StringId": "HomeSvcPriceComm",
@@ -77,7 +77,7 @@
   {
     "StringId": "OCToolbox",
     "StringEn": "Pro Toolbox",
-    "StringFr": "Boîte à outils Pro (Fr)"
+    "StringFr": "Boîte à outils Pro"
   },
   {
     "StringId": "PlsWait",
@@ -92,7 +92,7 @@
   {
     "StringId": "Pricing",
     "StringEn": "Pricing",
-    "StringFr": "Prix (Fr)"
+    "StringFr": "Les prix"
   },
   {
     "StringId": "ProdCat",
@@ -208,6 +208,11 @@
     "StringId": "Product",
     "StringEn": "Product",
     "StringFr": "Produit"
+  },
+  {
+    "StringId": "Refresh",
+    "StringEn": "Refresh",
+    "StringFr": "Rafraîchir"
   },
   {
     "StringId": "ResiService",
