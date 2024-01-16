@@ -61,7 +61,7 @@ const AppHomeScreen = ({navigation}) => {
             setStringOCToolbox(TextString.Get('OCToolbox').toUpperCase());
             setStringSelectCat(TextString.Get('HomeSelectToolboxCat'));
             setStringPricing(TextString.Get('Pricing').toUpperCase());
-            setStringSelectPricingCat(TextString.Get('HomeSelectCat').toUpperCase());
+            setStringSelectPricingCat(TextString.Get('HomeSelectCat'));
             setStringProdPrice(TextString.Get('HomeProdPrice').toUpperCase());
             setStringServicePriceComm(TextString.Get('HomeSvcPriceComm').toUpperCase());
             setStringServicePriceResi(TextString.Get('HomeSvcPriceResi').toUpperCase());
@@ -76,7 +76,7 @@ const AppHomeScreen = ({navigation}) => {
             setStringOCToolbox(TextString.Get('OCToolbox').toUpperCase());
             setStringSelectCat(TextString.Get('HomeSelectToolboxCat'));
             setStringPricing(TextString.Get('Pricing').toUpperCase());
-            setStringSelectPricingCat(TextString.Get('HomeSelectCat').toUpperCase());
+            setStringSelectPricingCat(TextString.Get('HomeSelectCat'));
             setStringProdPrice(TextString.Get('HomeProdPrice').toUpperCase());
             setStringServicePriceComm(TextString.Get('HomeSvcPriceComm').toUpperCase());
             setStringServicePriceResi(TextString.Get('HomeSvcPriceResi').toUpperCase());
