@@ -61,7 +61,7 @@ const AppHomeScreen = ({navigation}) => {
             setStringOCToolbox(TextString.Get('OCToolbox').toUpperCase());
             setStringSelectCat(TextString.Get('HomeSelectToolboxCat'));
             setStringPricing(TextString.Get('Pricing').toUpperCase());
-            setStringSelectPricingCat(TextString.Get('HomeSelectCat').toUpperCase());
+            setStringSelectPricingCat(TextString.Get('HomeSelectCat'));
             setStringProdPrice(TextString.Get('HomeProdPrice').toUpperCase());
             setStringServicePriceComm(TextString.Get('HomeSvcPriceComm').toUpperCase());
             setStringServicePriceResi(TextString.Get('HomeSvcPriceResi').toUpperCase());
@@ -76,7 +76,7 @@ const AppHomeScreen = ({navigation}) => {
             setStringOCToolbox(TextString.Get('OCToolbox').toUpperCase());
             setStringSelectCat(TextString.Get('HomeSelectToolboxCat'));
             setStringPricing(TextString.Get('Pricing').toUpperCase());
-            setStringSelectPricingCat(TextString.Get('HomeSelectCat').toUpperCase());
+            setStringSelectPricingCat(TextString.Get('HomeSelectCat'));
             setStringProdPrice(TextString.Get('HomeProdPrice').toUpperCase());
             setStringServicePriceComm(TextString.Get('HomeSvcPriceComm').toUpperCase());
             setStringServicePriceResi(TextString.Get('HomeSvcPriceResi').toUpperCase());
@@ -179,17 +179,17 @@ const AppHomeScreen = ({navigation}) => {
         .then((response) => response.json())
         .then(async (responseJson) => {
           if (responseJson != null && responseJson.Docs != null) {
-              setIsPleaseWaitOpen(false);
+              //setIsPleaseWaitOpen(false);
               setTimeout( () => { clearInterval(); navigation.navigate('DocList', {docs: responseJson.Docs }); }, 100);
           }
           else {
-              setIsPleaseWaitOpen(false);
+              //setIsPleaseWaitOpen(false);
               console.error("Didn't get document list downloaded.");
           }
           return responseJson;
         })
         .catch((error) => {
-            setIsPleaseWaitOpen(false);
+            //setIsPleaseWaitOpen(false);
             console.error("Error while Loading Doc List: " + error);
         });
       }
@@ -303,8 +303,9 @@ const AppHomeScreen = ({navigation}) => {
                         type="outline" 
                         buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
                         onPress={() => { 
-                            setIsPleaseWaitOpen(true);
-                            setTimeout(() => { loadDocList(); }, 1000);
+                            //setIsPleaseWaitOpen(true);
+                            //setTimeout(() => { loadDocList(); }, 1000);
+                            loadDocList();
                         }}
                     />
                 </View>
