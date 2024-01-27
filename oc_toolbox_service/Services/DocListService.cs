@@ -18,6 +18,7 @@ namespace oc_toolbox_service.Services
             DocList ret = new DocList();
             if (accessKey != ret.AccessKey)
                 throw new ArgumentException("Access Key Invalid");
+            List<Category> cats = new List<Category>();
             List<Doc> docs = new List<Doc>();
             using (SqlConnection conn = new SqlConnection(OCToolboxDbConnectionString))
             {
@@ -30,25 +31,36 @@ namespace oc_toolbox_service.Services
                 adpt.SelectCommand.Parameters.Add(new SqlParameter("@forPreview", SqlDbType.Bit));
                 adpt.SelectCommand.Parameters[0].Value = inFrench == null || !((bool)inFrench) ? false : true;
                 adpt.SelectCommand.Parameters[1].Value = inPreview == null || !((bool)inPreview) ? false : true;
-                DataTable tbl = new DataTable();
-                adpt.Fill(tbl);
-                for (int i = 0; i < tbl.Rows.Count; i++)
+                DataSet tbls = new DataSet();
+                adpt.Fill(tbls);
+                for (int i = 0; i < tbls.Tables[0].Rows.Count; i++)
+                {
+                    Category cat = new Category();
+                    cat.Id = (string)tbls.Tables[0].Rows[i]["CategoryId"];
+                    cat.Name = (string)tbls.Tables[0].Rows[i]["Category"];
+                    cats.Add(cat);
+                }
+                for (int i = 0; i < tbls.Tables[1].Rows.Count; i++)
                 {
                     Doc doc = new Doc();
-                    doc.Id = (int)tbl.Rows[i]["DocId"];
-                    doc.Category = (string)tbl.Rows[i]["Category"];
-                    doc.Type = (string)tbl.Rows[i]["Type"];
-                    doc.Name = (string)tbl.Rows[i]["Name"];
-                    doc.Description = tbl.Rows[i]["Description"].ToString();
-                    doc.DateLastUpdated = tbl.Rows[i]["DateLastUpdated"].ToString();
-                    doc.FileName = (string)tbl.Rows[i]["FileName"];
-                    doc.SizeKB = (int)tbl.Rows[i]["SizeKB"];
-                    doc.IconName = (string)tbl.Rows[i]["IconName"];
-                    doc.IconColor = (string)tbl.Rows[i]["IconColor"];
-                    doc.IsPublished = (bool)tbl.Rows[i]["IsPublished"];
+                    doc.Id = (int)tbls.Tables[1].Rows[i]["DocId"];
+                    doc.CategoryId = (int)tbls.Tables[1].Rows[i]["CategoryId"];
+                    doc.Category = (string)tbls.Tables[1].Rows[i]["Category"];
+                    doc.SubcategoryId = (int)tbls.Tables[1].Rows[i]["SubcategoryId"];
+                    doc.Subcategory = (string)tbls.Tables[1].Rows[i]["Subcategory"];
+                    doc.Type = (string)tbls.Tables[1].Rows[i]["Type"];
+                    doc.Name = (string)tbls.Tables[1].Rows[i]["Name"];
+                    doc.Description = tbls.Tables[1].Rows[i]["Description"].ToString();
+                    doc.DateLastUpdated = tbls.Tables[1].Rows[i]["DateLastUpdated"].ToString();
+                    doc.FileName = (string)tbls.Tables[1].Rows[i]["FileName"];
+                    doc.SizeKB = (int)tbls.Tables[1].Rows[i]["SizeKB"];
+                    doc.IconName = (string)tbls.Tables[1].Rows[i]["IconName"];
+                    doc.IconColor = (string)tbls.Tables[1].Rows[i]["IconColor"];
+                    doc.IsPublished = (bool)tbls.Tables[1].Rows[i]["IsPublished"];
                     docs.Add(doc);
                 }
             }
+            ret.Categories = cats.ToArray();
             ret.Docs = docs.ToArray();
             return ret;
         }

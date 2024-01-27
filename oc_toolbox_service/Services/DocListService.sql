@@ -11,11 +11,15 @@ AS
 BEGIN
     SET NOCOUNT ON
 
-	select DocId, 
+	IF OBJECT_ID('TEMPDB..#Docs') IS NOT NULL DROP TABLE #Docs
+	select DocId,
+		   CategoryId = Doc.DocCategoryId,
 		   Category = case when isnull(@inFrench, 0) = 0 then DocCategoryNameEn else DocCategoryNameFr end, 
+		   SubcategoryId = isnull(Doc.DocSubcategoryId, 0),
+		   Subcategory = ISNULL((case when isnull(@inFrench, 0) = 0 then DocSubcategoryNameEn else DocSubcategoryNameFr end), ''), 
 		   Type = case when isnull(@inFrench, 0) = 0 then DocTypeEn else DocTypeFr end, 
 		   Name = case when isnull(@inFrench, 0) = 0 then DocNameEn else isnull(DocNameFr, DocNameEn) end, 
-		   Description = case when isnull(@inFrench, 0) = 0 then DocDescriptionEn else isnull(DocDescriptionFr, DocDescriptionEn) end,
+		   Description = isnull(case when isnull(@inFrench, 0) = 0 then DocDescriptionEn else isnull(DocDescriptionFr, DocDescriptionEn) end, ''),
 		   DateLastUpdated = convert(nvarchar(10), LastUpdatedTime, 120), 
 		   SizeKB = cast((case when isnull(@inFrench, 0) = 0 then datalength(DocDataEn) else datalength(DocDataFr) end) / 8192 as int),
 		   FileName = replace(replace(replace(DocNameEn, '\', '_'), '/', '_'), '.', '_') + '.' + (case when isnull(@inFrench, 0) = 0 then DocTypeEn else DocTypeFr end),
@@ -44,10 +48,21 @@ BEGIN
 			else '#990000'			
 			end,
 		   IsPublished
+	  into #Docs
 	  from Doc inner join DocCategory Cat on Doc.DocCategoryId = Cat.DocCategoryId
+		   left join DocSubcategory Sub on Doc.DocSubcategoryId = Sub.DocSubcategoryId 
 	 where isnull(Doc.IsDeleted, 0) = 0
 	   and (isnull(@inFrench, 0) = 0 and DocDataEn is not null or DocDataFr is not null)
 	   and (IsPublished = 1 or isnull(@forPreview, 0) = 1)
-	 order by 2, 4
+
+	 select CategoryId = cast(CategoryId as nvarchar(10)) + ':0', Category
+	   from #Docs
+	 union
+	 select CategoryId = cast(CategoryId as nvarchar(10)) + ':' + cast(SubcategoryId as nvarchar(10)), Category + ': ' + Subcategory
+	   from #Docs
+	  where SubcategoryId <> 0
+	 order by Category
+
+	 select * from #Docs order by Category, Name
 END
 GO
