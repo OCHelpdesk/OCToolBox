@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, SafeAreaView, FlatList, Text, Modal, Dimensions, TouchableOpacity, Image } from 'react-native';
+import { View, SafeAreaView, FlatList, Text, TextInput, Modal, Dimensions, TouchableOpacity, Image } from 'react-native';
 import { Button } from '@rneui/base';
 import { CommonActions } from "@react-navigation/native";
 import RNFS from 'react-native-fs';
@@ -17,9 +17,13 @@ class DocListScreen extends Component {
     //when DocWaitList submitted the navigation request. 
     //console.log(props)
     this.navigation = props.navigation;
+    this.categories = props.route.categories != null ? props.route.categories : props.route.params.categories;
     this.docs = props.route.docs != null ? props.route.docs : props.route.params.docs;
-    this.state = { isPleaseWaitOpen: false, docs: this.docs };
+    this.state = { isPleaseWaitOpen: false, categories: this.categories, docs: this.docs };
     this.docCardList = React.createRef();
+    this.searchTextInput = React.createRef();
+    this.searchText = '';
+    this.searchCategoryId = '';
     const screenTitle = TextString.Get('Doc').toUpperCase();
     setTimeout(() => {
       this.navigation.setOptions({ title: screenTitle });
@@ -84,8 +88,9 @@ class DocListScreen extends Component {
         if (responseJson != null && responseJson.Docs != null) {
             this.setState({isPleaseWaitOpen: false});
             setTimeout( () => { 
+              this.categories = responseJson.Categories;
               this.docs = responseJson.Docs;
-              this.setState({docs: this.docs});
+              this.setState({categories: this.categories, docs: this.docs});
               setTimeout(() => {
                 this.docCardList.current.scrollToIndex({ index: 0, animated: true} );
               }, 100) 
@@ -120,6 +125,7 @@ class DocListScreen extends Component {
     const screenHeight = parseInt(Dimensions.get('window').height);
     const modalBoxHeight = 260;
     const modalBoxMarginTop = (screenHeight - modalBoxHeight) / 2;
+    const cardWidth = parseInt(Dimensions.get('window').width) - 24;
     return (
         <View style={{ height: '100%', flexDirection: "column", alignItems: 'flex-start', backgroundColor: '#333333',}}>
             <Modal visible={this.state.isPleaseWaitOpen} transparent={true}>
@@ -140,6 +146,56 @@ class DocListScreen extends Component {
             </Modal>
           <View style={{height: 2, width: '100%', backgroundColor: "#993333"}} />
           <View style={{height: 2, width: '100%', backgroundColor: "#663333"}} />
+          <View style={{
+              position: "relative",
+              height: 40, width: cardWidth, 
+              borderWidth: 0, borderColor: "#ff0000", borderRadius: 5, 
+              marginLeft: 12, marginTop: 2, padding: 4,
+              backgroundColor: "#ffffff"
+          }}>
+            <TextInput
+              ref={this.searchTextInput}
+              style={{
+                height: 30, width: cardWidth - 100, 
+                position: "absolute", top: 4, left: 4,
+                borderWidth: 1, borderColor: "#cccccc", borderRadius: 5, 
+                marginLeft: 4, marginTop: 2, padding: 4,
+              }}
+            />
+            <Button
+                title=''
+                titleStyle={{ color: '#666666', fontWeight: "bold" }}
+                icon={{ name: 'search', type: 'font-awesome', size: 16, color: '#666666', }}
+                type="clear" 
+                buttonStyle={{width: 60, margin: 0 }}
+                containerStyle={{position: "absolute", top: 4, left: 220, }}
+                onPress={() => {  }}
+            />
+            <Button
+                title=''
+                titleStyle={{ color: '#666666', fontWeight: "bold" }}
+                icon={{ name: 'remove', type: 'font-awesome', size: 20, color: '#666666', }}
+                type="clear" 
+                buttonStyle={{width: 60, margin: 0 }}
+                containerStyle={{position: "absolute", top: 2, left: 320, }}
+                onPress={() => {  
+                  this.searchText = '';
+                  this.searchCategoryId = '';
+                  this.searchTextInput.current.clear();
+                }}
+            />
+            <Button
+                title=''
+                titleStyle={{ color: '#666666', fontWeight: "bold" }}
+                icon={{ name: 'list', type: 'font-awesome', size: 16, color: '#666666', }}
+                type="clear" 
+                buttonStyle={{width: 60, margin: 0 }}
+                containerStyle={{position: "absolute", top: 5, left: 280, }}
+                onPress={() => {  
+
+                }}
+            />
+          </View>
             <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'stretch', backgroundColor: '#333333',}}>
               <FlatList
                 ref={this.docCardList} 

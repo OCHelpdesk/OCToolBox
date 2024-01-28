@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="OCLogoEx.png" translatesAutoresizingMaskIntoConstraints="NO" id="7Hs-cY-bPq">
-                                <rect key="frame" x="139" y="515" width="108" height="57"/>
+                                <rect key="frame" x="139" y="660" width="108" height="57"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>

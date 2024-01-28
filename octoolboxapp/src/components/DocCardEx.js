@@ -24,7 +24,7 @@ class DocCardEx extends Component {
     hidePleaseWait = () => { this.setState({isPleaseWaitOpen: false}); }
   
     render() {
-        const cardHeight = 130;
+        const cardHeight = 140;
         const cardWidth = parseInt(Dimensions.get('window').width) - 24;
         return (
         <View style={{height: cardHeight, width: cardWidth, position: "relative"}}>
@@ -32,29 +32,35 @@ class DocCardEx extends Component {
             style={{
               height: cardHeight, width: cardWidth, position: "absolute", top: 0, left: 0, 
               borderWidth: 0, borderColor: "#ff0000", borderRadius: 5, 
-              marginLeft: 4, marginTop: 2, padding: 4,
-              backgroundColor: "#ffffff"
+              marginLeft: 4, marginTop: 0, padding: 4,
+              backgroundColor: "#ffffff",
+              fontSize: 10
             }}
             onPress={this.onDocSelected}
           >
-            <View style={{flexDirection: 'row', height: 24}}>
+            <View style={{flexDirection: 'row', height: 22}}>
               <Text style={styles.dataFieldCaption}>{'Category:'.toUpperCase()}</Text>
-              <Text style={{flex: 1, }}>{this.props.doc.Category.toUpperCase()}</Text>
+              <Text style={styles.dataField}>{this.props.doc.Category.toUpperCase()}</Text>
               <Icon name={this.props.doc.IconName} size={16} color={this.props.doc.IconColor} style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
-            <View style={{flexDirection: 'row', height: 24}}>
+            <View style={{flexDirection: 'row', height: 22}}>
+              <Text style={styles.dataFieldCaption}>{'Subcategory:'.toUpperCase()}</Text>
+              <Text style={styles.dataField}>{this.props.doc.Subcategory.toUpperCase()}</Text>
+              <Icon name='circle-thin' size={16} color='#ffffff' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
+            </View>
+            <View style={{flexDirection: 'row', height: 22}}>
               <Text style={styles.dataFieldCaption}>{'Name:'.toUpperCase()}</Text>
-              <Text style={{flex: 1, fontWeight: "bold", color: "#ff0000", }}>{this.props.doc.Name.toUpperCase()}</Text>
+              <Text style={[styles.dataField, {fontWeight: "bold", color: "#ff0000", }]}>{this.props.doc.Name.toUpperCase()}</Text>
               <Icon name='circle-thin' size={16} color='#ffffff' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
             <View style={{flexDirection: 'row'}}>
               <Text style={styles.dataFieldCaption}>{'Description:'.toUpperCase()}</Text>
-              <Text style={{flex: 1, }}>{this.props.doc.SizeKB}KB, {this.props.doc.DateLastUpdated}</Text>
+              <Text style={styles.dataField}>{this.props.doc.SizeKB}KB, {this.props.doc.DateLastUpdated}</Text>
               <Icon name='circle-thin' size={16} color='#ffffff' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
             <View style={{flexDirection: 'row'}}>
               <Text style={styles.dataFieldCaption}>{' '}</Text>
-              <Text style={{flex: 1, }}>{this.props.doc.Description}</Text>
+              <Text style={styles.dataField}>{this.props.doc.Description}</Text>
               <Icon name='circle-thin' size={16} color='#ffffff' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
           </TouchableOpacity>
@@ -81,10 +87,14 @@ class DocCardEx extends Component {
   const styles = StyleSheet.create({
     dataFieldCaption: {
       width: 100,
-      fontSize: 12, 
+      fontSize: 10, 
       fontWeight: "bold", 
       color: "#666666",
       paddingTop: 2,
+    },
+    dataField: {
+      flex: 1, 
+      fontSize: 12, 
     }
   });
 

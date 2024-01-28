@@ -180,7 +180,7 @@ const AppHomeScreen = ({navigation}) => {
         .then(async (responseJson) => {
           if (responseJson != null && responseJson.Docs != null) {
               //setIsPleaseWaitOpen(false);
-              setTimeout( () => { clearInterval(); navigation.navigate('DocList', {docs: responseJson.Docs }); }, 100);
+              setTimeout( () => { clearInterval(); navigation.navigate('DocList', {categories: responseJson.Categories, docs: responseJson.Docs }); }, 100);
           }
           else {
               //setIsPleaseWaitOpen(false);

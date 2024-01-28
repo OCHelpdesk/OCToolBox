@@ -240,6 +240,11 @@
     "StringFr": "Trier"
   },
   {
+    "StringId": "Subcategory",
+    "StringEn": "Subcategory",
+    "StringFr": "Sous-catégorie"
+  },
+  {
     "StringId": "UnitPrice",
     "StringEn": "Unit Price",
     "StringFr": "Prix ​​unitaire"
