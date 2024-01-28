@@ -70,6 +70,8 @@ class DocListScreen extends Component {
   }
 
   refreshDocList = async() => {
+    this.searchTextInput.current.clear();
+    this.searchText = '';
     this.setState({isPleaseWaitOpen: true});
     setTimeout(() => {
       var apiURL = AppSettings.UrlDocList;
@@ -111,7 +113,6 @@ class DocListScreen extends Component {
   
   filterBySearchText = () => {
     const sText = this.searchText.replace(' ', '').toUpperCase();
-    console.log(sText);
     if (sText != '') {
       var ret = [];
       for (var d = 0; d < this.docs.length; d++) {
@@ -134,6 +135,7 @@ class DocListScreen extends Component {
 
   filterByCategory = (categoryId) => {
     this.searchTextInput.current.clear();
+    this.searchText = '';
     const ids = categoryId.split(':');
     var ret = [];
     for (var d = 0; d < this.docs.length; d++) {
@@ -288,7 +290,7 @@ class DocListScreen extends Component {
                 onPress={() => { this.setState({isCategoryBoxOpen: true}); }}
             />
           </View>
-            <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'stretch', backgroundColor: '#333333',}}>
+          <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'stretch', backgroundColor: '#333333',}}>
               <FlatList
                 ref={this.docCardList} 
                 style={{margin:0, marginTop: 2, padding:8, width: '100%',}}
@@ -298,7 +300,7 @@ class DocListScreen extends Component {
                 keyExtractor={(item, index) => { return item.Id; }}
                 ItemSeparatorComponent={() => <View style={{height: 4}} />}
               />
-            </SafeAreaView>
+          </SafeAreaView>
           <View style={{height: 4, width: '100%', backgroundColor: "#333333"}} />
           <View style={{height: 2, width: '100%', backgroundColor: "#663333"}} />
           <View style={{height: 2, width: '100%', backgroundColor: "#993333"}} />
