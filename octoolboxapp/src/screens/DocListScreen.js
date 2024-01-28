@@ -271,6 +271,7 @@ class DocListScreen extends Component {
                 containerStyle={{position: "absolute", top: 2, left: 320, }}
                 onPress={() => {  
                   this.searchTextInput.current.clear();
+                  this.searchText = '';
                   this.setState({docs: this.docs});
                   if (this.docs.length > 0) {
                     setTimeout(() => { this.docCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
