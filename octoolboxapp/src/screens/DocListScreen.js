@@ -24,7 +24,6 @@ class DocListScreen extends Component {
     this.docCardList = React.createRef();
     this.searchTextInput = React.createRef();
     this.searchText = '';
-    this.searchCategoryId = '';
     const screenTitle = TextString.Get('Doc').toUpperCase();
     setTimeout(() => {
       this.navigation.setOptions({ title: screenTitle });
@@ -92,9 +91,9 @@ class DocListScreen extends Component {
               this.categories = responseJson.Categories;
               this.docs = responseJson.Docs;
               this.setState({categories: this.categories, docs: this.docs});
-              setTimeout(() => {
-                this.docCardList.current.scrollToIndex({ index: 0, animated: true} );
-              }, 100) 
+              if (this.docs.length > 0) {
+                setTimeout(() => { this.docCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
+              } 
             }, 100);
         }
         else {
@@ -110,6 +109,44 @@ class DocListScreen extends Component {
     }, 1000);
   }
   
+  filterBySearchText = () => {
+    const sText = this.searchText.replace(' ', '').toUpperCase();
+    console.log(sText);
+    if (sText != '') {
+      var ret = [];
+      for (var d = 0; d < this.docs.length; d++) {
+        if (this.docs[d].Name.toUpperCase().indexOf(sText) >= 0 || this.docs[d].Description.toUpperCase().indexOf(sText) >= 0) {
+          ret.push(this.docs[d]);
+        }
+      }    
+      this.setState({ docs: ret }); 
+      if (ret.length > 0) {
+        setTimeout(() => { this.docCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
+      } 
+    }
+    else {
+      this.setState({ docs: this.docs });  
+      if (this.docs.length > 0) {
+        setTimeout(() => { this.docCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
+      } 
+    }
+  }
+
+  filterByCategory = (categoryId) => {
+    this.searchTextInput.current.clear();
+    const ids = categoryId.split(':');
+    var ret = [];
+    for (var d = 0; d < this.docs.length; d++) {
+      if (this.docs[d].CategoryId == ids[0] && (ids[1] == '0' || this.docs[d].SubcategoryId == ids[1])) {
+        ret.push(this.docs[d]);
+      }
+    }    
+    this.setState({docs: ret});
+    if (ret.length > 0) {
+      setTimeout(() => { this.docCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
+    } 
+  }
+
   renderCategory = ({ item }) => (
       <Button 
         title={item.Name}
@@ -123,7 +160,7 @@ class DocListScreen extends Component {
         }}
         onPress={() => {
           this.setState({isCategoryBoxOpen: false})
-          console.log(item.Id);
+          this.filterByCategory(item.Id);
         }}
       />
   );
@@ -212,7 +249,10 @@ class DocListScreen extends Component {
                 borderWidth: 1, borderColor: "#cccccc", borderRadius: 5, 
                 marginLeft: 4, marginTop: 2, padding: 4,
               }}
-            />
+              onChangeText={(newText) => { this.searchText = newText; }}
+              returnKeyType='search'
+              onSubmitEditing={() => { this.filterBySearchText(); }}
+          />
             <Button
                 title=''
                 titleStyle={{ color: '#666666', fontWeight: "bold" }}
@@ -220,7 +260,7 @@ class DocListScreen extends Component {
                 type="clear" 
                 buttonStyle={{width: 60, margin: 0 }}
                 containerStyle={{position: "absolute", top: 4, left: 220, }}
-                onPress={() => {  }}
+                onPress={() => { this.filterBySearchText(); }}
             />
             <Button
                 title=''
@@ -230,9 +270,11 @@ class DocListScreen extends Component {
                 buttonStyle={{width: 60, margin: 0 }}
                 containerStyle={{position: "absolute", top: 2, left: 320, }}
                 onPress={() => {  
-                  this.searchText = '';
-                  this.searchCategoryId = '';
                   this.searchTextInput.current.clear();
+                  this.setState({docs: this.docs});
+                  if (this.docs.length > 0) {
+                    setTimeout(() => { this.docCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
+                  } 
                 }}
             />
             <Button
