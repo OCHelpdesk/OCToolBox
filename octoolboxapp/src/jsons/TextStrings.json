@@ -235,6 +235,11 @@
     "StringFr": "Rechercher des produits dans une catégorie"
   },
   {
+    "StringId": "SelectCategory",
+    "StringEn": "Select a Category",
+    "StringFr": "Choisir une catégorie"
+  },
+  {
     "StringId": "Sort",
     "StringEn": "Sort",
     "StringFr": "Trier"

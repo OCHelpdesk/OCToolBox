@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { View, SafeAreaView, FlatList, Text, TextInput, Modal, Dimensions, TouchableOpacity, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from '@rneui/base';
 import { CommonActions } from "@react-navigation/native";
 import RNFS from 'react-native-fs';
@@ -19,7 +20,7 @@ class DocListScreen extends Component {
     this.navigation = props.navigation;
     this.categories = props.route.categories != null ? props.route.categories : props.route.params.categories;
     this.docs = props.route.docs != null ? props.route.docs : props.route.params.docs;
-    this.state = { isPleaseWaitOpen: false, categories: this.categories, docs: this.docs };
+    this.state = { isPleaseWaitOpen: false, isCategoryBoxOpen: false, categories: this.categories, docs: this.docs };
     this.docCardList = React.createRef();
     this.searchTextInput = React.createRef();
     this.searchText = '';
@@ -109,6 +110,24 @@ class DocListScreen extends Component {
     }, 1000);
   }
   
+  renderCategory = ({ item }) => (
+      <Button 
+        title={item.Name}
+        titleStyle={{ color: '#ffffff', fontWeight: "bold", fontSize: 14 }}
+        type="outline" 
+        buttonStyle={{
+          borderWidth: 1,
+          borderColor: "#ffffff",
+          borderRadius: 5,
+          justifyContent: "flex-start" ,
+        }}
+        onPress={() => {
+          this.setState({isCategoryBoxOpen: false})
+          console.log(item.Id);
+        }}
+      />
+  );
+
   renderDoc = ({ item }) => (
     <DocCard 
       doc={item} 
@@ -125,7 +144,9 @@ class DocListScreen extends Component {
     const screenHeight = parseInt(Dimensions.get('window').height);
     const modalBoxHeight = 260;
     const modalBoxMarginTop = (screenHeight - modalBoxHeight) / 2;
-    const cardWidth = parseInt(Dimensions.get('window').width) - 24;
+    const categoryBoxHeight = 600;
+    const categoryBoxMarginTop = (screenHeight - categoryBoxHeight) / 2;
+  const cardWidth = parseInt(Dimensions.get('window').width) - 24;
     return (
         <View style={{ height: '100%', flexDirection: "column", alignItems: 'flex-start', backgroundColor: '#333333',}}>
             <Modal visible={this.state.isPleaseWaitOpen} transparent={true}>
@@ -141,6 +162,36 @@ class DocListScreen extends Component {
                         <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-evenly', alignSelf: 'stretch',}}>
                           <Image source={require('../../assets/oc/LadyBug.gif')} style={{ width: 100, height: 100, }} />
                         </View>
+                    </View>
+                </View>
+            </Modal>
+            <Modal visible={this.state.isCategoryBoxOpen} transparent={true}>
+                <View style={{backgroundColor: "#000000cc", flex: 1}}>
+                    <View 
+                        style={{
+                            height: categoryBoxHeight, 
+                            marginRight: 50, marginLeft: 50, marginTop: categoryBoxMarginTop,
+                            padding: 8,
+                            backgroundColor: "#333333",
+                            borderWidth: 1, borderColor: "#ff0000", borderRadius: 5,
+                    }}>
+                        <TouchableOpacity
+                          style={{flexDirection: "row", borderBottomWidth: 1, borderBottomColor: "#333333"}}
+                          onPress={() => {this.setState({isCategoryBoxOpen: false})}}
+                        >
+                          <Text style={{flex: 1, alignSelf: 'stretch', fontSize: 12, fontWeight: "bold", color: "#ffffff", paddingTop: 4}}>{TextString.Get('SelectCategory').toUpperCase()}</Text>
+                          <Icon name="close" size={22} color="#ffffff" style={{flex: 0, width: 22, }} />
+                        </TouchableOpacity>
+                        <View style={{height: 2, borderBottomWidth: 1, borderBottomColor: "#ff0000", paddingBottom: 8, alignItems: 'center'}}></View>
+                        <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'stretch',}}>
+                            <FlatList 
+                              style={{margin:0, padding:8, width: '100%',}}
+                              contentContainerStyle={{ paddingBottom: 12}}
+                              data={this.state.categories} 
+                              renderItem={this.renderCategory} 
+                              ItemSeparatorComponent={() => <View style={{height: 8}} />}
+                            />
+                        </SafeAreaView>
                     </View>
                 </View>
             </Modal>
@@ -191,9 +242,7 @@ class DocListScreen extends Component {
                 type="clear" 
                 buttonStyle={{width: 60, margin: 0 }}
                 containerStyle={{position: "absolute", top: 5, left: 280, }}
-                onPress={() => {  
-
-                }}
+                onPress={() => { this.setState({isCategoryBoxOpen: true}); }}
             />
           </View>
             <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'stretch', backgroundColor: '#333333',}}>
