@@ -20,10 +20,10 @@ class DocListScreen extends Component {
     this.navigation = props.navigation;
     this.categories = props.route.categories != null ? props.route.categories : props.route.params.categories;
     this.docs = props.route.docs != null ? props.route.docs : props.route.params.docs;
-    this.state = { isPleaseWaitOpen: false, isCategoryBoxOpen: false, categories: this.categories, docs: this.docs };
     this.docCardList = React.createRef();
     this.searchTextInput = React.createRef();
     this.searchText = '';
+    this.state = { isPleaseWaitOpen: false, isCategoryBoxOpen: false, searchCategoty: '', categories: this.categories, docs: this.docs };
     const screenTitle = TextString.Get('Doc').toUpperCase();
     setTimeout(() => {
       this.navigation.setOptions({ title: screenTitle });
@@ -133,7 +133,7 @@ class DocListScreen extends Component {
     }
   }
 
-  filterByCategory = (categoryId) => {
+  filterByCategory = (categoryId, category) => {
     this.searchTextInput.current.clear();
     this.searchText = '';
     const ids = categoryId.split(':');
@@ -143,7 +143,7 @@ class DocListScreen extends Component {
         ret.push(this.docs[d]);
       }
     }    
-    this.setState({docs: ret});
+    this.setState({searchCategoty: category, docs: ret});
     if (ret.length > 0) {
       setTimeout(() => { this.docCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
     } 
@@ -162,7 +162,7 @@ class DocListScreen extends Component {
         }}
         onPress={() => {
           this.setState({isCategoryBoxOpen: false})
-          this.filterByCategory(item.Id);
+          this.filterByCategory(item.Id, item.Name);
         }}
       />
   );
@@ -254,6 +254,7 @@ class DocListScreen extends Component {
               onChangeText={(newText) => { this.searchText = newText; }}
               returnKeyType='search'
               onSubmitEditing={() => { this.filterBySearchText(); }}
+              placeholder={ this.state.searchCategoty }
           />
             <Button
                 title=''
@@ -262,7 +263,12 @@ class DocListScreen extends Component {
                 type="clear" 
                 buttonStyle={{width: 60, margin: 0 }}
                 containerStyle={{position: "absolute", top: 4, left: 220, }}
-                onPress={() => { this.filterBySearchText(); }}
+                onPress={() => { 
+                  if (this.searchText != '') {
+                    this.setState({searchCategoty: ""})
+                    setTimeout(() => { this.filterBySearchText(); }, 100)
+                  } 
+                }}
             />
             <Button
                 title=''
@@ -274,7 +280,7 @@ class DocListScreen extends Component {
                 onPress={() => {  
                   this.searchTextInput.current.clear();
                   this.searchText = '';
-                  this.setState({docs: this.docs});
+                  this.setState({searchCategoty: "", docs: this.docs});
                   if (this.docs.length > 0) {
                     setTimeout(() => { this.docCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
                   } 
