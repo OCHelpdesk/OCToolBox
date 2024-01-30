@@ -72,7 +72,7 @@ class DocListScreen extends Component {
   refreshDocList = async() => {
     this.searchTextInput.current.clear();
     this.searchText = '';
-    this.setState({isPleaseWaitOpen: true});
+    this.setState({searchCategoty: '', isPleaseWaitOpen: true});
     setTimeout(() => {
       var apiURL = AppSettings.UrlDocList;
       var request = {
@@ -120,14 +120,8 @@ class DocListScreen extends Component {
           ret.push(this.docs[d]);
         }
       }    
-      this.setState({ docs: ret }); 
+      this.setState({ searchCategoty: '', docs: ret }); 
       if (ret.length > 0) {
-        setTimeout(() => { this.docCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
-      } 
-    }
-    else {
-      this.setState({ docs: this.docs });  
-      if (this.docs.length > 0) {
         setTimeout(() => { this.docCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
       } 
     }
@@ -185,7 +179,7 @@ class DocListScreen extends Component {
     const modalBoxMarginTop = (screenHeight - modalBoxHeight) / 2;
     const categoryBoxHeight = 600;
     const categoryBoxMarginTop = (screenHeight - categoryBoxHeight) / 2;
-  const cardWidth = parseInt(Dimensions.get('window').width) - 24;
+    const cardWidth = parseInt(Dimensions.get('window').width) - 24;
     return (
         <View style={{ height: '100%', flexDirection: "column", alignItems: 'flex-start', backgroundColor: '#333333',}}>
             <Modal visible={this.state.isPleaseWaitOpen} transparent={true}>
@@ -255,7 +249,8 @@ class DocListScreen extends Component {
               returnKeyType='search'
               onSubmitEditing={() => { this.filterBySearchText(); }}
               placeholder={ this.state.searchCategoty }
-          />
+              maxLength={30}
+            />
             <Button
                 title=''
                 titleStyle={{ color: '#666666', fontWeight: "bold" }}
@@ -263,12 +258,7 @@ class DocListScreen extends Component {
                 type="clear" 
                 buttonStyle={{width: 60, margin: 0 }}
                 containerStyle={{position: "absolute", top: 4, left: 220, }}
-                onPress={() => { 
-                  if (this.searchText != '') {
-                    this.setState({searchCategoty: ""})
-                    setTimeout(() => { this.filterBySearchText(); }, 100)
-                  } 
-                }}
+                onPress={() => { this.filterBySearchText(); }}
             />
             <Button
                 title=''
