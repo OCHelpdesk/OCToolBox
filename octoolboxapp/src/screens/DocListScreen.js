@@ -240,7 +240,7 @@ class DocListScreen extends Component {
             <TextInput
               ref={this.searchTextInput}
               style={{
-                height: 30, width: cardWidth - 100, 
+                height: 30, width: cardWidth - 116, 
                 position: "absolute", top: 4, left: 4,
                 borderWidth: 1, borderColor: "#cccccc", borderRadius: 5, 
                 marginLeft: 4, marginTop: 2, padding: 4,
@@ -257,7 +257,7 @@ class DocListScreen extends Component {
                 icon={{ name: 'search', type: 'font-awesome', size: 16, color: '#666666', }}
                 type="clear" 
                 buttonStyle={{width: 60, margin: 0 }}
-                containerStyle={{position: "absolute", top: 4, left: 220, }}
+                containerStyle={{position: "absolute", top: 4, left: cardWidth - 160, }}
                 onPress={() => { this.filterBySearchText(); }}
             />
             <Button
@@ -266,7 +266,7 @@ class DocListScreen extends Component {
                 icon={{ name: 'remove', type: 'font-awesome', size: 20, color: '#666666', }}
                 type="clear" 
                 buttonStyle={{width: 60, margin: 0 }}
-                containerStyle={{position: "absolute", top: 2, left: 320, }}
+                containerStyle={{position: "absolute", top: 2, left: cardWidth - 46, }}
                 onPress={() => {  
                   this.searchTextInput.current.clear();
                   this.searchText = '';
@@ -282,7 +282,7 @@ class DocListScreen extends Component {
                 icon={{ name: 'list', type: 'font-awesome', size: 16, color: '#666666', }}
                 type="clear" 
                 buttonStyle={{width: 60, margin: 0 }}
-                containerStyle={{position: "absolute", top: 5, left: 280, }}
+                containerStyle={{position: "absolute", top: 5, left: cardWidth - 96, }}
                 onPress={() => { this.setState({isCategoryBoxOpen: true}); }}
             />
           </View>
