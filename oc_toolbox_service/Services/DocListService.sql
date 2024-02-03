@@ -63,6 +63,6 @@ BEGIN
 	  where SubcategoryId <> 0
 	 order by Category
 
-	 select * from #Docs order by Category, Name
+	 select * from #Docs order by Category, Subcategory, Name
 END
 GO
