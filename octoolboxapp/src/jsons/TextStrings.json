@@ -20,6 +20,11 @@
     "StringFr": "Document"
   },
   {
+    "StringId": "Description",
+    "StringEn": "Description",
+    "StringFr": "Description"
+  },
+  {
     "StringId": "Home",
     "StringEn": "Home",
     "StringFr": "Accueil"
@@ -63,6 +68,11 @@
     "StringId": "Manufactory",
     "StringEn": "Manufacturer",
     "StringFr": "Fournisseur"
+  },
+  {
+    "StringId": "Name",
+    "StringEn": "Name",
+    "StringFr": "Nom"
   },
   {
     "StringId": "National",
@@ -258,5 +268,10 @@
     "StringId": "UOM",
     "StringEn": "UOM",
     "StringFr": "UDM"
+  },
+  {
+    "StringId": "Video",
+    "StringEn": "Video",
+    "StringFr": "Vidéo"
   }
 ]

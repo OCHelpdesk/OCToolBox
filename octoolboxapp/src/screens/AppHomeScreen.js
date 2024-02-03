@@ -29,17 +29,17 @@ const AppHomeScreen = ({navigation}) => {
         });
     }, 2000);
 
-    global.isInPreviewMode = false
-    const getIsInPreviewMode = async() => {
-      try {
-        var v = await AsyncStorage.getItem(AppSettings.IsInPreviewModeSettingName);
-        global.isInPreviewMode = v !== null ? (v == 'true') : false;
-        //console.log('AppHomeScreen.getIsInPreviewMode Executed!');
-      } catch(e) {
-        global.isInPreviewMode = false;
-      }    
-    }
-    getIsInPreviewMode();  
+    //global.isInPreviewMode = false
+    //const getIsInPreviewMode = async() => {
+    //  try {
+    //    var v = await AsyncStorage.getItem(AppSettings.IsInPreviewModeSettingName);
+    //    global.isInPreviewMode = v !== null ? (v == 'true') : false;
+    //    //console.log('AppHomeScreen.getIsInPreviewMode Executed!');
+    //  } catch(e) {
+    //    global.isInPreviewMode = false;
+    //  }    
+    //}
+    //getIsInPreviewMode();  
     
     const [stringLanguage, setLanguage] = useState('Français');
     const [stringOCToolbox, setStringOCToolbox] = useState('OC Pro Toolbox'.toUpperCase());
@@ -50,6 +50,7 @@ const AppHomeScreen = ({navigation}) => {
     const [stringServicePriceComm, setStringServicePriceComm] = useState('Service - Commercial'.toLocaleUpperCase());
     const [stringServicePriceResi, setStringServicePriceResi] = useState('Service - Residential'.toLocaleUpperCase());
     const [stringDoc, setStringDoc] = useState('Document'.toUpperCase());
+    const [stringVideo, setStringVideo] = useState('Video'.toUpperCase());
     const [isPricingMenuOpen, setIsPricingMenuOpen] = useState(false);
     const [isPleaseWaitOpen, setIsPleaseWaitOpen] = useState(false);
 
@@ -66,6 +67,7 @@ const AppHomeScreen = ({navigation}) => {
             setStringServicePriceComm(TextString.Get('HomeSvcPriceComm').toUpperCase());
             setStringServicePriceResi(TextString.Get('HomeSvcPriceResi').toUpperCase());
             setStringDoc(TextString.Get('Doc').toUpperCase());
+            setStringVideo(TextString.Get('Video').toUpperCase());
         }
     ) 
     const toggleLanguage = () => {
@@ -81,22 +83,30 @@ const AppHomeScreen = ({navigation}) => {
             setStringServicePriceComm(TextString.Get('HomeSvcPriceComm').toUpperCase());
             setStringServicePriceResi(TextString.Get('HomeSvcPriceResi').toUpperCase());
             setStringDoc(TextString.Get('Doc').toUpperCase());
+            setStringVideo(TextString.Get('Video').toUpperCase());
     }
 
     var timeLogoLastPressed = new Date().getTime();
-    const setIsInPreviewMode = async(value) => {
-        try {
-            await AsyncStorage.setItem(AppSettings.IsInPreviewModeSettingName, value ? 'true' : 'false');
-            global.isInPreviewMode = value;
-        } catch (e) {
-            console.log('Unable to ' + (value ? 'set' : 'reset') + ' preview mode.');
-        }
-      }
+    //const setIsInPreviewMode = async(value) => {
+    //    try {
+    //        await AsyncStorage.setItem(AppSettings.IsInPreviewModeSettingName, value ? 'true' : 'false');
+    //        global.isInPreviewMode = value;
+    //    } catch (e) {
+    //        console.log('Unable to ' + (value ? 'set' : 'reset') + ' preview mode.');
+    //    }
+    //  }
+    const [isInPreviewMode, setIsInPreviewMode] = useState(global.isInPreviewMode);
     const toggleIsInPreviewMode = () => {
         var title = global.isInPreviewMode ? 'Exit Preview Mode?' : 'Start Preview Mode?';
-        var msg = global.isInPreviewMode ? "" : "Preview mode enables features and/or data about to release.\n\nPreview mode is retained until you exit it."
+        var msg = global.isInPreviewMode ? "" : "\r\nPreview mode enables new features and data which are about to release.\r\n\r\nPreview mode retains until you have exited it or exited the app."
         Alert.alert(title, msg, [
-            {text: 'YES', onPress: () => { setIsInPreviewMode(!global.isInPreviewMode); AsyncStorage.removeItem(AppSettings.PriceDataVersionSettingName); }, style: 'yes'},
+            {text: 'YES', onPress: () => { 
+                global.isInPreviewMode = !global.isInPreviewMode;
+                setIsInPreviewMode(global.isInPreviewMode);
+                //setIsInPreviewMode(!global.isInPreviewMode); 
+                //AsyncStorage.removeItem(AppSettings.PriceDataVersionSettingName); 
+                }, 
+                style: 'yes'},
             {text: 'NO', style: 'no',},
         ]);    
       }
@@ -308,6 +318,20 @@ const AppHomeScreen = ({navigation}) => {
                             loadDocList();
                         }}
                     />
+                    {
+                        global.isInPreviewMode &&
+                        <Button 
+                        title={stringVideo}
+                        titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 20 }}
+                        type="outline" 
+                        buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
+                        onPress={() => { 
+                            //setIsPleaseWaitOpen(true);
+                            //setTimeout(() => { loadDocList(); }, 1000);
+                            loadDocList();
+                        }}
+                    />
+                    }
                 </View>
                 <View style={{paddingTop: 120, paddingBottom: 40, alignItems: 'center'}}>
                     <Button 

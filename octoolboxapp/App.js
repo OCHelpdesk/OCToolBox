@@ -66,8 +66,8 @@ const backgroundTask = async (taskDataArguments) => {
           } catch (ex) {
               console.error('Error occurred while clean up files temp folder: ' + ex);
           }
-          var isInPreviewMode = await AsyncStorage.getItem(AppSettings.IsInPreviewModeSettingName)
-          isInPreviewMode = isInPreviewMode == null ? 'false' : isInPreviewMode;
+          //var isInPreviewMode = await AsyncStorage.getItem(AppSettings.IsInPreviewModeSettingName)
+          //isInPreviewMode = isInPreviewMode == null ? 'false' : isInPreviewMode;
           var priceDataVersion = await AsyncStorage.getItem(AppSettings.PriceDataVersionSettingName)
           priceDataVersion = priceDataVersion == null ? AppSettings.PriceDataVersion : priceDataVersion;
           var apiURL = AppSettings.UrlPriceData;
@@ -78,7 +78,7 @@ const backgroundTask = async (taskDataArguments) => {
               AccessKey: AppSettings.AppServiceAccessKey,
               AppSideVersionNumber: priceDataVersion,
               RequestVersionNumberOnly: false,
-              RequestPreviewVersion: isInPreviewMode == 'true',
+              RequestPreviewVersion: global.isInPreviewMode,
             }),
           }
           fetch(apiURL, request)
@@ -153,6 +153,8 @@ const backgroundTaskOptions = {
 
 
 function App() {
+  global.isInPreviewMode = false;
+
   const startBackgroundService = async() => {
     await AsyncStorage.removeItem(AppSettings.PriceDataVersionSettingName);
     await AsyncStorage.removeItem(AppSettings.BgTaskTimeLastCheckPriceUpdateSettingName);

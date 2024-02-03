@@ -39,22 +39,22 @@ class DocCardEx extends Component {
             onPress={this.onDocSelected}
           >
             <View style={{flexDirection: 'row', height: 22}}>
-              <Text style={styles.dataFieldCaption}>{'Category:'.toUpperCase()}</Text>
+              <Text style={styles.dataFieldCaption}>{TextString.Get('Category').toUpperCase()}</Text>
               <Text style={styles.dataField}>{this.props.doc.Category.toUpperCase()}</Text>
               <Icon name={this.props.doc.IconName} size={16} color={this.props.doc.IconColor} style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
             <View style={{flexDirection: 'row', height: 22}}>
-              <Text style={styles.dataFieldCaption}>{'Subcategory:'.toUpperCase()}</Text>
+              <Text style={styles.dataFieldCaption}>{TextString.Get('Subcategory').toUpperCase()}</Text>
               <Text style={styles.dataField}>{this.props.doc.Subcategory.toUpperCase()}</Text>
               <Icon name='circle-thin' size={16} color='#ffffff' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
             <View style={{flexDirection: 'row', height: 22}}>
-              <Text style={styles.dataFieldCaption}>{'Name:'.toUpperCase()}</Text>
+              <Text style={styles.dataFieldCaption}>{TextString.Get('Name').toUpperCase()}</Text>
               <Text style={[styles.dataField, {fontWeight: "bold", color: "#ff0000", }]}>{this.props.doc.Name.toUpperCase()}</Text>
               <Icon name='circle-thin' size={16} color='#ffffff' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
             <View style={{flexDirection: 'row'}}>
-              <Text style={styles.dataFieldCaption}>{'Description:'.toUpperCase()}</Text>
+              <Text style={styles.dataFieldCaption}>{TextString.Get('Description').toUpperCase()}</Text>
               <Text style={styles.dataField}>{this.props.doc.SizeKB}KB, {this.props.doc.DateLastUpdated}</Text>
               <Icon name='circle-thin' size={16} color='#ffffff' style={{width: 24, textAlign: "center", textAlignVertical: "top"}}/>
             </View>
