@@ -17,6 +17,7 @@ import ProductCategoryScreen from './src/screens/ProductCategoryScreen';
 import ProductScreen from './src/screens/ProductScreen';
 import RateCardCommercialServiceScreen from './src/screens/RateCardCommercialServiceScreen';
 import RateCardResidentialServiceScreen from './src/screens/RateCardResidentialServiceScreen';
+import VideosListScreen from './src/screens/VideoListScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -198,6 +199,16 @@ function App() {
           headerBackVisible: true,
           headerBackTitleVisible: false,
           title: 'Document',
+          headerTitleAlign: 'center',          
+          headerTintColor: '#ffffff',
+          headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0, },
+          headerShadowVisible: false,
+        }} />
+        <Stack.Screen name="VideosList" component={VideosListScreen} options={{
+          //headerShown: false,
+          headerBackVisible: true,
+          headerBackTitleVisible: false,
+          title: 'Video',
           headerTitleAlign: 'center',          
           headerTintColor: '#ffffff',
           headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0, },

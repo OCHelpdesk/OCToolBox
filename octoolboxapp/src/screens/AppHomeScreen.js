@@ -203,7 +203,38 @@ const AppHomeScreen = ({navigation}) => {
             console.error("Error while Loading Doc List: " + error);
         });
       }
-    
+
+    loadVideosList = async () => {
+        //console.log('Loading Doc List');
+        var apiURL = AppSettings.UrlVideoList;
+        var request = {
+          method: 'POST',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json; charset=utf-8', },
+          body: JSON.stringify({
+            AccessKey: AppSettings.AppServiceAccessKey,
+            InFrench: TextString.IsInFrench(),
+            InPreview: global.isInPreviewMode,
+          }),
+        }
+        fetch(apiURL, request)
+        .then((response) => response.json())
+        .then(async (responseJson) => {
+          if (responseJson != null && responseJson.Docs != null) {
+              //setIsPleaseWaitOpen(false);
+              setTimeout( () => { clearInterval(); navigation.navigate('VideoList', {categories: responseJson.Categories, videos: responseJson.Videos }); }, 100);
+          }
+          else {
+              //setIsPleaseWaitOpen(false);
+              console.error("Didn't get document list downloaded.");
+          }
+          return responseJson;
+        })
+        .catch((error) => {
+            //setIsPleaseWaitOpen(false);
+            console.error("Error while Loading Doc List: " + error);
+        });
+      }
+      
     const screenHeight = parseInt(Dimensions.get('window').height);
     const modalBoxHeight = 320;
     const modalBoxMarginTop = (screenHeight - modalBoxHeight) / 2;
@@ -326,9 +357,7 @@ const AppHomeScreen = ({navigation}) => {
                         type="outline" 
                         buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
                         onPress={() => { 
-                            //setIsPleaseWaitOpen(true);
-                            //setTimeout(() => { loadDocList(); }, 1000);
-                            loadDocList();
+                            loadVideosList();
                         }}
                     />
                     }
