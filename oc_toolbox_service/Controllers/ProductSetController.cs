@@ -37,5 +37,15 @@ namespace oc_toolbox_service.Controllers
             );
             return ret;
         }
+
+        [Route("DownloadRateCard")]
+        [HttpGet]
+        //api/ProductSet/DownloadRateCard?AccessKey=B2C002F1-FA35-4F93-81FB-315D48A9342B&RateCardType=CommercialEn
+        public ActionResult DownloadRateCard([FromQuery] string accessKey, [FromQuery] string rateCardType)
+        {
+            RateCardImage file = ProductSetService.GetRateCardImage(accessKey, rateCardType);
+            return File(file.ImageData == null ? new byte[] { } : file.ImageData, "application/octet-stream", file.Name);
+        }
+
     }
 }

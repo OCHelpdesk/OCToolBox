@@ -84,7 +84,12 @@ namespace oc_toolbox_service.Services
                 adpt.Fill(tbl);
                 ret.Id = docId;
                 string docType = (string)tbl.Rows[0]["DocType"];
-                ret.ContentType = docType.Equals("pdf", StringComparison.OrdinalIgnoreCase) ? "application/pdf" : "application/octet-stream";
+                ret.ContentType = docType.Equals("pdf", StringComparison.OrdinalIgnoreCase) ? "application/pdf" :
+                                  docType.Equals("xlsx", StringComparison.OrdinalIgnoreCase) ? "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" :
+                                  docType.Equals("xls", StringComparison.OrdinalIgnoreCase) ? "application/vnd.ms-excel" :
+                                  docType.Equals("docx", StringComparison.OrdinalIgnoreCase) ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document" :
+                                  docType.Equals("doc", StringComparison.OrdinalIgnoreCase) ? "application/msword" :
+                                  "application/octet-stream";
                 ret.Content = (byte[])tbl.Rows[0]["DocData"];
                 ret.Name = ((string)tbl.Rows[0]["DocNameEn"]).Replace("\\", "_").Replace("/", "_") + "." + docType;
             }

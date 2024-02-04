@@ -6,6 +6,21 @@ using System.Threading.Tasks;
 
 namespace oc_toolbox_service.Models
 {
+    public class ServiceRateCard
+    {
+        public string? RateCardType { get; set; }
+        public string? VersionNumber { get; set; }
+        public string? ImageType { get; set; }
+        public int? Width { get; set; }
+        public int? Height { get; set; }
+    }
+    public class RateCardImage
+    {
+        [JsonIgnore]
+        public string AccessKey { get { return "B2C002F1-FA35-4F93-81FB-315D48A9342B"; } }
+        public byte[]? ImageData { get; set; }
+        public string? Name { get; set; }
+    }
 
     public class ProductCategory
     {
@@ -15,7 +30,6 @@ namespace oc_toolbox_service.Models
         public string? image { get; set; }
         public string[]? subcategories { get; set; }
     }
-
     public class Product
     {
         public string? Category { get; set; }
@@ -36,6 +50,8 @@ namespace oc_toolbox_service.Models
         public string AccessKey { get { return "B2C002F1-FA35-4F93-81FB-315D48A9342B"; } }
 
         public string? Version { get; set; }
+
+        public ServiceRateCard[]? ServiceRateCards { get; set; }
 
         public ProductCategory[]? ProductCategories { get; set; }
         public Product[]? Products { get; set; }
