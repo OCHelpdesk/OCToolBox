@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddTransient<oc_toolbox_service.Services.ProductSetService>();
 builder.Services.AddTransient<oc_toolbox_service.Services.DocListService>();
+builder.Services.AddTransient<oc_toolbox_service.Services.VideoListService>();
 builder.Services.AddControllers();
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
