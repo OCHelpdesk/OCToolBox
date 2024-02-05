@@ -5,7 +5,9 @@ import { CommonActions } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from '@rneui/base';
+import RNFS from 'react-native-fs';
 
+import RateCardScreen from './RateCardScreen';
 import ProductCard from '../components/ProductCard';
 import ProductCategoryCard from '../components/ProductCategoryCard';
 import TextString from '../components/TextString';
@@ -235,6 +237,31 @@ const AppHomeScreen = ({navigation}) => {
         });
       }
       
+    loadRateCard = async(ratecardtype) => {
+        const filePath = RateCardScreen.GetRateCardFilePath(ratecardtype);
+        if (filePath == null) {
+            alert("Rate card list not downloaded yet.");
+            return;
+        }
+        const fileExisting = await RNFS.exists(filePath);
+        if (fileExisting) {
+            clearInterval();
+            navigation.navigate('RateCard', {ratecardtype: ratecardtype });
+            return;
+        }
+        setIsPleaseWaitOpen(true);
+        var url = AppSettings.UrlRateCardImage.replace('@RateCardType', ratecardtype);
+        await RNFS.downloadFile({fromUrl: url, toFile: filePath}).promise
+        .then((res) => {
+            setIsPleaseWaitOpen(false);
+            setTimeout(() => { clearInterval(); navigation.navigate('RateCard', {ratecardtype: ratecardtype }); }, 100);
+        })
+        .catch((res) => {
+            alert("The rate card didn't get downloaded.");
+            setIsPleaseWaitOpen(false);
+        });
+    }
+    
     const screenHeight = parseInt(Dimensions.get('window').height);
     const modalBoxHeight = 320;
     const modalBoxMarginTop = (screenHeight - modalBoxHeight) / 2;
@@ -277,8 +304,9 @@ const AppHomeScreen = ({navigation}) => {
                                 buttonStyle={{ width: 240, height: 40, borderWidth: 1, borderColor: "#ffffff", borderRadius: 5 }}
                                 onPress={() => { 
                                     setIsPricingMenuOpen(false);
-                                    clearInterval();
-                                    setTimeout(() => { navigation.navigate('CommercialService'); }, 200);
+                                    //clearInterval();
+                                    //setTimeout(() => { navigation.navigate('CommercialService'); }, 200);
+                                    this.loadRateCard(RateCardScreen.GetCommercialRateCardType());
                                 }}
                             />
                             <Button 
@@ -288,8 +316,9 @@ const AppHomeScreen = ({navigation}) => {
                                 buttonStyle={{ width: 240, height: 40, borderWidth: 1, borderColor: "#ffffff", borderRadius: 5 }}
                                 onPress={() => { 
                                     setIsPricingMenuOpen(false);
-                                    clearInterval();
-                                    setTimeout(() => { navigation.navigate('ResidentialService'); }, 200);
+                                    //clearInterval();
+                                    //setTimeout(() => { navigation.navigate('ResidentialService'); }, 200);
+                                    this.loadRateCard(RateCardScreen.GetResidentialRateCardType());
                                 }}
                             />
                         </View>
@@ -357,7 +386,8 @@ const AppHomeScreen = ({navigation}) => {
                         type="outline" 
                         buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
                         onPress={() => { 
-                            loadVideosList();
+                            //loadVideosList();
+                            navigation.navigate('VideoList');
                         }}
                     />
                     }

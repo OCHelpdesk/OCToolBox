@@ -15,8 +15,7 @@ import DocListScreen from './src/screens/DocListScreen';
 import PriceDataDownloadScreen from './src/screens/PriceDataDownloadScreen';
 import ProductCategoryScreen from './src/screens/ProductCategoryScreen';
 import ProductScreen from './src/screens/ProductScreen';
-import RateCardCommercialServiceScreen from './src/screens/RateCardCommercialServiceScreen';
-import RateCardResidentialServiceScreen from './src/screens/RateCardResidentialServiceScreen';
+import RateCardScreen from './src/screens/RateCardScreen';
 import VideosListScreen from './src/screens/VideoListScreen';
 
 const Stack = createNativeStackNavigator();
@@ -87,18 +86,21 @@ const backgroundTask = async (taskDataArguments) => {
           .then(async (responseJson) => {
             var isGoodResponse = responseJson != null && responseJson.Version !== undefined && responseJson.Version !== null;
             if (isGoodResponse && responseJson.Version === priceDataVersion) {
+              RateCardScreen.ServiceRateCards = responseJson.ServiceRateCards;
               await AsyncStorage.setItem(AppSettings.BgTaskTimeLastCheckPriceUpdateSettingName, timeNow.toString());
               console.log("GbTask: No Updates.");
             }
             else if (isGoodResponse) {
               console.log("GbTask: Has Updates.");
               isGoodResponse = isGoodResponse &&
+                responseJson.ServiceRateCards !== undefined && responseJson.ServiceRateCards !== null &&
                 responseJson.ProductCategories !== undefined && responseJson.ProductCategories !== null &&
                 responseJson.ProductCategoriesFr !== undefined && responseJson.ProductCategoriesFr !== null &&
                 responseJson.Products !== undefined && responseJson.Products !== null &&
                 responseJson.ProductsFr !== undefined && responseJson.ProductsFr !== null;
               if (isGoodResponse) {
                 console.log("GbTask: Updates Fetched.");
+                RateCardScreen.ServiceRateCards = responseJson.ServiceRateCards;
                 ProductCategoryCard.AllEnCards = responseJson.ProductCategories;
                 ProductCategoryCard.AllFrCards = responseJson.ProductCategoriesFr;
                 ProductCard.AllEnCards = responseJson.Products;
@@ -204,7 +206,7 @@ function App() {
           headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0, },
           headerShadowVisible: false,
         }} />
-        <Stack.Screen name="VideosList" component={VideosListScreen} options={{
+        <Stack.Screen name="VideoList" component={VideosListScreen} options={{
           //headerShown: false,
           headerBackVisible: true,
           headerBackTitleVisible: false,
@@ -243,21 +245,11 @@ function App() {
           headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0},
           headerShadowVisible: false,
         }}  />
-        <Stack.Screen name="CommercialService" component={RateCardCommercialServiceScreen} options={{ 
+        <Stack.Screen name="RateCard" component={RateCardScreen} options={{ 
           //headerShown: false, 
           headerBackVisible: true,
           headerBackTitleVisible: false,
-          title: 'COMMERCIAL SERVICE',
-          headerTitleAlign: 'center',          
-          headerTintColor: '#ffffff',
-          headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0},
-          headerShadowVisible: false,
-        }}  />
-        <Stack.Screen name="ResidentialService" component={RateCardResidentialServiceScreen} options={{ 
-          //headerShown: false, 
-          headerBackVisible: true,
-          headerBackTitleVisible: false,
-          title: 'RESIDENTIAL SERVICE',
+          title: 'Rate Card',
           headerTitleAlign: 'center',          
           headerTintColor: '#ffffff',
           headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0},
