@@ -22,6 +22,7 @@ namespace oc_toolbox_service.Models
         public string? Description { get; set; }
         public string? URL { get; set; }
         public string? ThumbnailURL { get; set; }
+        public string? YouTubeVideoId { get; set; }
         public bool? IsPublished { get; set; }
     }
 

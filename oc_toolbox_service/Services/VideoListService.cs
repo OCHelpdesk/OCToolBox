@@ -52,6 +52,7 @@ namespace oc_toolbox_service.Services
                     video.Description = tbls.Tables[1].Rows[i]["Description"].ToString();
                     video.URL = tbls.Tables[1].Rows[i]["URL"].ToString();
                     video.ThumbnailURL = tbls.Tables[1].Rows[i]["ThumbnailURL"].ToString();
+                    video.YouTubeVideoId = tbls.Tables[1].Rows[i]["YouTubeVideoId"].ToString();
                     video.IsPublished = (bool)tbls.Tables[1].Rows[i]["IsPublished"];
                     videos.Add(video);
                 }
