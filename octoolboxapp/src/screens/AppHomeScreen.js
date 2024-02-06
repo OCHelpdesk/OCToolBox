@@ -221,19 +221,19 @@ const AppHomeScreen = ({navigation}) => {
         fetch(apiURL, request)
         .then((response) => response.json())
         .then(async (responseJson) => {
-          if (responseJson != null && responseJson.Docs != null) {
+          if (responseJson != null && responseJson.Videos != null) {
               //setIsPleaseWaitOpen(false);
-              setTimeout( () => { clearInterval(); navigation.navigate('VideoList', {categories: responseJson.Categories, videos: responseJson.Videos }); }, 100);
+              setTimeout( () => { clearInterval(); navigation.navigate('VideoList', {categories: responseJson.VideoCategories, videos: responseJson.Videos }); }, 100);
           }
           else {
               //setIsPleaseWaitOpen(false);
-              console.error("Didn't get document list downloaded.");
+              console.error("Didn't get video list downloaded.");
           }
           return responseJson;
         })
         .catch((error) => {
             //setIsPleaseWaitOpen(false);
-            console.error("Error while Loading Doc List: " + error);
+            console.error("Error while Loading Video List: " + error);
         });
       }
       
@@ -386,8 +386,7 @@ const AppHomeScreen = ({navigation}) => {
                         type="outline" 
                         buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
                         onPress={() => { 
-                            //loadVideosList();
-                            navigation.navigate('VideoList');
+                            loadVideosList();
                         }}
                     />
                     }
