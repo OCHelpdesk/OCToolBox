@@ -313,4 +313,8 @@ XCode -> octoolboxapp -> General -> Version #: 1.0.1, Build #: 5
 VSCode -> iOS -> octoolboxapp -> info.plist -> CFBundleShortVersionString: 1.0.1, CFBundleVersion: 5
 */
 
+echo Refer to https://www.npmjs.com/package/react-native-webview
+npm i react-native-webview
+
+
 

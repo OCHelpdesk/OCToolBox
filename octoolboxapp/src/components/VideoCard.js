@@ -16,8 +16,8 @@ class VideoCard extends Component {
     }
 
     onVideoSelected = () => {
-      if (this.props.onVideosSelected !== undefined && this.props.onVideosSelected != null && typeof this.props.onVideosSelected === 'function')
-        this.props.onVideosSelected(this.props.video.Id, this);  
+      if (this.props.onVideoSelected !== undefined && this.props.onVideoSelected != null && typeof this.props.onVideoSelected === 'function')
+        this.props.onVideoSelected(this.props.video.URL, this);  
     };
 
     showPleaseWait = () => { this.setState({isPleaseWaitOpen: true}); }
@@ -87,13 +87,15 @@ class VideoCard extends Component {
       fontSize: 10, 
       fontWeight: "bold", 
       color: "#666666",
-      paddingTop: 4,
-      paddingLeft: 4 
+      paddingTop: 2,
+      paddingLeft: 4,
+      paddingRight: 4 
     },
     dataField: {
       height: 16,
       fontSize: 12, 
-      paddingLeft: 4 
+      paddingLeft: 4,
+      paddingRight: 4 
     }
   });
 
