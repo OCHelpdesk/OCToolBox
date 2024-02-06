@@ -44,8 +44,8 @@ class VideoCard extends Component {
             onPress={this.onVideoSelected}
           >
             <View style={{flexDirection: 'row', height: imgBoxHeight}}>
-              <View style={{width: imgBoxWidth, height: imgBoxHeight}}>
-                <Image source={{uri: this.props.video.ThumbnailURL}} style={{ width: imgWidth, height: imgHeight, }} />
+              <View style={{width: imgBoxWidth, height: imgBoxHeight, backgroundColor: '#ffffff', padding: 4}}>
+                <Image source={{uri: this.props.video.ThumbnailURL}} style={{ height: imgHeight}} />
               </View>
               <View>
                 <Text style={styles.dataFieldCaption}>{TextString.Get('Category').toUpperCase()}:</Text>
@@ -83,13 +83,17 @@ class VideoCard extends Component {
     
   const styles = StyleSheet.create({
     dataFieldCaption: {
+      height: 16,
       fontSize: 10, 
       fontWeight: "bold", 
       color: "#666666",
-      paddingTop: 2,
+      paddingTop: 4,
+      paddingLeft: 4 
     },
     dataField: {
+      height: 16,
       fontSize: 12, 
+      paddingLeft: 4 
     }
   });
 

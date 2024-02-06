@@ -27,6 +27,80 @@ class VideoListScreen extends Component {
     }, 200);
   }
 
+  refreshVideoList = async() => {
+    this.searchTextInput.current.clear();
+    this.searchText = '';
+    this.setState({searchCategoty: '', isPleaseWaitOpen: true});
+    setTimeout(() => {
+      var apiURL = AppSettings.UrlVideoList;
+      var request = {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json; charset=utf-8', },
+        body: JSON.stringify({
+          AccessKey: AppSettings.AppServiceAccessKey,
+          InFrench: TextString.IsInFrench(),
+          InPreview: global.isInPreviewMode,
+        }),
+      }
+      fetch(apiURL, request)
+      .then((response) => response.json())
+      .then(async (responseJson) => {
+        if (responseJson != null && responseJson.Videos != null) {
+            this.setState({isPleaseWaitOpen: false});
+            setTimeout( () => { 
+              this.categories = responseJson.VideoCategories;
+              this.videos = responseJson.Videos;
+              this.setState({categories: this.categories, videos: this.videos});
+              if (this.videos.length > 0) {
+                setTimeout(() => { this.videoCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
+              } 
+            }, 100);
+        }
+        else {
+            this.setState({isPleaseWaitOpen: false});
+            console.error("Didn't get video list downloaded.");
+        }
+        return responseJson;
+      })
+      .catch((error) => {
+          this.setState({isPleaseWaitOpen: false});
+          console.error("Error while Loading Video List: " + error);
+      });
+    }, 1000);
+  }
+
+  filterBySearchText = () => {
+    const sText = this.searchText.replace(' ', '').toUpperCase();
+    if (sText != '') {
+      var ret = [];
+      for (var d = 0; d < this.videos.length; d++) {
+        if (this.videos[d].Name.toUpperCase().indexOf(sText) >= 0 || this.videos[d].Description.toUpperCase().indexOf(sText) >= 0) {
+          ret.push(this.videos[d]);
+        }
+      }    
+      this.setState({ searchCategoty: '', videos: ret }); 
+      if (ret.length > 0) {
+        setTimeout(() => { this.videoCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
+      } 
+    }
+  }
+
+  filterByCategory = (categoryId, category) => {
+    this.searchTextInput.current.clear();
+    this.searchText = '';
+    const ids = categoryId.split(':');
+    var ret = [];
+    for (var d = 0; d < this.videos.length; d++) {
+      if (this.videos[d].CategoryId == ids[0] && (ids[1] == '0' || this.videos[d].SubcategoryId == ids[1])) {
+        ret.push(this.videos[d]);
+      }
+    }    
+    this.setState({searchCategoty: category, videos: ret});
+    if (ret.length > 0) {
+      setTimeout(() => { this.videoCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
+    } 
+  }
+
   renderCategory = ({ item }) => (
     <Button 
       title={item.Name}
@@ -152,9 +226,9 @@ class VideoListScreen extends Component {
               onPress={() => {  
                 this.searchTextInput.current.clear();
                 this.searchText = '';
-                this.setState({searchCategoty: "", docs: this.docs});
-                if (this.docs.length > 0) {
-                  setTimeout(() => { this.docCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
+                this.setState({searchCategoty: "", videos: this.videos});
+                if (this.videos.length > 0) {
+                  setTimeout(() => { this.videoCardList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
                 } 
               }}
           />
@@ -201,7 +275,7 @@ class VideoListScreen extends Component {
                 icon={{ name: 'refresh', type: 'font-awesome', size: 16, color: '#ffffff', }}
                 iconContainerStyle={{ marginRight: 6 }}
                 buttonStyle={{ backgroundColor: '#333333', }}
-                onPress={() => { this.refreshDocList(); }}
+                onPress={() => { this.refreshVideoList(); }}
               />
             </View>
         </View>
