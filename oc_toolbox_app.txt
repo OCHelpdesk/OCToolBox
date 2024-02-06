@@ -316,5 +316,10 @@ VSCode -> iOS -> octoolboxapp -> info.plist -> CFBundleShortVersionString: 1.0.1
 echo Refer to https://www.npmjs.com/package/react-native-webview
 npm i react-native-webview
 
+echo Refer to https://www.npmjs.com/package/react-native-youtube-iframe
+npm i react-native-youtube-iframe
+
+echo Refer to https://www.npmjs.com/package/react-native-device-info
+npm i react-native-device-info
 
 
