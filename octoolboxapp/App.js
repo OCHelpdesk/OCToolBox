@@ -17,6 +17,7 @@ import ProductCategoryScreen from './src/screens/ProductCategoryScreen';
 import ProductScreen from './src/screens/ProductScreen';
 import RateCardScreen from './src/screens/RateCardScreen';
 import VideosListScreen from './src/screens/VideoListScreen';
+import WebViewScreen from './src/screens/WebViewScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -250,6 +251,16 @@ function App() {
           headerBackVisible: true,
           headerBackTitleVisible: false,
           title: 'Rate Card',
+          headerTitleAlign: 'center',          
+          headerTintColor: '#ffffff',
+          headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0},
+          headerShadowVisible: false,
+        }}  />
+        <Stack.Screen name="WebView" component={WebViewScreen} options={{ 
+          //headerShown: false, 
+          headerBackVisible: true,
+          headerBackTitleVisible: false,
+          title: 'WWW',
           headerTitleAlign: 'center',          
           headerTintColor: '#ffffff',
           headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0},

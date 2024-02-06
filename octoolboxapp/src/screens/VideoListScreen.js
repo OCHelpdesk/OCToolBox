@@ -119,16 +119,17 @@ class VideoListScreen extends Component {
     />
   );
 
-  playVideo = (videoURL, videoCard) => {
+  playVideo = (videoName, videoURL, videoCard) => {
     //console.log(videoURL)
+    this.navigation.navigate('WebView', {title: videoName, URL: videoURL });
   }
 
   renderVideoCard = ({ item }) => (
   <VideoCard 
     video={item} 
-    onVideoSelected={(videoURL, videoCard) => {
+    onVideoSelected={(videoName, videoURL, videoCard) => {
       //videoCard.showPleaseWait();
-      setTimeout(() => { this.playVideo(videoURL, videoCard); }, 100);
+      setTimeout(() => { this.playVideo(videoName, videoURL, videoCard); }, 100);
     }}
   />
   );
