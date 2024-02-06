@@ -17,7 +17,7 @@ class VideoCard extends Component {
 
     onVideoSelected = () => {
       if (this.props.onVideoSelected !== undefined && this.props.onVideoSelected != null && typeof this.props.onVideoSelected === 'function')
-        this.props.onVideoSelected(this.props.video.Name, this.props.video.URL, this);  
+        this.props.onVideoSelected(this.props.video.Name, this.props.video.URL, this.props.video.YouTubeVideoId, this);  
     };
 
     showPleaseWait = () => { this.setState({isPleaseWaitOpen: true}); }

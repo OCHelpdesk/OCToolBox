@@ -3,6 +3,7 @@ import { View, SafeAreaView, FlatList, Text, TextInput, Modal, Dimensions, Touch
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from '@rneui/base';
 import { CommonActions } from "@react-navigation/native";
+import DeviceInfo from 'react-native-device-info';
 import RNFS from 'react-native-fs';
 import FileViewer from 'react-native-file-viewer'
 
@@ -119,17 +120,18 @@ class VideoListScreen extends Component {
     />
   );
 
-  playVideo = (videoName, videoURL, videoCard) => {
-    //console.log(videoURL)
-    this.navigation.navigate('WebView', {title: videoName, URL: videoURL });
+  playVideo = (videoName, videoURL, YouTubeVideoId, videoCard) => {
+    DeviceInfo.isEmulator().then((isEmulator) => {
+      this.navigation.navigate((!isEmulator && YouTubeVideoId != '' ? 'YouTube' : 'WebView'), {title: videoName, URL: videoURL, YouTubeVideoId: YouTubeVideoId });
+    });
   }
 
   renderVideoCard = ({ item }) => (
   <VideoCard 
     video={item} 
-    onVideoSelected={(videoName, videoURL, videoCard) => {
+    onVideoSelected={(videoName, videoURL, YouTubeVideoId, videoCard) => {
       //videoCard.showPleaseWait();
-      setTimeout(() => { this.playVideo(videoName, videoURL, videoCard); }, 100);
+      setTimeout(() => { this.playVideo(videoName, videoURL, YouTubeVideoId, videoCard); }, 100);
     }}
   />
   );

@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BackgroundService from 'react-native-background-actions';
 import RNFS from 'react-native-fs';
+import DeviceInfo from 'react-native-device-info';
 
 import AppSettings from './src/jsons/AppSettings.json'
 import ProductCard from './src/components/ProductCard';
@@ -18,6 +19,7 @@ import ProductScreen from './src/screens/ProductScreen';
 import RateCardScreen from './src/screens/RateCardScreen';
 import VideosListScreen from './src/screens/VideoListScreen';
 import WebViewScreen from './src/screens/WebViewScreen';
+import YouTubeScreen from './src/screens/YouTubeScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -157,7 +159,9 @@ const backgroundTaskOptions = {
 
 
 function App() {
-  global.isInPreviewMode = false;
+  DeviceInfo.isEmulator().then((isEmulator) => {
+    global.isInPreviewMode = isEmulator;
+  });
 
   const startBackgroundService = async() => {
     await AsyncStorage.removeItem(AppSettings.PriceDataVersionSettingName);
@@ -261,6 +265,16 @@ function App() {
           headerBackVisible: true,
           headerBackTitleVisible: false,
           title: 'WWW',
+          headerTitleAlign: 'center',          
+          headerTintColor: '#ffffff',
+          headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0},
+          headerShadowVisible: false,
+        }}  />
+        <Stack.Screen name="YouTube" component={YouTubeScreen} options={{ 
+          //headerShown: false, 
+          headerBackVisible: true,
+          headerBackTitleVisible: false,
+          title: 'YouTube',
           headerTitleAlign: 'center',          
           headerTintColor: '#ffffff',
           headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0},
