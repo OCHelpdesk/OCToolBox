@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import { Button } from '@rneui/base';
 import { CommonActions } from "@react-navigation/native";
 import { WebView } from 'react-native-webview';
@@ -31,11 +31,15 @@ class YouTubeScreen extends Component {
   }
 
   render() {
+    //Refer to https://lonelycpp.github.io/react-native-youtube-iframe/component-props
+    //It is recommended 16:9 players are at least 480 pixels wide and 270 pixels tall.
+    const screenWidth = parseInt(Dimensions.get('window').width) - 16;
+    const playerHeight = screenWidth * 9 / 16;
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'stretch', backgroundColor: '#333333',}}>
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#333333',}}>
         <YoutubePlayer
-            height={300}
-            width={400}
+            height={playerHeight}
+            width={screenWidth}
             play={this.state.isPlaying}
             videoId={this.YouTubeVideoId}
             onChangeState={this.onStateChange}
