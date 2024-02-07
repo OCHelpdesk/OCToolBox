@@ -161,6 +161,7 @@ const backgroundTaskOptions = {
 function App() {
   DeviceInfo.isEmulator().then((isEmulator) => {
     global.isInPreviewMode = isEmulator;
+    global.isInPreviewMode = false;
   });
 
   const startBackgroundService = async() => {

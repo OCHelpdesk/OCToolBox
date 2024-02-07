@@ -122,7 +122,8 @@ class VideoListScreen extends Component {
 
   playVideo = (videoName, videoURL, YouTubeVideoId, videoCard) => {
     DeviceInfo.isEmulator().then((isEmulator) => {
-      this.navigation.navigate((!isEmulator && YouTubeVideoId != '' ? 'YouTube' : 'WebView'), {title: videoName, URL: videoURL, YouTubeVideoId: YouTubeVideoId });
+      //this.navigation.navigate((!isEmulator && YouTubeVideoId != '' ? 'YouTube' : 'WebView'), {title: videoName, URL: videoURL, YouTubeVideoId: YouTubeVideoId });
+      this.navigation.navigate((YouTubeVideoId != '' ? 'YouTube' : 'WebView'), {title: videoName, URL: videoURL, YouTubeVideoId: YouTubeVideoId });
     });
   }
 
