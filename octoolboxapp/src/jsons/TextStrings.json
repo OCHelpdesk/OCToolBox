@@ -245,7 +245,7 @@
     "StringFr": "Classe de Pesticide"
   },
   {
-    "StringId": "SDSFormulationTypes",
+    "StringId": "SDSFormulationType",
     "StringEn": "Formulation Type",
     "StringFr": "Type de Formulation"
   },
