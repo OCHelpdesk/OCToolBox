@@ -220,6 +220,56 @@
     "StringFr": "Produit"
   },
   {
+    "StringId": "SDSRevision#",
+    "StringEn": "Revision Number",
+    "StringFr": "Numéro de Révision"
+  },
+  {
+    "StringId": "SDSRevisionDate",
+    "StringEn": "Revision Date",
+    "StringFr": "Date de Révision"
+  },
+  {
+    "StringId": "SDSIngredient",
+    "StringEn": "Active Ingredient",
+    "StringFr": "Ingrédient Actif"
+  },
+  {
+    "StringId": "SDSLocation",
+    "StringEn": "Location",
+    "StringFr": "Emplacement"
+  },
+  {
+    "StringId": "SDSPesticideClass",
+    "StringEn": "Pesticide Class",
+    "StringFr": "Classe de Pesticide"
+  },
+  {
+    "StringId": "SDSFormulationTypes",
+    "StringEn": "Formulation Type",
+    "StringFr": "Type de Formulation"
+  },
+  {
+    "StringId": "SDSTargetPest",
+    "StringEn": "Target Pest",
+    "StringFr": "Ravageur cible"
+  },
+  {
+    "StringId": "SDS",
+    "StringEn": "SDS",
+    "StringFr": "SDS"
+  },
+  {
+    "StringId": "SDSLabel",
+    "StringEn": "Label",
+    "StringFr": "Étiquette"
+  },
+  {
+    "StringId": "SDSLabel&SDS",
+    "StringEn": "Label & SDS",
+    "StringFr": "Étiquette & SDS"
+  },
+  {
     "StringId": "Refresh",
     "StringEn": "Refresh",
     "StringFr": "Rafraîchir"
