@@ -26,12 +26,39 @@ class LabelSdsListScreen extends Component {
     }, 200);
   }
 
+  viewDoc = async (docId, docName, refCard) => {
+    var fileName = RNFS.DocumentDirectoryPath + AppSettings.TempFileSubfolder + '/' + docName;
+    var isExisting = await RNFS.exists(fileName)
+    if (isExisting) {
+      await RNFS.unlink(fileName); //Remove the file
+    }
+    var url = AppSettings.UrlLabelSdsDocData.replace('@DocId', docId);
+    await RNFS.downloadFile({fromUrl: url, toFile: fileName}).promise
+    .then((res) => {
+      //Success
+      refCard.hidePleaseWait();
+      setTimeout(() => {
+        FileViewer.open(fileName)
+        .then(() => {
+          //console.log('Opened ' + fileName)
+        })
+        .catch((err) => {
+          console.log(err); 
+        });
+      }, 100);
+    })
+    .catch((res) => {
+      refCard.hidePleaseWait();
+      console.log("Didn't get the file downloaded!");
+    });
+  }
+
   renderCard = ({ item }) => (
     <Card 
       product={item} 
-      onDocSelected={(docId, card) => {
-        card.showPleaseWait();
-        setTimeout(() => { this.viewDoc(docId, card); }, 100);
+      onDocSelected={(docId, docName, refCard) => {
+        refCard.showPleaseWait();
+        setTimeout(() => { this.viewDoc(docId, docName, refCard); }, 100);
       }}
     />
   );

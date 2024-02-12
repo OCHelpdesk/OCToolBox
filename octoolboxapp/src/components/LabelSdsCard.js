@@ -16,9 +16,9 @@ class LabelSdsCard extends Component {
         props.onCreated(this);
     }
 
-    onDocSelected = (docId) => {
+    onDocSelected = (docId, docName) => {
       if (this.props.onDocSelected !== undefined && this.props.onDocSelected != null && typeof this.props.onDocSelected === 'function')
-        this.props.onDocSelected(docId, this);  
+        this.props.onDocSelected(docId, docName, this);  
     };
 
     showPleaseWait = () => { this.setState({isPleaseWaitOpen: true}); }
@@ -27,12 +27,12 @@ class LabelSdsCard extends Component {
     render() {
         const need2Lines = 30;
         const need3Lines = 60;
-        const nameHeight = this.product.Name.length > need2Lines ? 34: 22;
+        const nameHeight = this.product.Name.length > 40 ? 34: 22;
         const manufacturerHeight = this.product.Manufacturer.length > need2Lines ? 34: 22;
         const ingredientHeight = this.product.Ingredient.length > need3Lines ? 46 : this.product.Ingredient.length > need2Lines ? 34: 22;
         const targetPestHeight = this.product.TargetPests.length > need3Lines ? 46 : this.product.TargetPests.length > need2Lines ? 34: 22;
-        const cardHeight = 248 
-          + (this.product.Name.length > need2Lines ? 12 : 0) 
+        const cardHeight = 252 
+          + (this.product.Name.length > 40 ? 12 : 0) 
           + (this.product.Manufacturer.length > need2Lines ? 12 : 0) 
           + (this.product.Ingredient.length > need3Lines ? 24 : this.product.Ingredient.length > need2Lines ? 12 : 0) 
           + (this.product.TargetPests.length > need3Lines ? 24 : this.product.TargetPests.length > need2Lines ? 12 : 0);
@@ -48,11 +48,10 @@ class LabelSdsCard extends Component {
               fontSize: 10
             }}
           >
-            <View style={{flexDirection: 'row', height: nameHeight}}>
-              <Text style={styles.dataFieldCaption}>{TextString.Get('Name').toUpperCase()}</Text>
-              <Text style={[styles.dataField, {fontWeight: "bold", color: "#ff0000", }]}>{this.product.Name.toUpperCase()}</Text>
+            <View style={{flexDirection: 'row', height: nameHeight, borderBottomWidth: 1, borderColor: "#cccccc", paddingTop: 4}}>
+              <Text style={[styles.dataField, {fontWeight: "bold", color: "#ff0000", width: "100%", textAlign: 'center', }]}>{this.product.Name.toUpperCase()}</Text>
             </View>
-            <View style={{flexDirection: 'row', height: manufacturerHeight}}>
+            <View style={{flexDirection: 'row', height: manufacturerHeight, paddingTop: 2}}>
               <Text style={styles.dataFieldCaption}>{TextString.Get('Manufactory').toUpperCase()}</Text>
               <Text style={styles.dataField}>{this.product.Manufacturer.toUpperCase()}</Text>
             </View>
@@ -90,12 +89,12 @@ class LabelSdsCard extends Component {
                   this.product.LabelDocId != '' &&  
                   <Button 
                     title={'  ' + TextString.Get('SDSLabel').toUpperCase()}
-                    titleStyle={{ fontSize: 16, fontWeight: 'bold', color: '#3333ff' }}
-                    icon={{ name: 'tag', type: 'font-awesome', size: 16, color: '#3333ff', }}
+                    titleStyle={{ fontSize: 16, fontWeight: 'bold', color: '#666666' }}
+                    icon={{ name: 'tag', type: 'font-awesome', size: 16, color: '#666666', }}
                     iconContainerStyle={{ marginRight: 6 }}
                     buttonStyle={{ backgroundColor: '#cccccc'}}
                     containerStyle={{ width: 150, paddingTop: 4}}
-                    onPress={() => { this.onDocSelected(this.product.LabelDocId); }}
+                    onPress={() => { this.onDocSelected(this.product.LabelDocId, this.product.LabelDocName); }}
                   />
                }
               </View>
@@ -104,12 +103,12 @@ class LabelSdsCard extends Component {
                   this.product.SDSDocId != '' && 
                   <Button 
                     title={'  ' + TextString.Get('SDS').toUpperCase()}
-                    titleStyle={{ fontSize: 16, fontWeight: 'bold', color: '#3333ff' }}
-                    icon={{ name: 'warning', type: 'font-awesome', size: 16, color: '#3333ff', }}
+                    titleStyle={{ fontSize: 16, fontWeight: 'bold', color: '#666666' }}
+                    icon={{ name: 'warning', type: 'font-awesome', size: 16, color: '#666666', }}
                     iconContainerStyle={{ marginRight: 6 }}
                     buttonStyle={{ backgroundColor: '#cccccc'}}
                     containerStyle={{ width: 150, paddingTop: 4 }}
-                    onPress={() => { this.onDocSelected(this.product.SDSDocId); }}
+                    onPress={() => { this.onDocSelected(this.product.SDSDocId, this.product.SDSDocName); }}
                   />
                 }
               </View>
