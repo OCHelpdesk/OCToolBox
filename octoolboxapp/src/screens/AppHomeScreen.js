@@ -52,6 +52,7 @@ const AppHomeScreen = ({navigation}) => {
     const [stringServicePriceComm, setStringServicePriceComm] = useState('Service - Commercial'.toLocaleUpperCase());
     const [stringServicePriceResi, setStringServicePriceResi] = useState('Service - Residential'.toLocaleUpperCase());
     const [stringDoc, setStringDoc] = useState('Document'.toUpperCase());
+    const [stringLabelSds, setStringLabelSds] = useState('Label & SDS'.toUpperCase());
     const [stringVideo, setStringVideo] = useState('Video'.toUpperCase());
     const [isPricingMenuOpen, setIsPricingMenuOpen] = useState(false);
     const [isPleaseWaitOpen, setIsPleaseWaitOpen] = useState(false);
@@ -69,6 +70,7 @@ const AppHomeScreen = ({navigation}) => {
             setStringServicePriceComm(TextString.Get('HomeSvcPriceComm').toUpperCase());
             setStringServicePriceResi(TextString.Get('HomeSvcPriceResi').toUpperCase());
             setStringDoc(TextString.Get('Doc').toUpperCase());
+            setStringLabelSds(TextString.Get('SDSLabel&SDS').toUpperCase());
             setStringVideo(TextString.Get('Video').toUpperCase());
         }
     ) 
@@ -85,6 +87,7 @@ const AppHomeScreen = ({navigation}) => {
             setStringServicePriceComm(TextString.Get('HomeSvcPriceComm').toUpperCase());
             setStringServicePriceResi(TextString.Get('HomeSvcPriceResi').toUpperCase());
             setStringDoc(TextString.Get('Doc').toUpperCase());
+            setStringLabelSds(TextString.Get('SDSLabel&SDS').toUpperCase());
             setStringVideo(TextString.Get('Video').toUpperCase());
     }
 
@@ -205,6 +208,11 @@ const AppHomeScreen = ({navigation}) => {
             console.error("Error while Loading Doc List: " + error);
         });
       }
+
+    loadLabelSdsList = () => {
+        setIsPleaseWaitOpen(false);
+        setTimeout( () => { clearInterval(); navigation.navigate('LabelSdsList', { }); }, 100);
+    }
 
     loadVideosList = async () => {
         //console.log('Loading Doc List');
@@ -377,6 +385,16 @@ const AppHomeScreen = ({navigation}) => {
                             setTimeout(() => { loadDocList(); }, 100) ;
                         }}
                     />
+                    <Button 
+                        title={stringLabelSds}
+                        titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 20 }}
+                        type="outline" 
+                        buttonStyle={{ width: 300, height: 68, borderWidth: 1, borderColor: "#ffffff", borderRadius: 20 }}
+                        onPress={() => { 
+                            setIsPleaseWaitOpen(true);
+                            setTimeout(() => { loadLabelSdsList(); }, 100) ;
+                        }}
+                    />
                     {
                         global.isInPreviewMode &&
                         <Button 
@@ -391,7 +409,7 @@ const AppHomeScreen = ({navigation}) => {
                     />
                     }
                 </View>
-                <View style={{paddingTop: 120, paddingBottom: 40, alignItems: 'center'}}>
+                <View style={{paddingTop: 60, paddingBottom: 40, alignItems: 'center'}}>
                     <Button 
                         title={stringLanguage}
                         titleStyle={{ fontWeight: "bold", color: "#ffffff", fontSize: 20 }}

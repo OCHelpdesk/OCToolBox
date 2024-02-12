@@ -18,6 +18,7 @@ import ProductCategoryScreen from './src/screens/ProductCategoryScreen';
 import ProductScreen from './src/screens/ProductScreen';
 import RateCardScreen from './src/screens/RateCardScreen';
 import VideosListScreen from './src/screens/VideoListScreen';
+import LabelSdsListScreen from './src/screens/LabelSdsListScreen';
 import WebViewScreen from './src/screens/WebViewScreen';
 import YouTubeScreen from './src/screens/YouTubeScreen';
 
@@ -163,6 +164,10 @@ function App() {
     global.isInPreviewMode = isEmulator;
     global.isInPreviewMode = false;
   });
+  //DeviceInfo.getUniqueId().then((uniqueId) => {
+  //  // iOS: "FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F9"
+  //  console.log('DeviceUID: ' + uniqueId);
+  //});
 
   const startBackgroundService = async() => {
     await AsyncStorage.removeItem(AppSettings.PriceDataVersionSettingName);
@@ -207,6 +212,16 @@ function App() {
           headerBackVisible: true,
           headerBackTitleVisible: false,
           title: 'Document',
+          headerTitleAlign: 'center',          
+          headerTintColor: '#ffffff',
+          headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0, },
+          headerShadowVisible: false,
+        }} />
+        <Stack.Screen name="LabelSdsList" component={LabelSdsListScreen} options={{
+          //headerShown: false,
+          headerBackVisible: true,
+          headerBackTitleVisible: false,
+          title: 'Label & SDS',
           headerTitleAlign: 'center',          
           headerTintColor: '#ffffff',
           headerStyle: {backgroundColor: '#ff0000', borderBottomWidth: 0, },
