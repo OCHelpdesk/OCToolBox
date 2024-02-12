@@ -29,18 +29,19 @@ namespace oc_toolbox_service.Models
     public class LabelSdsProduct
     {
         public int? Id { get; set; }
-        public int? CategoryId { get; set; }
-        public string? Category { get; set; }
-        public int? SubcategoryId { get; set; }
-        public string? Subcategory { get; set; }
-        public string? Type { get; set; }
         public string? Name { get; set; }
-        public string? Description { get; set; }
-        public string? DateLastUpdated { get; set; }
-        public string? FileName { get; set; }
-        public int? SizeKB { get; set; }
-        public string? IconName { get; set; }
-        public string? IconColor { get; set; }
+        public string? Manufacturer { get; set; }
+        public string? PCP { get; set; }
+        public string? RevisionNumber { get; set; }
+        public string? Ingredient { get; set; }
+        public int? LocationId { get; set; }
+        public string? Location { get; set; }
+        public int? PesticideClassId { get; set; }
+        public string? PesticideClass { get; set; }
+        public int? FormulationTypeId { get; set; }
+        public string? FormulationType { get; set; }
+        public string? TargetPestIds { get; set; }
+        public string? TargetPests { get; set; }
         public bool? IsPublished { get; set; }
     }
 
