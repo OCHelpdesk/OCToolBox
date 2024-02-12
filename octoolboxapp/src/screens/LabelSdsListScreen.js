@@ -6,7 +6,7 @@ import { CommonActions } from "@react-navigation/native";
 import RNFS from 'react-native-fs';
 import FileViewer from 'react-native-file-viewer'
 
-import DocCard from '../components/DocCardEx';
+import Card from '../components/LabelSdsCard';
 import TextString from '../components/TextString';
 import AppSettings from '../jsons/AppSettings.json'
 
@@ -14,16 +14,27 @@ class LabelSdsListScreen extends Component {
   constructor(props) {
     super(props);
     this.navigation = props.navigation;
+    this.data = props.route.params.data;
+    console.log();
     this.cardList = React.createRef();
     this.searchTextInput = React.createRef();
     this.searchText = '';
-    this.state = { isPleaseWaitOpen: false, isCategoryBoxOpen: false };
+    this.state = { isPleaseWaitOpen: false, isCategoryBoxOpen: false, products: this.data.Products };
     const screenTitle = TextString.Get('SDSLabel&SDS').toUpperCase();
     setTimeout(() => {
       this.navigation.setOptions({ title: screenTitle });
     }, 200);
   }
 
+  renderCard = ({ item }) => (
+    <Card 
+      product={item} 
+      onDocSelected={(docId, card) => {
+        card.showPleaseWait();
+        setTimeout(() => { this.viewDoc(docId, card); }, 100);
+      }}
+    />
+  );
 
   render() {
     //console.log('DocListScreen Rendering Screen')
@@ -141,6 +152,15 @@ class LabelSdsListScreen extends Component {
             />
           </View>
           <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'stretch', backgroundColor: '#333333',}}>
+            <FlatList
+                ref={this.cardList} 
+                style={{margin:0, marginTop: 2, padding:8, width: '100%',}}
+                contentContainerStyle={{ paddingBottom: 12}}
+                data={this.state.products} 
+                renderItem={this.renderCard} 
+                keyExtractor={(item, index) => { return item.Id; }}
+                ItemSeparatorComponent={() => <View style={{height: 4}} />}
+              />
           </SafeAreaView>
           <View style={{height: 4, width: '100%', backgroundColor: "#333333"}} />
           <View style={{height: 2, width: '100%', backgroundColor: "#663333"}} />

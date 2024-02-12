@@ -209,9 +209,34 @@ const AppHomeScreen = ({navigation}) => {
         });
       }
 
-    loadLabelSdsList = () => {
-        setIsPleaseWaitOpen(false);
-        setTimeout( () => { clearInterval(); navigation.navigate('LabelSdsList', { }); }, 100);
+    loadLabelSdsList = async () => {
+        var apiURL = AppSettings.UrlLabelSdsList;
+        var request = {
+          method: 'POST',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json; charset=utf-8', },
+          body: JSON.stringify({
+            AccessKey: AppSettings.AppServiceAccessKey,
+            InFrench: TextString.IsInFrench(),
+            InPreview: global.isInPreviewMode,
+          }),
+        }
+        fetch(apiURL, request)
+        .then((response) => response.json())
+        .then(async (responseJson) => {
+          if (responseJson != null) {
+              setIsPleaseWaitOpen(false);
+              setTimeout( () => { clearInterval(); navigation.navigate('LabelSdsList', { data: responseJson }); }, 100);
+            }
+          else {
+              setIsPleaseWaitOpen(false);
+              console.error("Didn't get Label & SDS list downloaded.");
+          }
+          return responseJson;
+        })
+        .catch((error) => {
+            setIsPleaseWaitOpen(false);
+            console.error("Error while Loading Label & SDS List: " + error);
+        });
     }
 
     loadVideosList = async () => {
