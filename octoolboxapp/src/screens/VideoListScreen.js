@@ -75,7 +75,7 @@ class VideoListScreen extends Component {
     if (sText != '') {
       var ret = [];
       for (var d = 0; d < this.videos.length; d++) {
-        if (this.videos[d].Name.toUpperCase().indexOf(sText) >= 0 || this.videos[d].Description.toUpperCase().indexOf(sText) >= 0) {
+        if (this.videos[d].Name.replace(' ', '').toUpperCase().indexOf(sText) >= 0 || this.videos[d].Description.replace(' ', '').toUpperCase().indexOf(sText) >= 0) {
           ret.push(this.videos[d]);
         }
       }    

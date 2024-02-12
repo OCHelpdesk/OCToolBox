@@ -116,7 +116,7 @@ class DocListScreen extends Component {
     if (sText != '') {
       var ret = [];
       for (var d = 0; d < this.docs.length; d++) {
-        if (this.docs[d].Name.toUpperCase().indexOf(sText) >= 0 || this.docs[d].Description.toUpperCase().indexOf(sText) >= 0) {
+        if (this.docs[d].Name.replace(' ', '').toUpperCase().indexOf(sText) >= 0 || this.docs[d].Description.replace(' ', '').toUpperCase().indexOf(sText) >= 0) {
           ret.push(this.docs[d]);
         }
       }    

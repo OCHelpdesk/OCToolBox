@@ -32,12 +32,12 @@ class LabelSdsListScreen extends Component {
     if (sText != '') {
       var ret = [];
       for (var d = 0; d < this.data.Products.length; d++) {
-        if (this.data.Products[d].Name.toUpperCase().indexOf(sText) >= 0 || 
-            this.data.Products[d].Manufacturer.toUpperCase().indexOf(sText) >= 0 ||
-            this.data.Products[d].PCP.toUpperCase().indexOf(sText) >= 0 ||
-            this.data.Products[d].RevisionNumber.toUpperCase().indexOf(sText) >= 0 ||
-            this.d1ata.Products[d].Ingredient.toUpperCase().indexOf(sText) >= 0 ||
-            this.data.Products[d].TargetPests.toUpperCase().indexOf(sText) >= 0
+        if (this.data.Products[d].Name.replace(' ', '').toUpperCase().indexOf(sText) >= 0 || 
+            this.data.Products[d].Manufacturer.replace(' ', '').toUpperCase().indexOf(sText) >= 0 ||
+            this.data.Products[d].PCP.replace(' ', '').toUpperCase().indexOf(sText) >= 0 ||
+            this.data.Products[d].RevisionNumber.replace(' ', '').toUpperCase().indexOf(sText) >= 0 ||
+            this.data.Products[d].Ingredient.replace(' ', '').toUpperCase().indexOf(sText) >= 0 ||
+            this.data.Products[d].TargetPests.replace(' ', '').toUpperCase().indexOf(sText) >= 0
            ) {
           ret.push(this.data.Products[d]);
         }
@@ -55,7 +55,7 @@ class LabelSdsListScreen extends Component {
     const ids = categoryId.split(':');
     var ret = [];
     for (var d = 0; d < this.data.Products.length; d++) {
-      if (this.categoryType == "Manufacturers" && this.data.Products[d].Manufacturer == category ||
+      if (this.categoryType == "Manufacturers" && this.data.Products[d].Manufacturer.toUpperCase() == category.toUpperCase() ||
           this.categoryType == "Locations" && this.data.Products[d].LocationId == categoryId ||
           this.categoryType == "PesticideClasses" && this.data.Products[d].PesticideClassId == categoryId ||
           this.categoryType == "FormulationTypes" && this.data.Products[d].FormulationTypeId == categoryId ||
