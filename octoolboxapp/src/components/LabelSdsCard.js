@@ -11,6 +11,8 @@ class LabelSdsCard extends Component {
     constructor(props) {
       super(props);
       this.product = this.props.product;
+      this.hasLabel = this.product.LabelDocId != '' && this.product.LabelDocId != '0' && this.product.LabelDocName != '';
+      this.hasSDS = this.product.SDSDocId != '' && this.product.SDSDocId != '0' && this.product.SDSDocName != '';
       this.state = { isPleaseWaitOpen: false };
       if (props.onCreated !== undefined && props.onCreated != null && typeof props.onCreated === 'function')
         props.onCreated(this);
@@ -85,9 +87,8 @@ class LabelSdsCard extends Component {
             </View>
             <View style={{flexDirection: 'row', height: 46, borderTopWidth: 1, borderColor: "#cccccc"}}>
               <View style={{width: '50%', alignItems: 'center'}}>
-                {
-                  this.product.LabelDocId != '' &&  
-                  <Button 
+                  <Button
+                    disabled = {!this.hasLabel} 
                     title={'  ' + TextString.Get('SDSLabel').toUpperCase()}
                     titleStyle={{ fontSize: 16, fontWeight: 'bold', color: '#666666' }}
                     icon={{ name: 'tag', type: 'font-awesome', size: 16, color: '#666666', }}
@@ -96,12 +97,10 @@ class LabelSdsCard extends Component {
                     containerStyle={{ width: 150, paddingTop: 4}}
                     onPress={() => { this.onDocSelected(this.product.LabelDocId, this.product.LabelDocName); }}
                   />
-               }
               </View>
               <View style={{width: '50%', alignItems: 'center'}}>
-                {
-                  this.product.SDSDocId != '' && 
                   <Button 
+                    disabled = {!this.hasSDS} 
                     title={'  ' + TextString.Get('SDS').toUpperCase()}
                     titleStyle={{ fontSize: 16, fontWeight: 'bold', color: '#666666' }}
                     icon={{ name: 'warning', type: 'font-awesome', size: 16, color: '#666666', }}
@@ -110,7 +109,6 @@ class LabelSdsCard extends Component {
                     containerStyle={{ width: 150, paddingTop: 4 }}
                     onPress={() => { this.onDocSelected(this.product.SDSDocId, this.product.SDSDocName); }}
                   />
-                }
               </View>
             </View>
           </View>
