@@ -5,6 +5,10 @@ using System.Text.Json.Serialization;
 
 namespace oc_toolbox_service.Models
 {
+    public class LabelSdsManufacturer
+    {
+        public string? Name { get; set; }
+    }
     public class LabelSdsLocation
     {
         public string? Id { get; set; }
@@ -34,14 +38,16 @@ namespace oc_toolbox_service.Models
         public string? PCP { get; set; }
         public string? RevisionNumber { get; set; }
         public string? Ingredient { get; set; }
-        public int? LocationId { get; set; }
+        public string? LocationId { get; set; }
         public string? Location { get; set; }
-        public int? PesticideClassId { get; set; }
+        public string? PesticideClassId { get; set; }
         public string? PesticideClass { get; set; }
-        public int? FormulationTypeId { get; set; }
+        public string? FormulationTypeId { get; set; }
         public string? FormulationType { get; set; }
         public string? TargetPestIds { get; set; }
         public string? TargetPests { get; set; }
+        public string? LabelDocId { get; set; }
+        public string? SDSDocId { get; set; }
         public bool? IsPublished { get; set; }
     }
 
@@ -50,6 +56,7 @@ namespace oc_toolbox_service.Models
         [JsonIgnore]
         public string AccessKey { get { return "B2C002F1-FA35-4F93-81FB-315D48A9342B"; } }
 
+        public LabelSdsManufacturer[]? Manufacturers { get; set; }
         public LabelSdsLocation[]? Locations { get; set; }
         public LabelSdsPesticideClass[]? PesticideClasses { get; set; }
         public LabelSdsFormulationType[]? FormulationTypes { get; set; }
