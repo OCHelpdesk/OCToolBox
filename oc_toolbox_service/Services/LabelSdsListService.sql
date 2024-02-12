@@ -30,16 +30,25 @@ BEGIN
 		   TargetPestIds = cast('' as nvarchar(1000)),
 		   TargetPests = cast('' as nvarchar(1000)),
 		   LabelDocId = cast(isnull(case when isnull(@inFrench, 0) = 0 or ISNULL([LabelFrDocId], 0) = 0 then LabelEnDocId else LabelFrDocId end, 0) as nvarchar(10)),
+		   LabelDocName = cast('' as nvarchar(255)),
 		   SDSDocId = cast(isnull(case when isnull(@inFrench, 0) = 0 or ISNULL([SDSFrDocId], 0) = 0 then SDSEnDocId else SDSFrDocId end, 0) as nvarchar(10)),
+		   SDSDocName = cast('' as nvarchar(255)),
 		   IsPublished
 	  into #List
 	  from Product Prod
 		   left join ProductLocation Loc on Prod.LocationId = Loc.ProductLocationId
 		   left join ProductPesticideClass Clas on Prod.PesticideClassId = Clas.ProductPesticideClassId
-		   left join ProductFormulation Formu on Prod.FormulationId = Formu.ProductFormulationId 
+		   left join ProductFormulation Formu on Prod.FormulationId = Formu.ProductFormulationId
 	 where isnull(Prod.IsDeleted, 0) = 0
 	   and (IsPublished = 1 or isnull(@forPreview, 0) = 1)
 	 order by [ProductId]
+
+	 update #List set LabelDocName = Doc.DocName
+	   from #List List inner join ProductDoc Doc on List.LabelDocId = Doc.ProductDocId
+	  where LabelDocId <> '0' 
+	 update #List set SDSDocName = Doc.DocName
+	   from #List List inner join ProductDoc Doc on List.SDSDocId = Doc.ProductDocId
+	  where SDSDocId <> '0' 
 
 	 update #List set LabelDocId = '' where LabelDocId = '0'
 	 update #List set SDSDocId = '' where SDSDocId = '0'
@@ -75,7 +84,10 @@ BEGIN
 		set @id = @id + 1
 	 end
 
-	 select distinct Name = Manufacturer from #List order by Name
+	 IF OBJECT_ID('TEMPDB..#Manufacturer') IS NOT NULL DROP TABLE #Manufacturer
+	 CREATE TABLE #Manufacturer (Id int Identity(1, 1), [Name] NVARCHAR(255))
+	 INSERT INTO #Manufacturer select distinct Manufacturer from #List order by Manufacturer
+	 select * from #Manufacturer order by Id
 	 select Id = ProductLocationId, Name = case when isnull(@inFrench, 0) = 0 then ProductLocationNameEn else ProductLocationNameFr end from ProductLocation order by Name
 	 select Id = ProductPesticideClassId, Name = case when isnull(@inFrench, 0) = 0 then ProductPesticideClassNameEn else ProductPesticideClassNameFr end from ProductPesticideClass order by Name
 	 select Id = ProductFormulationId, Name = case when isnull(@inFrench, 0) = 0 then ProductFormulationNameEn else ProductFormulationNameFr end from ProductFormulation order by Name

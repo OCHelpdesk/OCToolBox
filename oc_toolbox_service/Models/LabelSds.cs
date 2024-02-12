@@ -7,6 +7,7 @@ namespace oc_toolbox_service.Models
 {
     public class LabelSdsManufacturer
     {
+        public string? Id { get; set; }
         public string? Name { get; set; }
     }
     public class LabelSdsLocation
@@ -47,7 +48,9 @@ namespace oc_toolbox_service.Models
         public string? TargetPestIds { get; set; }
         public string? TargetPests { get; set; }
         public string? LabelDocId { get; set; }
+        public string? LabelDocName { get; set; }
         public string? SDSDocId { get; set; }
+        public string? SDSDocName { get; set; }
         public bool? IsPublished { get; set; }
     }
 

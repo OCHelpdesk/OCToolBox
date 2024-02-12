@@ -41,6 +41,7 @@ namespace oc_toolbox_service.Services
                 for (int i = 0; i < tbls.Tables[tblIndex].Rows.Count; i++)
                 {
                     LabelSdsManufacturer item = new LabelSdsManufacturer();
+                    item.Id = tbls.Tables[tblIndex].Rows[i]["Id"].ToString();
                     item.Name = tbls.Tables[tblIndex].Rows[i]["Name"].ToString();
                     manufacturers.Add(item);
                 }
@@ -96,7 +97,9 @@ namespace oc_toolbox_service.Services
                     prod.TargetPestIds = row["TargetPestIds"].ToString();
                     prod.TargetPests = row["TargetPests"].ToString();
                     prod.LabelDocId = row["LabelDocId"].ToString();
+                    prod.LabelDocName = row["LabelDocName"].ToString();
                     prod.SDSDocId = row["SDSDocId"].ToString();
+                    prod.SDSDocName = row["SDSDocName"].ToString();
                     prod.IsPublished = (bool)row["IsPublished"];
                     products.Add(prod);
                 }
