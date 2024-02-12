@@ -92,14 +92,14 @@ BEGIN
 	 select Id = ProductPesticideClassId, Name = case when isnull(@inFrench, 0) = 0 then ProductPesticideClassNameEn else ProductPesticideClassNameFr end from ProductPesticideClass order by Name
 	 select Id = ProductFormulationId, Name = case when isnull(@inFrench, 0) = 0 then ProductFormulationNameEn else ProductFormulationNameFr end from ProductFormulation order by Name
 	 /*
-	 select Id = '[' + cast(T.TargetCategoryId as nvarchar(10)) + ':' + cast(TargetId as nvarchar(10)) + ']',
+	 select Id = cast(T.TargetCategoryId as nvarchar(10)) + ':' + cast(TargetId as nvarchar(10)),
 	 	    Name = case when isnull(@inFrench, 0) = 0 then TargetCategoryNameEn else TargetCategoryNameFr end
 				 + ': '
 				 + case when isnull(@inFrench, 0) = 0 then TargetNameEn else TargetNameFr end
 	   from [dbo].[Target] T inner join [dbo].[TargetCategory] C on T.TargetCategoryId = C.TargetCategoryId
 	 union
 	  */
-	 select Id = '[' + cast([TargetCategoryId] as nvarchar(10)) + ':0]',
+	 select Id = cast([TargetCategoryId] as nvarchar(10)) + ':0',
 		    Name = case when isnull(@inFrench, 0) = 0 then TargetCategoryNameEn else TargetCategoryNameFr end
 	   from [dbo].[TargetCategory]
 	  where [TargetCategoryId] <> 0
