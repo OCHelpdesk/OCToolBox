@@ -29,7 +29,7 @@ class LabelSdsCard extends Component {
     render() {
         const need2Lines = 30;
         const need3Lines = 60;
-        const nameHeight = this.product.Name.length > 40 ? 34: 22;
+        const nameHeight = this.product.Name.length > 40 ? 36: 24;
         const manufacturerHeight = this.product.Manufacturer.length > need2Lines ? 34: 22;
         const ingredientHeight = this.product.Ingredient.length > need3Lines ? 46 : this.product.Ingredient.length > need2Lines ? 34: 22;
         const targetPestHeight = this.product.TargetPests.length > need3Lines ? 46 : this.product.TargetPests.length > need2Lines ? 34: 22;
@@ -50,8 +50,8 @@ class LabelSdsCard extends Component {
               fontSize: 10
             }}
           >
-            <View style={{flexDirection: 'row', height: nameHeight, borderBottomWidth: 1, borderColor: "#cccccc", paddingTop: 4}}>
-              <Text style={[styles.dataField, {fontWeight: "bold", color: "#ff0000", width: "100%", textAlign: 'center', }]}>{this.product.Name.toUpperCase()}</Text>
+            <View style={{flexDirection: 'row', height: nameHeight, borderWidth: 1, borderColor: "#ff0000", paddingTop: 4}}>
+              <Text style={[styles.dataField, {fontWeight: "bold", color: "#ff0000", width: "100%", textAlign: 'center', paddingLeft: 8, paddingRight: 8 }]}>{this.product.Name.toUpperCase()}</Text>
             </View>
             <View style={{flexDirection: 'row', height: manufacturerHeight, paddingTop: 2}}>
               <Text style={styles.dataFieldCaption}>{TextString.Get('Manufactory').toUpperCase()}</Text>
@@ -85,7 +85,7 @@ class LabelSdsCard extends Component {
               <Text style={styles.dataFieldCaption}>{TextString.Get('SDSTargetPest').toUpperCase()}</Text>
               <Text style={styles.dataField}>{this.product.TargetPests.toUpperCase()}</Text>
             </View>
-            <View style={{flexDirection: 'row', height: 46, borderTopWidth: 1, borderColor: "#cccccc"}}>
+            <View style={{flexDirection: 'row', height: 46, borderTopWidth: 1, borderColor: "#ff0000"}}>
               <View style={{width: '50%', alignItems: 'center'}}>
                   <Button
                     disabled = {!this.hasLabel} 
@@ -93,7 +93,8 @@ class LabelSdsCard extends Component {
                     titleStyle={{ fontSize: 16, fontWeight: 'bold', color: '#666666' }}
                     icon={{ name: 'tag', type: 'font-awesome', size: 16, color: '#666666', }}
                     iconContainerStyle={{ marginRight: 6 }}
-                    buttonStyle={{ backgroundColor: '#cccccc'}}
+                    buttonStyle={{ backgroundColor: '#cccccc', borderColor: "#999999", borderWidth: 1, borderRadius: 8}}
+                    type="solid"
                     containerStyle={{ width: 150, paddingTop: 4}}
                     onPress={() => { this.onDocSelected(this.product.LabelDocId, this.product.LabelDocName); }}
                   />
@@ -105,7 +106,8 @@ class LabelSdsCard extends Component {
                     titleStyle={{ fontSize: 16, fontWeight: 'bold', color: '#666666' }}
                     icon={{ name: 'warning', type: 'font-awesome', size: 16, color: '#666666', }}
                     iconContainerStyle={{ marginRight: 6 }}
-                    buttonStyle={{ backgroundColor: '#cccccc'}}
+                    buttonStyle={{ backgroundColor: '#cccccc', borderColor: "#999999", borderWidth: 1, borderRadius: 8}}
+                    type="solid"
                     containerStyle={{ width: 150, paddingTop: 4 }}
                     onPress={() => { this.onDocSelected(this.product.SDSDocId, this.product.SDSDocName); }}
                   />
