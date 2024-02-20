@@ -67,7 +67,7 @@ BEGIN
 					   Name = case when isnull(@inFrench, 0) = 0 then TargetCategoryNameEn else TargetCategoryNameFr end
 				  from ProductTarget p
 					   inner join TargetCategory c on p.TargetCategoryId = c.TargetCategoryId
-				 where p.ProductId = @id and p.TargetId = 0
+				 where IsDeleted = 0 and p.ProductId = @id and p.TargetId = 0
 				union
 				select id = '[' + cast(p.TargetCategoryId as nvarchar(10)) + ':' + cast(p.TargetId as nvarchar(10)) + ']',
 					   Name = case when isnull(@inFrench, 0) = 0 then TargetCategoryNameEn else TargetCategoryNameFr end
@@ -76,7 +76,7 @@ BEGIN
 				  from ProductTarget p
 					   inner join TargetCategory c on p.TargetCategoryId = c.TargetCategoryId	
 					   inner join Target t on p.TargetId = t.TargetId
-				 where p.ProductId = @id and p.TargetId <> 0
+				 where IsDeleted = 0 and p.ProductId = @id and p.TargetId <> 0
 			  ) as p
 			  order by Name
 			update #List set TargetPestIds = @Ids, TargetPests = @names where id = @id
