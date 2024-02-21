@@ -50,7 +50,7 @@ class LabelSdsCard extends Component {
               fontSize: 10
             }}
           >
-            <View style={{flexDirection: 'row', height: nameHeight, borderWidth: 1, borderColor: "#ff0000", paddingTop: 4}}>
+            <View style={{flexDirection: 'row', height: nameHeight, borderWidth: 1, borderColor: "#ff0000", backgroundColor: "#cccccc", paddingTop: 4}}>
               <Text style={[styles.dataField, {fontWeight: "bold", color: "#ff0000", width: "100%", textAlign: 'center', paddingLeft: 8, paddingRight: 8 }]}>{this.product.Name.toUpperCase()}</Text>
             </View>
             <View style={{flexDirection: 'row', height: manufacturerHeight, paddingTop: 2}}>
@@ -90,10 +90,10 @@ class LabelSdsCard extends Component {
                   <Button
                     disabled = {!this.hasLabel} 
                     title={'  ' + TextString.Get('SDSLabel').toUpperCase()}
-                    titleStyle={{ fontSize: 16, fontWeight: 'bold', color: '#666666' }}
+                    titleStyle={{ fontSize: 16, color: '#333333' }}
                     icon={{ name: 'tag', type: 'font-awesome', size: 16, color: '#666666', }}
                     iconContainerStyle={{ marginRight: 6 }}
-                    buttonStyle={{ backgroundColor: '#cccccc', borderColor: "#999999", borderWidth: 1, borderRadius: 8}}
+                    buttonStyle={{ backgroundColor: '#cccccc', borderColor: "#666666", borderWidth: 1, borderRadius: 8}}
                     type="solid"
                     containerStyle={{ width: 150, paddingTop: 4}}
                     onPress={() => { this.onDocSelected(this.product.LabelDocId, this.product.LabelDocName); }}
@@ -103,10 +103,10 @@ class LabelSdsCard extends Component {
                   <Button 
                     disabled = {!this.hasSDS} 
                     title={'  ' + TextString.Get('SDS').toUpperCase()}
-                    titleStyle={{ fontSize: 16, fontWeight: 'bold', color: '#666666' }}
+                    titleStyle={{ fontSize: 16, color: '#333333' }}
                     icon={{ name: 'warning', type: 'font-awesome', size: 16, color: '#666666', }}
                     iconContainerStyle={{ marginRight: 6 }}
-                    buttonStyle={{ backgroundColor: '#cccccc', borderColor: "#999999", borderWidth: 1, borderRadius: 8}}
+                    buttonStyle={{ backgroundColor: '#cccccc', borderColor: "#666666", borderWidth: 1, borderRadius: 8}}
                     type="solid"
                     containerStyle={{ width: 150, paddingTop: 4 }}
                     onPress={() => { this.onDocSelected(this.product.SDSDocId, this.product.SDSDocName); }}
