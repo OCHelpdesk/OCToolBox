@@ -215,6 +215,15 @@ class LabelSdsListScreen extends Component {
                             }}
                           />
                           <Button 
+                            title={TextString.Get('SDSTargetPest').toUpperCase()}
+                            titleStyle={ styles.buttonListTitle } type="outline" buttonStyle={ styles.buttonListButton }
+                            onPress={() => {
+                              this.categoryType = 'TargetPests';
+                              this.setState({categories: this.data.TargetPests})
+                              setTimeout(() => { this.refCategoryList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
+                            }}
+                          />
+                          <Button 
                             title={TextString.Get('SDSLocation').toUpperCase()}
                             titleStyle={ styles.buttonListTitle } type="outline" buttonStyle={ styles.buttonListButton }
                             onPress={() => {
@@ -238,15 +247,6 @@ class LabelSdsListScreen extends Component {
                             onPress={() => {
                               this.categoryType = 'FormulationTypes';
                               this.setState({categories: this.data.FormulationTypes})
-                              setTimeout(() => { this.refCategoryList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
-                            }}
-                          />
-                          <Button 
-                            title={TextString.Get('SDSTargetPest').toUpperCase()}
-                            titleStyle={ styles.buttonListTitle } type="outline" buttonStyle={ styles.buttonListButton }
-                            onPress={() => {
-                              this.categoryType = 'TargetPests';
-                              this.setState({categories: this.data.TargetPests})
                               setTimeout(() => { this.refCategoryList.current.scrollToIndex({ index: 0, animated: true} ); }, 100);
                             }}
                           />
