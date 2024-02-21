@@ -69,6 +69,10 @@ class LabelSdsCard extends Component {
               <Text style={styles.dataFieldCaption}>{TextString.Get('SDSIngredient').toUpperCase()}</Text>
               <Text style={styles.dataField}>{this.product.Ingredient.toUpperCase()}</Text>
             </View>
+            <View style={{flexDirection: 'row', height: targetPestHeight}}>
+              <Text style={styles.dataFieldCaption}>{TextString.Get('SDSTargetPest').toUpperCase()}</Text>
+              <Text style={styles.dataField}>{this.product.TargetPests.toUpperCase()}</Text>
+            </View>
             <View style={{flexDirection: 'row', height: 22}}>
               <Text style={styles.dataFieldCaption}>{TextString.Get('SDSLocation').toUpperCase()}</Text>
               <Text style={styles.dataField}>{this.product.Location.toUpperCase()}</Text>
@@ -80,10 +84,6 @@ class LabelSdsCard extends Component {
             <View style={{flexDirection: 'row', height: 22}}>
               <Text style={styles.dataFieldCaption}>{TextString.Get('SDSFormulationType').toUpperCase()}</Text>
               <Text style={styles.dataField}>{this.product.FormulationType.toUpperCase()}</Text>
-            </View>
-            <View style={{flexDirection: 'row', height: targetPestHeight}}>
-              <Text style={styles.dataFieldCaption}>{TextString.Get('SDSTargetPest').toUpperCase()}</Text>
-              <Text style={styles.dataField}>{this.product.TargetPests.toUpperCase()}</Text>
             </View>
             <View style={{flexDirection: 'row', height: 46, borderTopWidth: 1, borderColor: "#ff0000"}}>
               <View style={{width: '50%', alignItems: 'center'}}>
