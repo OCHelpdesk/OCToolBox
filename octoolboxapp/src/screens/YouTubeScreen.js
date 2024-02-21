@@ -47,6 +47,7 @@ class YouTubeScreen extends Component {
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center',  alignSelf: 'stretch', backgroundColor: '#333333',}}>
           <YoutubePlayer
               ref={this.player}
+              initialPlayerParams={{conrtols: false, modestbranding: false}}
               height={playerHeight}
               width={screenWidth}
               play={this.state.isPlaying}

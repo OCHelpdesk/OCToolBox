@@ -257,7 +257,7 @@
   {
     "StringId": "SDS",
     "StringEn": "SDS",
-    "StringFr": "SDS"
+    "StringFr": "FDS"
   },
   {
     "StringId": "SDSLabel",
@@ -267,7 +267,7 @@
   {
     "StringId": "SDSLabel&SDS",
     "StringEn": "Label & SDS",
-    "StringFr": "Étiquette & SDS"
+    "StringFr": "Étiquette & FDS"
   },
   {
     "StringId": "Refresh",
