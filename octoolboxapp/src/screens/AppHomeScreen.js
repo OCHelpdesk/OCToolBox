@@ -389,9 +389,6 @@ const AppHomeScreen = ({navigation}) => {
                         <Text style={{fontWeight: "bold", color: "#ffffff", fontSize: 20, paddingTop: 10, paddingBottom: 10}}>{stringOCToolbox}</Text>
                     </View>
                 </TouchableWithoutFeedback>
-                <View style={{paddingTop: 20, paddingBottom: 0, alignItems: 'center'}}>
-                    <Text style={{ fontWeight: "bold", color: "#ffffff", fontSize: 14}}>{stringSelectCat}</Text>
-                </View>
                 <View style={{flex: 3, alignItems: 'center', justifyContent: 'space-evenly', alignSelf: 'stretch',}}>
                     <Button 
                         title={stringPricing}

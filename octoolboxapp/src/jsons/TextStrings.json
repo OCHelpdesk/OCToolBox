@@ -37,7 +37,7 @@
   {
     "StringId": "HomePricing",
     "StringEn": "Pricing",
-    "StringFr": "Prix de vente"
+    "StringFr": "Les prix"
   },
   {
     "StringId": "HomeProdPrice",
@@ -102,7 +102,7 @@
   {
     "StringId": "Pricing",
     "StringEn": "Pricing",
-    "StringFr": "Les prix"
+    "StringFr": "Prix de vente"
   },
   {
     "StringId": "ProdCat",
