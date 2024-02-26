@@ -17,7 +17,7 @@
   {
     "StringId": "Doc",
     "StringEn": "Document",
-    "StringFr": "Document"
+    "StringFr": "Document de reference"
   },
   {
     "StringId": "Description",
@@ -37,7 +37,7 @@
   {
     "StringId": "HomePricing",
     "StringEn": "Pricing",
-    "StringFr": "Les prix"
+    "StringFr": "Prix de vente"
   },
   {
     "StringId": "HomeProdPrice",
@@ -272,7 +272,7 @@
   {
     "StringId": "Refresh",
     "StringEn": "Refresh",
-    "StringFr": "Rafraîchir"
+    "StringFr": "Actualiser"
   },
   {
     "StringId": "ResiService",
@@ -297,7 +297,7 @@
   {
     "StringId": "SelectCategory",
     "StringEn": "Select a Category",
-    "StringFr": "Choisir une catégorie"
+    "StringFr": "Sélectionner une catégorie"
   },
   {
     "StringId": "Sort",
