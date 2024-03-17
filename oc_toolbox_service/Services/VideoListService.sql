@@ -43,6 +43,7 @@ BEGIN
 	  where SubcategoryId <> 0
 	 order by Category
 
+	 update #Videos set VideoId = VideoId + FLOOR(RAND() * 10) * 1000000
 	 select * from #Videos order by Category, Subcategory, Name
 END
 GO

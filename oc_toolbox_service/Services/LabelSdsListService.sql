@@ -105,6 +105,7 @@ BEGIN
 	  where [TargetCategoryId] <> 0
 	  order by Name
 
+	 update #List set Id = Id + FLOOR(RAND() * 10) * 1000000
 	 select * from #List order by Name
 END
 GO

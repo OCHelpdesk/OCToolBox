@@ -123,7 +123,7 @@ namespace oc_toolbox_service.Services
                 SqlDataAdapter adpt = new SqlDataAdapter();
                 adpt.SelectCommand = new SqlCommand();
                 adpt.SelectCommand.Connection = conn;
-                adpt.SelectCommand.CommandText = "select DocName, DocData from ProductDoc where ProductDocId=" + docId;
+                adpt.SelectCommand.CommandText = "select DocName, DocData from ProductDoc where ProductDocId=" + (docId % 1000000);
                 DataTable tbl = new DataTable();
                 adpt.Fill(tbl);
                 ret.Id = docId;

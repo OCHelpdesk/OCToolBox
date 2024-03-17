@@ -63,6 +63,7 @@ BEGIN
 	  where SubcategoryId <> 0
 	 order by Category
 
+	 update #Docs set DocId = DocId + FLOOR(RAND() * 10) * 1000000
 	 select * from #Docs order by Category, Subcategory, Name
 END
 GO
