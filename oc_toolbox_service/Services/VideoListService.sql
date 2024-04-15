@@ -35,6 +35,16 @@ BEGIN
 
 	update #Videos set YouTubeVideoId = case when CHARINDEX('YouTube.', URL) > 0 then RIGHT(URL, 11) else '' end
 
+	update #Videos set ThumbnailURL = 
+		case VideoId % 5
+		when 4 then 'https://www.orkincanada.ca/drive/uploads/2021/07/orkin-home2-mb.jpg'
+		when 3 then 'https://www.orkincanada.ca/drive/uploads/2021/07/residential-mb.jpg' 
+		when 2 then 'https://www.orkincanada.ca/drive/uploads/2021/09/orkin-about-mobile.jpg' 
+		when 1 then 'https://www.orkincanada.ca/drive/uploads/2021/07/residential-mb.jpg' 
+		else 'https://www.orkincanada.ca/drive/uploads/2021/07/orkin-home2-mb.jpg'
+		end 
+	where ThumbnailURL is null
+
 	 select CategoryId = cast(CategoryId as nvarchar(10)) + ':0', Category
 	   from #Videos
 	 union

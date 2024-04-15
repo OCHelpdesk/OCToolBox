@@ -340,8 +340,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 60.00,
-                    OrkinPrice = 60.00,
+                    Price = 65.00,
+                    OrkinPrice = 65.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -353,8 +353,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 75.00,
-                    OrkinPrice = 75.00,
+                    Price = 95.00,
+                    OrkinPrice = 95.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -1458,8 +1458,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "PK",
                     OrkinUOM = "EA",
-                    Price = 115.00,
-                    OrkinPrice = 5.00,
+                    Price = 135.00,
+                    OrkinPrice = 68.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -1653,8 +1653,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "PK",
                     OrkinUOM = "PK",
-                    Price = 19.00,
-                    OrkinPrice = 19.00,
+                    Price = 15.00,
+                    OrkinPrice = 15.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -1705,7 +1705,7 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "CS",
                     OrkinUOM = "EA",
-                    Price = 600.00,
+                    Price = 550.00,
                     OrkinPrice = 25.00,
                     PercentOffForNational = 0.10
                 },
@@ -1770,8 +1770,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "CS",
                     OrkinUOM = "EA",
-                    Price = 675.00,
-                    OrkinPrice = 29.00,
+                    Price = 775.00,
+                    OrkinPrice = 32.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -1822,8 +1822,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 380.00,
-                    OrkinPrice = 380.00,
+                    Price = 395.00,
+                    OrkinPrice = 395.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -1874,8 +1874,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 380.00,
-                    OrkinPrice = 380.00,
+                    Price = 365.00,
+                    OrkinPrice = 365.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -2056,8 +2056,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 750.00,
-                    OrkinPrice = 750.00,
+                    Price = 850.00,
+                    OrkinPrice = 850.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -2615,7 +2615,7 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "BX",
                     OrkinUOM = "EA",
-                    Price = 38.00,
+                    Price = 40.00,
                     OrkinPrice = 1.00,
                     PercentOffForNational = 0.10
                 },
@@ -2681,7 +2681,7 @@ namespace oc_toolbox_service.Models
                     UOM = "BX",
                     OrkinUOM = "EA",
                     Price = 45.00,
-                    OrkinPrice = 1.00,
+                    OrkinPrice = 2.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -3551,8 +3551,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "BX",
                     OrkinUOM = "BX",
-                    Price = 20.00,
-                    OrkinPrice = 20.00,
+                    Price = 15.00,
+                    OrkinPrice = 15.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -3590,8 +3590,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "BX",
                     OrkinUOM = "BX",
-                    Price = 20.00,
-                    OrkinPrice = 20.00,
+                    Price = 15.00,
+                    OrkinPrice = 15.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -4253,8 +4253,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 19.00,
-                    OrkinPrice = 19.00,
+                    Price = 20.00,
+                    OrkinPrice = 20.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -4383,8 +4383,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 70.00,
-                    OrkinPrice = 70.00,
+                    Price = 75.00,
+                    OrkinPrice = 75.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -4396,8 +4396,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 80.00,
-                    OrkinPrice = 80.00,
+                    Price = 85.00,
+                    OrkinPrice = 85.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -4448,8 +4448,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "KT",
                     OrkinUOM = "KT",
-                    Price = 60.00,
-                    OrkinPrice = 60.00,
+                    Price = 65.00,
+                    OrkinPrice = 65.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -4721,8 +4721,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 395.00,
-                    OrkinPrice = 395.00,
+                    Price = 450.00,
+                    OrkinPrice = 450.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -4910,14 +4910,14 @@ namespace oc_toolbox_service.Models
                 new Product()
                 {
                     Category = "RODENTS: RODENTS: TRAPS",
-                    Name = "MULTI-CATCH - SOLID LID WHITE (12/CS)",
+                    Name = "MULTI-CATCH - SOLID LID WHITE WITH ORKIN STICKERS (12/CS)",
                     Vendor = "AP&G",
                     ProductId = "800667",
                     PCPNum = "",
                     UOM = "CS",
                     OrkinUOM = "EA",
-                    Price = 175.00,
-                    OrkinPrice = 15.00,
+                    Price = 200.00,
+                    OrkinPrice = 18.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -7370,8 +7370,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "BX",
                     OrkinUOM = "BX",
-                    Price = 20.00,
-                    OrkinPrice = 20.00,
+                    Price = 15.00,
+                    OrkinPrice = 15.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -7409,8 +7409,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "BX",
                     OrkinUOM = "BX",
-                    Price = 20.00,
-                    OrkinPrice = 20.00,
+                    Price = 15.00,
+                    OrkinPrice = 15.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -7903,7 +7903,7 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "BX",
                     OrkinUOM = "EA",
-                    Price = 38.00,
+                    Price = 40.00,
                     OrkinPrice = 1.00,
                     PercentOffForNational = 0.10
                 },
@@ -7969,7 +7969,7 @@ namespace oc_toolbox_service.Models
                     UOM = "BX",
                     OrkinUOM = "EA",
                     Price = 45.00,
-                    OrkinPrice = 1.00,
+                    OrkinPrice = 2.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -8189,8 +8189,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "PK",
                     OrkinUOM = "EA",
-                    Price = 115.00,
-                    OrkinPrice = 5.00,
+                    Price = 135.00,
+                    OrkinPrice = 68.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -8761,8 +8761,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "PK",
                     OrkinUOM = "PK",
-                    Price = 19.00,
-                    OrkinPrice = 19.00,
+                    Price = 15.00,
+                    OrkinPrice = 15.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -8891,7 +8891,7 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "CS",
                     OrkinUOM = "EA",
-                    Price = 600.00,
+                    Price = 550.00,
                     OrkinPrice = 25.00,
                     PercentOffForNational = 0.10
                 },
@@ -8930,8 +8930,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "CS",
                     OrkinUOM = "EA",
-                    Price = 675.00,
-                    OrkinPrice = 29.00,
+                    Price = 775.00,
+                    OrkinPrice = 32.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -9021,8 +9021,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 380.00,
-                    OrkinPrice = 380.00,
+                    Price = 395.00,
+                    OrkinPrice = 395.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -9047,8 +9047,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 380.00,
-                    OrkinPrice = 380.00,
+                    Price = 365.00,
+                    OrkinPrice = 365.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -9164,8 +9164,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 750.00,
-                    OrkinPrice = 750.00,
+                    Price = 850.00,
+                    OrkinPrice = 850.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -10334,8 +10334,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 60.00,
-                    OrkinPrice = 60.00,
+                    Price = 65.00,
+                    OrkinPrice = 65.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -10347,8 +10347,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 75.00,
-                    OrkinPrice = 75.00,
+                    Price = 95.00,
+                    OrkinPrice = 95.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -10841,8 +10841,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "KT",
                     OrkinUOM = "KT",
-                    Price = 60.00,
-                    OrkinPrice = 60.00,
+                    Price = 65.00,
+                    OrkinPrice = 65.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -10997,8 +10997,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 395.00,
-                    OrkinPrice = 395.00,
+                    Price = 450.00,
+                    OrkinPrice = 450.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -11225,14 +11225,14 @@ namespace oc_toolbox_service.Models
                 new Product()
                 {
                     Category = "RONGEURS: RONGEURS: PIÈGES",
-                    Name = "ENG - MULTI-CATCH - SOLID LID WHITE (12/CS)",
+                    Name = "ENG - MULTI-CATCH - SOLID LID WHITE WITH ORKIN STICKERS (12/CS)",
                     Vendor = "AP&G",
                     ProductId = "800667",
                     PCPNum = "",
                     UOM = "CS",
                     OrkinUOM = "EA",
-                    Price = 175.00,
-                    OrkinPrice = 15.00,
+                    Price = 200.00,
+                    OrkinPrice = 18.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
@@ -11764,8 +11764,8 @@ namespace oc_toolbox_service.Models
                     PCPNum = "",
                     UOM = "EA",
                     OrkinUOM = "EA",
-                    Price = 19.00,
-                    OrkinPrice = 19.00,
+                    Price = 20.00,
+                    OrkinPrice = 20.00,
                     PercentOffForNational = 0.10
                 },
                 new Product()
