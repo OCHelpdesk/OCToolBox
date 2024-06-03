@@ -328,3 +328,7 @@ echo     "Called object type 'facebook::flipper::SocketCertificateProvider' is n
 echo To fix:
 echo     https://github.com/facebook/react-native/issues/43335#issuecomment-1980285308
 
+
+echo cd octoolboxapp
+echo npx react-native run-ios --simulator="iPhone 14 iOS 17.5"
+
