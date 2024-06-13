@@ -739,8 +739,8 @@
     "PCPNum": "",
     "UOM": "CS",
     "OrkinUOM": "EA",
-    "Price": 100.00,
-    "OrkinPrice": 50.00,
+    "Price": 110.00,
+    "OrkinPrice": 56.00,
     "PercentOffForNational": 0.10
   },
   {
@@ -787,8 +787,8 @@
     "PCPNum": "",
     "UOM": "CS",
     "OrkinUOM": "EA",
-    "Price": 105.00,
-    "OrkinPrice": 15.00,
+    "Price": 120.00,
+    "OrkinPrice": 16.00,
     "PercentOffForNational": 0.10
   },
   {
@@ -883,8 +883,8 @@
     "PCPNum": "",
     "UOM": "JG",
     "OrkinUOM": "JG",
-    "Price": 23.00,
-    "OrkinPrice": 23.00,
+    "Price": 26.00,
+    "OrkinPrice": 26.00,
     "PercentOffForNational": 0.10
   },
   {
@@ -1075,8 +1075,8 @@
     "PCPNum": "",
     "UOM": "EA",
     "OrkinUOM": "EA",
-    "Price": 10.00,
-    "OrkinPrice": 10.00,
+    "Price": 12.00,
+    "OrkinPrice": 12.00,
     "PercentOffForNational": 0.10
   },
   {
@@ -1423,8 +1423,8 @@
     "PCPNum": "",
     "UOM": "BX",
     "OrkinUOM": "EA",
-    "Price": 45.00,
-    "OrkinPrice": 2.00,
+    "Price": 55.00,
+    "OrkinPrice": 3.00,
     "PercentOffForNational": 0.10
   },
   {
@@ -1783,8 +1783,8 @@
     "PCPNum": "",
     "UOM": "EA",
     "OrkinUOM": "EA",
-    "Price": 15.00,
-    "OrkinPrice": 15.00,
+    "Price": 17.00,
+    "OrkinPrice": 17.00,
     "PercentOffForNational": 0.10
   },
   {
@@ -1843,8 +1843,8 @@
     "PCPNum": "",
     "UOM": "CS",
     "OrkinUOM": "EA",
-    "Price": 235.00,
-    "OrkinPrice": 11.00,
+    "Price": 250.00,
+    "OrkinPrice": 12.00,
     "PercentOffForNational": 0.10
   },
   {
@@ -1879,8 +1879,8 @@
     "PCPNum": "",
     "UOM": "PK",
     "OrkinUOM": "PK",
-    "Price": 35.00,
-    "OrkinPrice": 35.00,
+    "Price": 37.00,
+    "OrkinPrice": 37.00,
     "PercentOffForNational": 0.10
   },
   {
@@ -1975,8 +1975,8 @@
     "PCPNum": "",
     "UOM": "EA",
     "OrkinUOM": "EA",
-    "Price": 300.00,
-    "OrkinPrice": 300.00,
+    "Price": 340.00,
+    "OrkinPrice": 340.00,
     "PercentOffForNational": 0.10
   },
   {
@@ -2228,7 +2228,7 @@
     "UOM": "PK",
     "OrkinUOM": "PK",
     "Price": 15.00,
-    "OrkinPrice": 15.00,
+    "OrkinPrice": 16.00,
     "PercentOffForNational": 0.10
   },
   {
@@ -2335,8 +2335,8 @@
     "PCPNum": "",
     "UOM": "PK",
     "OrkinUOM": "PK",
-    "Price": 40.00,
-    "OrkinPrice": 40.00,
+    "Price": 35.00,
+    "OrkinPrice": 35.00,
     "PercentOffForNational": 0.10
   },
   {
@@ -3079,8 +3079,8 @@
     "PCPNum": "",
     "UOM": "EA",
     "OrkinUOM": "EA",
-    "Price": 70.00,
-    "OrkinPrice": 70.00,
+    "Price": 60.00,
+    "OrkinPrice": 60.00,
     "PercentOffForNational": 0.10
   },
   {
@@ -3679,8 +3679,8 @@
     "PCPNum": "",
     "UOM": "EA",
     "OrkinUOM": "EA",
-    "Price": 65.00,
-    "OrkinPrice": 65.00,
+    "Price": 75.00,
+    "OrkinPrice": 75.00,
     "PercentOffForNational": 0.10
   },
   {
@@ -4087,8 +4087,8 @@
     "PCPNum": "",
     "UOM": "BX",
     "OrkinUOM": "EA",
-    "Price": 205.00,
-    "OrkinPrice": 110.00,
+    "Price": 195.00,
+    "OrkinPrice": 195.00,
     "PercentOffForNational": 0.10
   },
   {
@@ -4291,8 +4291,8 @@
     "PCPNum": "",
     "UOM": "EA",
     "OrkinUOM": "EA",
-    "Price": 450.00,
-    "OrkinPrice": 450.00,
+    "Price": 475.00,
+    "OrkinPrice": 475.00,
     "PercentOffForNational": 0.10
   },
   {
