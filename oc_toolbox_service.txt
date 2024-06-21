@@ -28,6 +28,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.WriteIndented = true;        //Write indented.
 });
 
+(Azure extensions need to be installed)
 To deploy to octoolbox.azurewebsites.net, open View -> Command Palette...
 VS Code will ask you to sign into Windows Azure if you have not yet. 
 Select Azure App Service: Deploy to Web App...
@@ -49,8 +50,10 @@ A new item is added to the project file oc_toolbox_service.csproj
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
+To install (upgrade to) another version 
+ dotnet add package System.Data.SqlClient -v 4.8.6
 
 To add client IP to the Azure SQL server firewall,
 https://msftplayground.com/2017/01/adding-your-client-ip-to-the-azure-sql-server-firewall/
 
- 1 minute read
+ 
