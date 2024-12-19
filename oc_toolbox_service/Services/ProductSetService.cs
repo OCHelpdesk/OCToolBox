@@ -16,8 +16,8 @@ namespace oc_toolbox_service.Services
         public ProductSet GetProductSet(string? accessKey, string? appSideVersionNumber, bool requestVersionNumberOnly, bool requestPreviewVersion)
         {
             ProductSet ret = requestPreviewVersion ?
-                             Models.ProductSetV20240709.ProductSet :
-                             Models.ProductSetV20240709.ProductSet;
+                             Models.ProductSetV20241209.ProductSet :
+                             Models.ProductSetV20241209.ProductSet;
             if (appSideVersionNumber == ret.Version || requestVersionNumberOnly)
             {
                 ret = new ProductSet() { Version = ret.Version };
